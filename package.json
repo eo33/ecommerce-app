@@ -1,0 +1,20 @@
+{
+  "name": "ecommerce",
+	"version": "1.0.0",
+	"description": "ecommerce application",
+  "scripts":{
+    "dev":"nodemon server.js"
+  },
+  "keywords": ["web development","frontend","ecommerce","HTML","Node","Express"],
+  "author":"Edward O",
+  "dependencies": {
+    "bcrypt": "^5.1.1",
+    "config": "^3.3.9",
+    "express": "^4.18.2",
+    "jsonwebtoken": "^9.0.1",
+    "mongoose": "^7.4.5"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  }
+}
