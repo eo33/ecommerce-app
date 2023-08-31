@@ -2,6 +2,7 @@
 
 I'm building an Ecommerce app using the MERN stack. There are 10 features I'm going to implement.
 
+**Note**: Feature, user stories and tasks are auto-generated using ChatGPT. Texts that are not auto generated are labelled with (Custom). Texts under side notes are written by me.
 
 ## Feature 1: User Authentication and Authorization
 1. Allow users to sign up and log in.
@@ -16,8 +17,9 @@ I'm building an Ecommerce app using the MERN stack. There are 10 features I'm go
 - As an authenticated user, I want to have access to features like adding items to my cart and placing orders.
 
 ### Tasks:
-1. Set up user registration form.
-1. Implement user registration API endpoint.
+1. Set up user registration form. (DONE)
+1. Implement user registration API endpoint. (DONE)
+1. (Custom) Implement client side and server side validation.
 1. Design and implement user login form.
 1. Create user login API endpoint with authentication.
 1. Implement password hashing for user security.
@@ -25,18 +27,20 @@ I'm building an Ecommerce app using the MERN stack. There are 10 features I'm go
 1. Create protected routes for authenticated users.
 1. Add user logout functionality.
 
-### Notes
+### Side notes
 
 #### Work progress
 - 29 Aug 2023: Wrote user stories, setup local environemnt, and configured MongoDB Atlas Cluster. 
-- 30 Aug 2023: Setup express server: register route
+- 30 Aug 2023: Setup express server: register route, ignore node.
+- 31 Aug 2023: Setup mongoose and completed register route request
 
 #### Packages used:
 - Express
 - Mongoose
+- Express validator
 - Bcrypt
 - jsonwebtoken
-- config 
+- config (for deployment later on)
 - Nodemon (dev only)
 
 ## Feature 2: Product Listings

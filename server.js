@@ -1,14 +1,22 @@
+// Express application
 const express = require('express');
-const connectDB = require("./config/db");
+const app = express();
+
+// Using mongoose to connect with MongoDB
+const mongoose = require('mongoose');
+const config = require('config');
+const db = config.get('mongoURI');
 
 // Import routes
 const register = require('./routes/register')
 
-// Connect to MongoDB atlas cluster
-connectDB()
+// Connect to MongoDB atlas cluster using mongoose
+mongoose.connect(db)
+    .then(()=>{console.log("connected")})
+    .catch((error)=>{console.error(error.message)});
 
-// Create express
-const app = express();
+// Init middleware (to parse body in JSON format)
+app.use(express.json());
 
 // Setup main route
 app.get('/', (req,res)=>{
