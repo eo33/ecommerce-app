@@ -2,7 +2,27 @@
 
 I'm building an Ecommerce app using the MERN stack. There are 10 features I'm going to implement.
 
-**Note**: Feature, user stories and tasks are auto-generated using ChatGPT. Texts that are not auto generated are labelled with (Custom). Texts under side notes are written by me.
+_Note: Feature, user stories and tasks are auto-generated using ChatGPT. Texts that are not auto generated are labelled with (Custom). Texts under side notes are written by me._
+
+## Development plan
+
+The ecommerce project is planned to be completed within 9 weeks.
+
+| No |                 Feature                 | W35 | W36 | W37 | W38 | W39 | W40 | W41 | W42 | W43 |
+|:--:|:---------------------------------------:|-----|-----|-----|-----|-----|-----|-----|-----|-----|
+|  1 | User   Authentication and Authorization |  •  |  •  |     |     |     |     |     |     |     |
+|  2 | Product   Listings                      |     |  •  |  •  |     |     |     |     |     |     |
+|  3 | Product   Details                       |     |  •  |  •  |     |     |     |     |     |     |
+|  4 | Shopping   Cart                         |     |     |  •  |  •  |     |     |     |     |     |
+|  5 | Checkout   and Orders                   |     |     |     |  •  |  •  |     |     |     |     |
+|  6 | Admin   Panel                           |     |     |     |     |  •  |  •  |     |     |     |
+|  7 | Search   Functionality                  |     |     |     |     |     |  •  |  •  |     |     |
+|  8 | Responsive   Design                     |     |     |     |     |     |     |  •  |     |     |
+|  9 | Payment   Integration                   |     |     |     |     |     |     |  •  |     |     |
+| 10 | Reviews   and Ratings                   |     |     |     |     |     |     |     |  •  |  •  |
+| 11 | Wishlist/Favorites                      |     |     |     |     |     |     |     |  •  |  •  |
+
+_Note: W35 starts from 28 Aug 2023_
 
 ## Feature 1: User Authentication and Authorization
 1. Allow users to sign up and log in.
@@ -19,8 +39,9 @@ I'm building an Ecommerce app using the MERN stack. There are 10 features I'm go
 ### Tasks:
 1. Set up user registration form. (DONE)
 1. Implement user registration API endpoint. (DONE)
-1. (Custom) Implement client side and server side validation.
-1. Design and implement user login form.
+1. (Custom) Implement server side validation. (DONE)
+1. (Custom) Design user signup and login form using Figma. (DONE)
+1. Implement user signup and login form.
 1. Create user login API endpoint with authentication.
 1. Implement password hashing for user security.
 1. Set up JWT generation and validation.
@@ -33,15 +54,27 @@ I'm building an Ecommerce app using the MERN stack. There are 10 features I'm go
 - 29 Aug 2023: Wrote user stories, setup local environemnt, and configured MongoDB Atlas Cluster. 
 - 30 Aug 2023: Setup express server: register route, ignore node.
 - 31 Aug 2023: Setup mongoose and completed register route request
+- 01 Sept 2023: Implemented server side validation using express-validator, and design UI using Figma—[**Link to design**](https://www.figma.com/file/SeMCwhaQm3TieAG5Eo7COL/Ecommerce?type=design&node-id=0%3A1&mode=design&t=VHVPkV9jfHeoMaRj-1). Installed concurrently to run express and react together.
+- 02 Sept 2023: Implement user login and signup page
 
-#### Packages used:
+#### Packages used for backend (Express):
+- config (for deployment)
 - Express
 - Mongoose
 - Express validator
+- Concurrently
 - Bcrypt
 - jsonwebtoken
-- config (for deployment later on)
 - Nodemon (dev only)
+
+#### Packages used for frontend (React):
+- Bootstrap
+- Axios
+- Router dom
+- Redux
+- React-redux
+- Redux-thunk
+- Redux-devtools-extension
 
 ## Feature 2: Product Listings
 1. Display a list of available furniture products with images, names, prices, and brief descriptions.

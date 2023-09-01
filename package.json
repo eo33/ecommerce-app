@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "description": "ecommerce application",
   "scripts": {
-    "dev": "nodemon server.js"
+    "server": "nodemon server.js",
+    "client": "npm start --prefix client",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
   },
   "keywords": [
     "web development",
@@ -16,6 +18,7 @@
   "author": "Edward O",
   "dependencies": {
     "bcrypt": "^5.1.1",
+    "concurrently": "^8.2.1",
     "config": "^3.3.9",
     "express": "^4.18.2",
     "express-validator": "^7.0.1",

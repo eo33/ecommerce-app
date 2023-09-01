@@ -1,0 +1,1 @@
+# Frontend side of the E-commerce app
