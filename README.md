@@ -8,7 +8,7 @@ _Note: Feature, user stories and tasks are auto-generated using ChatGPT. Texts t
 
 The ecommerce project is planned to be completed within 9 weeks.
 
-| No |                 Feature                 | W35 | W36 | W37 | W38 | W39 | W40 | W41 | W42 | W43 |
+| No |                 Feature                 | W39 | W40 | W41 | W42 | W43 | W44 | W45 | W46 | W47 |
 |:--:|:---------------------------------------:|-----|-----|-----|-----|-----|-----|-----|-----|-----|
 |  1 | User   Authentication and Authorization |  •  |  •  |     |     |     |     |     |     |     |
 |  2 | Product   Listings                      |     |  •  |  •  |     |     |     |     |     |     |

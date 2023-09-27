@@ -1,16 +1,56 @@
-import React, { useState, useEffect, useRef }  from "react";
-import {Link } from "react-router-dom";
-import 'bootstrap/dist/css/bootstrap.css';
+import "bootstrap/dist/css/bootstrap.css";
 import "./Navbar.css";
+import { useState } from "react";
 
 function Navbar() {
-    
-    return (
-        <nav className="navbar nav-bg navbar-expand-sm navbar-light sticky-top" data-bs-theme="dark">
-            
-            
-        </nav>
-    );
+  const [toggleNavBar, setToggleNavBar] = useState(false);
+
+  return (
+    <nav class="navbar navbar-expand-lg border-3 border-secondary border-bottom">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="./">
+          <img
+            src="./assets/logo.jpeg"
+            width="auto"
+            height="80"
+            class="d-inline-block align-top"
+            alt=""
+          />
+        </a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          onClick={() => setToggleNavBar((e) => !e)}
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class={`${toggleNavBar ? "collapse" : ""} navbar-collapse `}>
+          <div className="col d-flex justify-content-start">
+            <ul class="navbar-nav mb-2 mb-lg-0 text-dark">
+              <li class="nav-item">
+                <a class="nav-link" href="/#">
+                  Main
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/#">
+                  Shop
+                </a>
+              </li>
+            </ul>
+          </div>
+          <ul class="navbar-nav mb-2 mb-lg-0 text-dark">
+            <li class="nav-item ml-auto">
+              <a class="nav-link" href="/#">
+                Login
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  );
 }
 
 export default Navbar;

@@ -22,7 +22,7 @@ router.post(
   async (req, res) => {
     try {
       if (req.user) {
-        return res.status("400").json({ msg: "user already exist!" });
+        return res.status(400).json({ msg: "user already exist!" });
       }
       let { email, password, admin } = req.body;
 
