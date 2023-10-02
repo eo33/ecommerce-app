@@ -3,7 +3,7 @@ import "./Navbar.css";
 import { useState } from "react";
 
 function Navbar() {
-  const [toggleNavBar, setToggleNavBar] = useState(false);
+  const [toggleNavBar, setToggleNavBar] = useState(true);
 
   return (
     <nav class="navbar navbar-expand-lg border-3 border-secondary border-bottom">
@@ -12,7 +12,7 @@ function Navbar() {
           <img
             src="./assets/logo.jpeg"
             width="auto"
-            height="80"
+            height="50"
             class="d-inline-block align-top"
             alt=""
           />
