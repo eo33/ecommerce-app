@@ -42,7 +42,7 @@ function Navbar() {
           </div>
           <ul class="navbar-nav mb-2 mb-lg-0 text-dark">
             <li class="nav-item ml-auto">
-              <a class="nav-link" href="/#">
+              <a class="nav-link" href="/login">
                 Login
               </a>
             </li>

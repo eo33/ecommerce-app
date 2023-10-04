@@ -1,11 +1,15 @@
 import "./Login.css";
 import { useState } from "react";
 
-function LoginForm({ setSignUpMode }) {
+function LoginForm({ setSignUpMode, isLoggedIn, setIsLoggedIn }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleSubmit = () => {};
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    console.log("LOGIN SUCCESS");
+    //
+  };
 
   return (
     <div className="col-12 offset-lg-2 mt-4 col-md-6 col-lg-4 mt-md-4 pt-md-4">
