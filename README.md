@@ -44,12 +44,12 @@ _Note: W35 starts from 28 Aug 2023_
 1. Implement user registration API endpoint. (DONE)
 1. (Custom) Implement server side validation. (DONE)
 1. (Custom) Design user signup and login form using Figma. (DONE)
-1. Implement user signup and login form.
-1. Create user login API endpoint with authentication.
-1. Implement password hashing for user security.
-1. Set up JWT generation and validation.
-1. Create protected routes for authenticated users.
-1. Add user logout functionality.
+1. Implement user signup and login form. (DONE)
+1. Create user login API endpoint with authentication. (DONE)
+1. Implement password hashing for user security. (DONE)
+1. Set up JWT generation and validation. (DONE)
+1. Create protected routes for authenticated users. (DONE)
+1. Add user logout functionality. (DONE)
 
 ### Side notes
 
@@ -61,6 +61,9 @@ _Note: W35 starts from 28 Aug 2023_
 - 01 Sept 2023: Implemented server side validation using express-validator, and design UI using Figma—[**Link to design**](https://www.figma.com/file/SeMCwhaQm3TieAG5Eo7COL/Ecommerce?type=design&node-id=0%3A1&mode=design&t=VHVPkV9jfHeoMaRj-1). Installed concurrently to run express and react together.
 - 02 Sept 2023: Learning how to implement authentication
 - 02 Oct 2023: Implemented Bcrypt for user registration
+- 03 Oct 2023: Implemented JWT for authentication
+- 04 Oct 2023: Created user login API endpoint.
+- 05 Oct 2023: Implemented protected route and useContext API.
 
 #### Packages used for backend (Express):
 

@@ -1,8 +1,16 @@
 import "bootstrap/dist/css/bootstrap.css";
 import "./Navbar.css";
-import { useState } from "react";
+import { useState, useContext } from "react";
+import { LoginContext } from "../Context/LoginContext";
+import { useNavigate } from "react-router-dom";
 
 function Navbar() {
+  // Login context
+  const { loggedIn, setLoggedIn } = useContext(LoginContext);
+  // To route to dashboard after signing up
+  const navigate = useNavigate();
+
+  // States for navigation bar
   const [toggleNavBar, setToggleNavBar] = useState(true);
 
   return (
@@ -42,9 +50,22 @@ function Navbar() {
           </div>
           <ul class="navbar-nav mb-2 mb-lg-0 text-dark">
             <li class="nav-item ml-auto">
-              <a class="nav-link" href="/login">
-                Login
-              </a>
+              {loggedIn ? (
+                <button
+                  class="nav-link"
+                  onClick={() => {
+                    localStorage.clear();
+                    setLoggedIn(false);
+                    navigate("/login");
+                  }}
+                >
+                  Logout
+                </button>
+              ) : (
+                <a class="nav-link" href="/login">
+                  Login
+                </a>
+              )}
             </li>
           </ul>
         </div>

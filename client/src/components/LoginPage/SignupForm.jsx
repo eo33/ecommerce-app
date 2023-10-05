@@ -1,11 +1,16 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
+
+import { LoginContext } from "../Context/LoginContext";
 import axios from "axios";
 
-function SignupForm({ isLoggedIn, setIsLoggedIn }) {
+function SignupForm() {
+  // Login Context
+  const { setLoggedIn } = useContext(LoginContext);
   // To route to dashboard after signing up
   const navigate = useNavigate();
 
+  // States for signup form and validation
   const [accountForm, setAccountForm] = useState({
     first_name: "",
     last_name: "",
@@ -13,8 +18,10 @@ function SignupForm({ isLoggedIn, setIsLoggedIn }) {
     password: "",
     password2: "",
   });
-
+  // Password validation for signup form (Client side)
   const [matchPassword, setMatchPassword] = useState(true);
+  // Form validation from server
+  const [isValid, setIsValid] = useState(true);
 
   const handleForm = (e) => {
     setAccountForm((prev) => ({
@@ -27,7 +34,6 @@ function SignupForm({ isLoggedIn, setIsLoggedIn }) {
     e.preventDefault();
     let { first_name, last_name, email, password, password2 } = accountForm;
     if (password !== password2) {
-      console.log("Passwords do not match");
       setMatchPassword(false);
     } else {
       setMatchPassword(true);
@@ -47,14 +53,16 @@ function SignupForm({ isLoggedIn, setIsLoggedIn }) {
           },
         };
         const res = await axios.post("/auth/register", body, config);
-        console.log(res);
-        setIsLoggedIn(true);
-        // Store token (API response) to local storage
+
+        // Store token (API response) in local storage
         localStorage.setItem("token", res.data.token);
+        // Set log in to true in the context api
+        setLoggedIn(true);
         // Go to dashboard
         navigate("/dashboard");
       } catch (err) {
-        console.error(err.response.data);
+        setIsValid(false);
+        console.error(err);
       }
     }
   };
@@ -105,14 +113,22 @@ function SignupForm({ isLoggedIn, setIsLoggedIn }) {
           </label>
           <input
             type="text"
-            class="form-control form-control-lg"
+            class={`form-control form-control-lg ${
+              isValid ? "-valid" : "is-invalid"
+            }`}
             id="email"
             aria-describedby="firstnamelHelp"
             placeholder="Enter your email"
             required
             value={accountForm.email}
-            onChange={(e) => handleForm(e)}
+            onChange={(e) => {
+              handleForm(e);
+              setIsValid(true);
+            }}
           />
+          <div class="invalid-feedback">
+            An account with this email already exist
+          </div>
         </div>
         {/*PASSWORD INPUT*/}
         <div className="form-group">
@@ -121,13 +137,18 @@ function SignupForm({ isLoggedIn, setIsLoggedIn }) {
           </label>
           <input
             type="password"
-            class="form-control form-control-lg"
+            class={`form-control form-control-lg ${
+              matchPassword ? "valid" : "is-invalid"
+            }`}
             id="password"
             aria-describedby="passwordHelp"
             placeholder=""
             required
             value={accountForm.password}
-            onChange={(e) => handleForm(e)}
+            onChange={(e) => {
+              handleForm(e);
+              setMatchPassword(true);
+            }}
           />
         </div>
         {/*SECOND PASSWORD INPUT*/}
@@ -138,20 +159,16 @@ function SignupForm({ isLoggedIn, setIsLoggedIn }) {
           <input
             type="password"
             class={`form-control form-control-lg ${
-              matchPassword ? null : "is-invalid"
+              matchPassword ? "valid" : "is-invalid"
             }`}
             id="password2"
             aria-describedby="passwordHelp"
             placeholder=""
             required
             value={accountForm.password2}
-            onBlur={() => {
-              accountForm.password2 === accountForm.password
-                ? setMatchPassword(true)
-                : setMatchPassword(false);
-            }}
             onChange={(e) => {
               handleForm(e);
+              setMatchPassword(true);
             }}
           />
           <div class="invalid-feedback">Passwords do not match</div>
@@ -160,7 +177,9 @@ function SignupForm({ isLoggedIn, setIsLoggedIn }) {
         <div className="form-group mt-5">
           <button
             type="submit"
-            class={`btn btn-dark w-100 ${matchPassword ? null : "disabled"}`}
+            class={`btn btn-dark w-100 ${
+              matchPassword && isValid ? "enabled" : "disabled"
+            }`}
           >
             Submit
           </button>

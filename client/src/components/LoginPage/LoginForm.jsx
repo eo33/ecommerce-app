@@ -1,13 +1,39 @@
-import "./Login.css";
-import { useState } from "react";
+import { useState, useContext } from "react";
+import { useNavigate } from "react-router-dom";
 
-function LoginForm({ setSignUpMode, isLoggedIn, setIsLoggedIn }) {
+import { LoginContext } from "../Context/LoginContext";
+import axios from "axios";
+
+function LoginForm({ setSignUpMode }) {
+  // Login context
+  const { setLoggedIn } = useContext(LoginContext);
+  // To route to dashboard after signing up
+  const navigate = useNavigate();
+
+  // States for login form and server-side validation
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [isValid, setIsValid] = useState(true);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("LOGIN SUCCESS");
+    try {
+      // Send request to API
+      const body = JSON.stringify({ email, password });
+      const config = {
+        headers: { "Content-Type": "application/json" },
+      };
+      const res = await axios.post("/auth/login", body, config);
+      // Store token in local storage
+      localStorage.setItem("token", res.data.token);
+      // Set log in to true in the context api
+      setLoggedIn(true);
+      // Go to dashboard
+      navigate("/dashboard");
+    } catch (err) {
+      setIsValid(false);
+      console.error(err);
+    }
     //
   };
 
@@ -16,7 +42,7 @@ function LoginForm({ setSignUpMode, isLoggedIn, setIsLoggedIn }) {
       <form onSubmit={handleSubmit}>
         {/*TITLE*/}
         <div className="row mb-md-4">
-          <h5 className="col-md-7 bold">Login here:</h5>
+          <h5 className="col-md-7 extra-bold">Login here:</h5>
         </div>
         {/*EMAIL INPUT*/}
         <div className="form-group">
@@ -25,7 +51,9 @@ function LoginForm({ setSignUpMode, isLoggedIn, setIsLoggedIn }) {
           </label>
           <input
             type="email"
-            class="form-control form-control-lg"
+            class={`form-control form-control-lg ${
+              isValid ? "valid" : "is-invalid"
+            }`}
             id="login-email"
             aria-describedby="emailHelp"
             placeholder="Enter email"
@@ -33,8 +61,10 @@ function LoginForm({ setSignUpMode, isLoggedIn, setIsLoggedIn }) {
             value={email}
             onChange={(e) => {
               setEmail(e.target.value);
+              setIsValid(true);
             }}
           />
+          <div class="invalid-feedback">Email or password invalid</div>
         </div>
         {/*PASSWORD INPUT*/}
         <div className="form-group">
@@ -43,7 +73,9 @@ function LoginForm({ setSignUpMode, isLoggedIn, setIsLoggedIn }) {
           </label>
           <input
             type="password"
-            class="form-control form-control-lg"
+            class={`form-control form-control-lg ${
+              isValid ? "valid" : "is-invalid"
+            }`}
             id="login-password"
             aria-describedby="passwordHelp"
             placeholder=""
@@ -51,8 +83,10 @@ function LoginForm({ setSignUpMode, isLoggedIn, setIsLoggedIn }) {
             value={password}
             onChange={(e) => {
               setPassword(e.target.value);
+              setIsValid(true);
             }}
           />
+          <div class="invalid-feedback">Email or password invalid</div>
         </div>
         {/*LOGIN BUTTON + SIGNUP BUTTON*/}
         <div className="form-group mt-5">

@@ -3,7 +3,7 @@ import LoginForm from "./LoginForm";
 import { useState } from "react";
 import SignupForm from "./SignupForm";
 
-function LoginPage({ isLoggedIn, setIsLoggedIn }) {
+function LoginPage() {
   const [signUpMode, setSignUpMode] = useState(false);
 
   return (
@@ -11,13 +11,9 @@ function LoginPage({ isLoggedIn, setIsLoggedIn }) {
       <div className="row mt-3 pt-3 mt-md-5 pt-md-5">
         <LoginText signUpMode={signUpMode} setSignUpMode={setSignUpMode} />
         {signUpMode === true ? (
-          <SignupForm isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
+          <SignupForm />
         ) : (
-          <LoginForm
-            setSignUpMode={setSignUpMode}
-            isLoggedIn={isLoggedIn}
-            setIsLoggedIn={setIsLoggedIn}
-          />
+          <LoginForm setSignUpMode={setSignUpMode} />
         )}
       </div>
     </div>

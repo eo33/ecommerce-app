@@ -15,9 +15,20 @@ function LoginText({ signUpMode, setSignUpMode }) {
               Already have an account?
               <button
                 class="btn-link bg-white border-0"
-                href="/#"
                 onClick={() => {
                   setSignUpMode(false);
+                }}
+                //CUSTOM STYLING FOR BUTTON
+                style={{
+                  color: "blue",
+                  textDecoration: "underline",
+                  transition: "color 0.3s ease",
+                }}
+                onMouseEnter={(e) => {
+                  e.target.style.color = "gray";
+                }}
+                onMouseLeave={(e) => {
+                  e.target.style.color = "blue";
                 }}
               >
                 Login here
