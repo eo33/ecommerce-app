@@ -9,8 +9,10 @@ function LoginPage() {
   return (
     <div className="container">
       <div className="row mt-3 pt-3 mt-md-5 pt-md-5">
+        {/**LEFT CONTAINER FOR TEXT*/}
         <LoginText signUpMode={signUpMode} setSignUpMode={setSignUpMode} />
-        {signUpMode === true ? (
+        {/**RIGHT CONTAINER FOR FORMS*/}
+        {signUpMode ? (
           <SignupForm />
         ) : (
           <LoginForm setSignUpMode={setSignUpMode} />

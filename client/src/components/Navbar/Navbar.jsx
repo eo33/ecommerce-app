@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 
 function Navbar() {
   // Login context
-  const { loggedIn, setLoggedIn } = useContext(LoginContext);
+  const { authenticated, setAuthenticated } = useContext(LoginContext);
   // To route to dashboard after signing up
   const navigate = useNavigate();
 
@@ -50,12 +50,12 @@ function Navbar() {
           </div>
           <ul class="navbar-nav mb-2 mb-lg-0 text-dark">
             <li class="nav-item ml-auto">
-              {loggedIn ? (
+              {authenticated ? (
                 <button
                   class="nav-link"
                   onClick={() => {
                     localStorage.clear();
-                    setLoggedIn(false);
+                    setAuthenticated(false);
                     navigate("/login");
                   }}
                 >

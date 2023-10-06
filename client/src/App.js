@@ -12,14 +12,15 @@ import Footer from "./components/Footer/Footer";
 import Dashboard from "./components/ProtectedRoutes/Dashboard/Dashboard";
 
 function App() {
-  const [loggedIn, setLoggedIn] = useState(false);
-  //const token = localStorage.getItem("token");
+  const token = localStorage.getItem("token");
+  const initAuth = !!token;
+  const [authenticated, setAuthenticated] = useState(initAuth);
 
   return (
     <div className="App">
       <BrowserRouter>
         <div className="container">
-          <LoginContext.Provider value={{ loggedIn, setLoggedIn }}>
+          <LoginContext.Provider value={{ authenticated, setAuthenticated }}>
             <div className="min-vh-100">
               <Navbar />
               <Routes>

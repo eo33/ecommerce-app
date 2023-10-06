@@ -6,7 +6,7 @@ import axios from "axios";
 
 function SignupForm() {
   // Login Context
-  const { setLoggedIn } = useContext(LoginContext);
+  const { setAuthenticated } = useContext(LoginContext);
   // To route to dashboard after signing up
   const navigate = useNavigate();
 
@@ -57,7 +57,7 @@ function SignupForm() {
         // Store token (API response) in local storage
         localStorage.setItem("token", res.data.token);
         // Set log in to true in the context api
-        setLoggedIn(true);
+        setAuthenticated(true);
         // Go to dashboard
         navigate("/dashboard");
       } catch (err) {
