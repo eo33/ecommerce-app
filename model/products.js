@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 // Create user schema
-const userSchema = new mongoose.Schema({
+const productSchema = new mongoose.Schema({
   name: {
     type: String,
     required: true,
@@ -18,7 +18,11 @@ const userSchema = new mongoose.Schema({
     type: String,
     default: "No available description",
   },
+  soldCount: {
+    type: Number,
+    default: 0,
+  },
 });
 
 // export mongoose model as default
-module.exports = mongoose.model("Product", productSchema);
+module.exports = mongoose.model("product", productSchema);

@@ -8,19 +8,18 @@ _Note: Feature, user stories and tasks are auto-generated using ChatGPT. Texts t
 
 The ecommerce project is planned to be completed within 9 weeks.
 
-| No  |                Feature                | W35 | W40 | W41 | W42 | W43 | W44 | W45 | W46 | W47 |
-| :-: | :-----------------------------------: | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-|  1  | User Authentication and Authorization | •   | •   |     |     |     |     |     |     |     |
-|  2  |           Product Listings            |     | •   | •   |     |     |     |     |     |     |
-|  3  |            Product Details            |     | •   | •   |     |     |     |     |     |     |
-|  4  |             Shopping Cart             |     |     | •   | •   |     |     |     |     |     |
-|  5  |          Checkout and Orders          |     |     |     | •   | •   |     |     |     |     |
-|  6  |              Admin Panel              |     |     |     |     | •   | •   |     |     |     |
-|  7  |         Search Functionality          |     |     |     |     |     | •   | •   |     |     |
-|  8  |           Responsive Design           |     |     |     |     |     |     | •   |     |     |
-|  9  |          Payment Integration          |     |     |     |     |     |     | •   |     |     |
-| 10  |          Reviews and Ratings          |     |     |     |     |     |     |     | •   | •   |
-| 11  |          Wishlist/Favorites           |     |     |     |     |     |     |     | •   | •   |
+| No  |                Feature                | W35 | W40 | W41 | W42 | W43 | W44 | W45 | W46 | W47 | W48 |
+| :-: | :-----------------------------------: | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+|  1  | User Authentication and Authorization | •   | •   |     |     |     |     |     |     |     |     |
+|  2  |           Product Listings            |     | •   | •   |     |     |     |     |     |     |     |
+|  3  |            Product Details            |     |     | •   |     |     |     |     |     |     |     |
+|  4  |             Shopping Cart             |     |     |     | •   |     |     |     |     |     |     |
+|  5  |          Checkout and Orders          |     |     |     | •   | •   |     |     |     |     |     |
+|  6  |              Admin Panel              |     |     |     |     | •   | •   |     |     |     |     |
+|  7  |         Search Functionality          |     |     |     |     |     | •   | •   |     |     |     |
+|  8  |          Payment Integration          |     |     |     |     |     |     | •   |     |     |     |
+|  9  |          Reviews and Ratings          |     |     |     |     |     |     |     | •   |     |     |
+| 10  |          Wishlist/Favorites           |     |     |     |     |     |     |     | •   |     |     |
 
 _Note: W35 starts from 28 Aug 2023_
 
@@ -91,14 +90,39 @@ _Note: W35 starts from 28 Aug 2023_
 1. Display a list of available furniture products with images, names, prices, and brief descriptions.
 1. Implement sorting and filtering options for users to find products easily.
 
-#### Steps:
+### User stories:
 
-Design product listing UI with placeholders for products.
-Create API endpoint to fetch list of products.
-Integrate API call to fetch and display products on frontend.
-Implement sorting options (e.g., by price, name) in UI.
-Add filtering options (e.g., by category, price range).
-Implement pagination for long product lists.
+1. As a user, I want to see pictures and names of furniture products on the homepage.
+1. As a user, I want to know how much each product costs.
+1. As a user, I want a short description of each product to understand what it's about.
+1. As a user, I want to sort products by price to find affordable products faster.
+1. As a user, I want to easily reset sorting and filtering to start over.
+1. As a user, I want the website to look good and work well on both my computer and my phone.
+1. As a user, I want to click on a product to see more details, like pictures and a longer description.
+1. As a user, I want to add products to my cart with just one click.
+1. As a user, I want to click on a product to learn more about it and maybe buy it.
+
+#### Tasks:
+
+1. Design the homepage layout to accommodate product listings. (DONE [Link](https://www.figma.com/file/SeMCwhaQm3TieAG5Eo7COL/Ecommerce?type=design&node-id=0-1&mode=design&t=salzlFiicX1p1Nng-0))
+1. Create a database schema to store product information including names and image URLs. (DONE)
+1. Implement a component to fetch and display product names and images on the homepage.
+1. Extend the database schema to include product prices.
+1. Update the homepage component to display product prices alongside names and images.
+1. Modify the database schema to include short product descriptions.
+1. Enhance the homepage component to show short descriptions for each product.
+1. Add sorting functionality to the product listings, allowing users to sort by price.
+1. Create UI elements for users to select sorting options.
+1. Develop a feature that allows users to reset sorting and filtering options with a single action.
+1. Add a "Reset" button or icon to the user interface.
+1. Apply responsive design principles to ensure the website looks and works well on both desktop and mobile devices.
+1. Test the website on various screen sizes and make adjustments as needed.
+1. Design and create a product details page.
+1. Implement navigation from product listings to the details page when a user clicks on a product.
+1. Develop a feature that allows users to add products to their shopping cart with a single click.
+1. Create a cart management system to store selected products.
+1. Add a "Buy" button on the product details page to enable users to purchase a product they are interested in.
+1. Integrate payment processing and order confirmation functionality.
 
 ## Feature 3: Product Details:
 
