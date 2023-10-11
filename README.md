@@ -23,6 +23,25 @@ The ecommerce project is planned to be completed within 9 weeks.
 
 _Note: W35 starts from 28 Aug 2023_
 
+### Packages used for backend (Express):
+
+- config (for deployment)
+- Express
+- Mongoose
+- Express validator
+- Concurrently
+- Bcrypt
+- jsonwebtoken
+- Nodemon (dev only)
+- Multer (for file upload)
+
+### Packages used for frontend (React):
+
+- Bootstrap
+- Axios
+- Router dom
+- Redux-devtools-extension
+
 ## Feature 1: User Authentication and Authorization
 
 1. Allow users to sign up and log in.
@@ -64,27 +83,6 @@ _Note: W35 starts from 28 Aug 2023_
 - 04 Oct 2023: Created user login API endpoint.
 - 05 Oct 2023: Implemented protected route and useContext API.
 
-#### Packages used for backend (Express):
-
-- config (for deployment)
-- Express
-- Mongoose
-- Express validator
-- Concurrently
-- Bcrypt
-- jsonwebtoken
-- Nodemon (dev only)
-
-#### Packages used for frontend (React):
-
-- Bootstrap
-- Axios
-- Router dom
-- Redux
-- React-redux
-- Redux-thunk
-- Redux-devtools-extension
-
 ## Feature 2: Product Listings
 
 1. Display a list of available furniture products with images, names, prices, and brief descriptions.
@@ -92,42 +90,64 @@ _Note: W35 starts from 28 Aug 2023_
 
 ### User stories:
 
-1. As a user, I want to see pictures and names of furniture products on the homepage.
-1. As a user, I want to know how much each product costs.
-1. As a user, I want a short description of each product to understand what it's about.
-1. As a user, I want to sort products by price to find affordable products faster.
-1. As a user, I want to easily reset sorting and filtering to start over.
-1. As a user, I want the website to look good and work well on both my computer and my phone.
-1. As a user, I want to click on a product to see more details, like pictures and a longer description.
-1. As a user, I want to add products to my cart with just one click.
-1. As a user, I want to click on a product to learn more about it and maybe buy it.
+1. As a customer, I want to see a list of available furniture products on the website so that I can browse and select the items I'm interested in.
+1. As a customer, I want the list of products to include essential information such as product images, names, prices, and brief descriptions, so that I can make informed choices.
+1. As a customer, I want the product listings to be sortable, so that I can easily arrange products based on my preferences.
+1. As a customer, I want the product listings to be filterable, allowing me to narrow down my choices by various criteria like category and price range.
+1. As a customer, I want the product listings to be paginated if there are many products available, so that I can navigate through the list without overwhelming scrolling.
+1. As an administrator, I want to easily manage and update the product listings, including adding new products and modifying existing ones.
+1. As an administrator, I want to include images, names, prices, and descriptions when adding or editing products, ensuring that customers have accurate and appealing information.
+1. As a developer, I want to optimize the performance of the product listings to ensure fast loading times, even when handling large datasets.
+1. As a developer, I want to ensure that the product listings are responsive and work seamlessly on various devices, including desktops, tablets, and mobile phones.
 
 #### Tasks:
 
-1. Design the homepage layout to accommodate product listings. (DONE [Link](https://www.figma.com/file/SeMCwhaQm3TieAG5Eo7COL/Ecommerce?type=design&node-id=0-1&mode=design&t=salzlFiicX1p1Nng-0))
-1. Create a database schema to store product information including names and image URLs. (DONE)
-1. Implement a component to fetch and display product names and images on the homepage.
-1. Extend the database schema to include product prices.
-1. Update the homepage component to display product prices alongside names and images.
-1. Modify the database schema to include short product descriptions.
-1. Enhance the homepage component to show short descriptions for each product.
-1. Add sorting functionality to the product listings, allowing users to sort by price.
-1. Create UI elements for users to select sorting options.
-1. Develop a feature that allows users to reset sorting and filtering options with a single action.
-1. Add a "Reset" button or icon to the user interface.
-1. Apply responsive design principles to ensure the website looks and works well on both desktop and mobile devices.
-1. Test the website on various screen sizes and make adjustments as needed.
-1. Design and create a product details page.
-1. Implement navigation from product listings to the details page when a user clicks on a product.
-1. Develop a feature that allows users to add products to their shopping cart with a single click.
-1. Create a cart management system to store selected products.
-1. Add a "Buy" button on the product details page to enable users to purchase a product they are interested in.
-1. Integrate payment processing and order confirmation functionality.
+1. Design product listing UI with placeholders for products.(DONE [Link](https://www.figma.com/file/SeMCwhaQm3TieAG5Eo7COL/Ecommerce?type=design&node-id=0-1&mode=design&t=salzlFiicX1p1Nng-0))
+1. Create API endpoint to fetch list of products. (DONE)
+1. Integrate API call to fetch and display products on frontend.
+1. Implement sorting options (e.g., by price, name) in UI.
+1. Add filtering options (e.g., by category, price range).
+1. Implement pagination for long product lists.
+1. Task (Admin Functionality): Develop a secure admin panel with features for adding, editing, and deleting products.
+1. Task (Admin Functionality): Enhance the admin panel to include fields for uploading images and providing product details.
+1. Task (Development): Implement efficient database queries and frontend rendering techniques to achieve optimal performance.
+1. Task (Development): Implement responsive design principles to adapt the product listing UI to different screen sizes.
+
+### Side notes
+
+#### Work progress
+
+- 06 Oct 2023 - Understanding the requirements
+- 09 Oct 2023 - Designed the interface
+- 10 Oct 2023 - Learned Multer to upload images in the file system. Also implemented it to the product API.
+- 11 Oct 2023 -
 
 ## Feature 3: Product Details:
 
 1. Create individual product pages with detailed information about each item.
 1. Allow users to view product images in a gallery and read product descriptions.
+
+### User stories:
+
+1. As a customer, I want to be able to click on a product from the product listings and view a dedicated product details page with comprehensive information.
+1. As a customer, I want to see a gallery of product images on the product details page so that I can view the item from different angles and get a better understanding of its appearance.
+1. As a customer, I want to read detailed product descriptions and specifications on the product details page to learn more about the product's features and characteristics.
+1. As a customer, I expect the product details page to load quickly and provide a smooth browsing experience, even for pages with large images.
+1. As a customer, I want to navigate easily between different product details pages and return to the product listings page when I'm done.
+1. As a customer, I expect the product details page to be responsive and user-friendly on various devices, including mobile phones and tablets.
+1. As an administrator, I want to have the ability to update and manage the detailed information for each product, including images, descriptions, and specifications.
+1. As a developer, I want to ensure that the product details are retrieved efficiently from the backend, minimizing load times for customers viewing the product details.
+
+#### Tasks:
+
+1. Create the user interface for the product detail page.
+1. Implement an image gallery on the product details page.
+1. Display product descriptions and specifications on the product detail page.
+1. Optimize the performance of the product details page, including image loading and rendering.
+1. Implement navigation controls that allow users to move between product detail pages and return to the product listings.
+1. Ensure that the product details page is designed to be responsive and accessible on different screen sizes.
+1. (Admin Functionality): Provide a secure admin panel with features for editing and updating product details.
+1. (Development): Optimize the API endpoint for retrieving product details and implement effective caching mechanisms.
 
 ## Feature 4: Shopping Cart:
 

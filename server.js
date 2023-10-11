@@ -9,6 +9,7 @@ const db = config.get("mongoURI");
 
 // Import routes
 const auth = require("./routes/auth");
+const products = require("./routes/products");
 
 // Connect to MongoDB atlas cluster using mongoose
 mongoose
@@ -31,6 +32,7 @@ app.get("/", (req, res) => {
 
 // Setup routes
 app.use("/auth", auth);
+app.use("/products", products);
 
 // Setup port
 const PORT = process.env.PORT || 5000;

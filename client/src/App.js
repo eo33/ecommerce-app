@@ -9,6 +9,7 @@ import { LoginContext } from "./components/Context/LoginContext";
 import Navbar from "./components/Navbar/Navbar";
 import LoginPage from "./components/LoginPage/LoginPage";
 import Footer from "./components/Footer/Footer";
+import Products from "./components/Products/Products";
 import Dashboard from "./components/ProtectedRoutes/Dashboard/Dashboard";
 
 function App() {
@@ -26,6 +27,7 @@ function App() {
               <Routes>
                 <Route path="/login" element={<LoginPage />} />
                 <Route path="/dashboard" element={<Dashboard />} />
+                <Route path="/products" element={<Products />} />
               </Routes>
             </div>
             <Footer />
