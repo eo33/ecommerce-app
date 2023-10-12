@@ -1,0 +1,11 @@
+.card-images {
+  max-width: 540px;
+}
+
+.dropdown-button {
+  background-color: white !important;
+}
+
+.active {
+  background-color: gray !important;
+}

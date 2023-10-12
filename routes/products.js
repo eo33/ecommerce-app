@@ -88,24 +88,48 @@ router.post(
   }
 );
 
-// @route   GET products
-// @desc    Get the information about the product
+// @route   GET products/:filename
+// @desc    Get the image of the product from filesystem
 // @acess   private
 
-router.get("/", async (req, res) => {
-  // Start from the root directory
-  const uploadDirectory = "./uploads";
-  const { name, images, price, description, soldCount } = req.body;
-
+router.get("/:filename", async (req, res) => {
   try {
-    // read the contents of the uploads directory
-    const uploads = fs.readdirSync(uploadDirectory);
-
-    res.json({ files: uploads });
+    const filename = req.params.filename;
+    const uploadDirectory = path.join(__dirname, "../uploads");
+    res.sendFile(path.join(uploadDirectory, `${filename}`));
   } catch (err) {
     console.error(err.message);
-    return res.status("500").json({ msg: "request error" });
+    return res.status(500).json({ msg: "request error" });
   }
 });
+
+// @route   GET products
+// @desc    Get the list of products from MongoDB
+// @acess   public
+router.get("/", async (req, res) => {
+  try {
+    const products = await Products.find({});
+    res.send(products);
+  } catch (err) {
+    console.error(err.message);
+    return res.status(500).json({ msg: "request error" });
+  }
+});
+
+// @route   GET products/list
+// @desc    Get the list of products images names
+// @acess   private
+/*
+router.get("/list", (req, res) => {
+  try {
+    const uploadDirecotry = path.join(__dirname, "../uploads");
+    const list = fs.readdirSync(uploadDirecotry);
+    res.json({ list });
+  } catch (err) {
+    console.error(err.message);
+    return res.status(500).json({ msg: "request error" });
+  }
+});
+*/
 
 module.exports = router;

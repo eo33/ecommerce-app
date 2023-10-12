@@ -90,22 +90,22 @@ _Note: W35 starts from 28 Aug 2023_
 
 ### User stories:
 
-1. As a customer, I want to see a list of available furniture products on the website so that I can browse and select the items I'm interested in.
-1. As a customer, I want the list of products to include essential information such as product images, names, prices, and brief descriptions, so that I can make informed choices.
+1. As a customer, I want to see a list of available furniture products on the website so that I can browse and select the items I'm interested in. (DONE)
+1. As a customer, I want the list of products to include essential information such as product images, names, and prices, so that I can make informed choices. (DONE)
 1. As a customer, I want the product listings to be sortable, so that I can easily arrange products based on my preferences.
 1. As a customer, I want the product listings to be filterable, allowing me to narrow down my choices by various criteria like category and price range.
 1. As a customer, I want the product listings to be paginated if there are many products available, so that I can navigate through the list without overwhelming scrolling.
 1. As an administrator, I want to easily manage and update the product listings, including adding new products and modifying existing ones.
 1. As an administrator, I want to include images, names, prices, and descriptions when adding or editing products, ensuring that customers have accurate and appealing information.
-1. As a developer, I want to optimize the performance of the product listings to ensure fast loading times, even when handling large datasets.
-1. As a developer, I want to ensure that the product listings are responsive and work seamlessly on various devices, including desktops, tablets, and mobile phones.
+1. As a developer, I want to optimize the performance of the product listings to ensure fast loading times, even when handling large datasets. (DONE)
+1. As a developer, I want to ensure that the product listings are responsive and work seamlessly on various devices, including desktops, tablets, and mobile phones. (DONE)
 
 #### Tasks:
 
 1. Design product listing UI with placeholders for products.(DONE [Link](https://www.figma.com/file/SeMCwhaQm3TieAG5Eo7COL/Ecommerce?type=design&node-id=0-1&mode=design&t=salzlFiicX1p1Nng-0))
 1. Create API endpoint to fetch list of products. (DONE)
-1. Integrate API call to fetch and display products on frontend.
-1. Implement sorting options (e.g., by price, name) in UI.
+1. Integrate API call to fetch and display products on frontend. (DONE)
+1. Implement sorting options (e.g., by highest price, lowest price, relevancy) in UI.
 1. Add filtering options (e.g., by category, price range).
 1. Implement pagination for long product lists.
 1. Task (Admin Functionality): Develop a secure admin panel with features for adding, editing, and deleting products.
@@ -120,7 +120,8 @@ _Note: W35 starts from 28 Aug 2023_
 - 06 Oct 2023 - Understanding the requirements
 - 09 Oct 2023 - Designed the interface
 - 10 Oct 2023 - Learned Multer to upload images in the file system. Also implemented it to the product API.
-- 11 Oct 2023 -
+- 11 Oct 2023 - Work on products API
+- 12 Oct 2023 - Work on frontend product component
 
 ## Feature 3: Product Details:
 

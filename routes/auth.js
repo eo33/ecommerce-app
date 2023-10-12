@@ -56,6 +56,7 @@ router.post(
       const payload = {
         user: {
           id: newUser.id,
+          admin: newUser.admin,
         },
       };
 
@@ -116,6 +117,7 @@ router.post(
       const payload = {
         user: {
           id: user.id,
+          admin: user.admin,
         },
       };
 
