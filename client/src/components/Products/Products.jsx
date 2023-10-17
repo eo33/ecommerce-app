@@ -11,8 +11,14 @@ function Products() {
   const [products, setProducts] = useState([]);
   const [filterState, setFilterState] = useState("Most relevant");
 
-  // Price filter variables
+  // Price filter variables to filter change after user exits input field
   const [priceCategory, setPriceCategory] = useState("");
+  const [minPriceFilter, setMinPriceFilter] = useState("");
+  const [maxPriceFilter, setMaxPriceFilter] = useState("");
+
+  // State variables to show immediate change
+  const [minPriceFilterTemp, setMinPriceFilterTemp] = useState("");
+  const [maxPriceFilterTemp, setMaxPriceFilterTemp] = useState("");
 
   // Sold filter variables
   const [soldFilter, setSoldFilter] = useState(0);
@@ -33,8 +39,23 @@ function Products() {
   // Primary filter (top right): Sort product using useMemo to cache it
   const [sortedProducts, priceCategoriesNumbers, soldCountCategoriesNumbers] =
     useMemo(() => {
+      // Advance filters: Price + Sold count accordion)
+      let FilteredProducts = [...products];
+      // Advance filter: price
+      if (minPriceFilter !== "" || maxPriceFilter !== "") {
+        const max = maxPriceFilter === "" ? Infinity : maxPriceFilter;
+        FilteredProducts = FilteredProducts.filter(
+          (item) => item.price >= minPriceFilter && item.price <= max
+        );
+      }
+      // Advance filter: sold
+      console.log(FilteredProducts);
+      FilteredProducts = FilteredProducts.filter(
+        (item) => item.soldCount >= soldFilter
+      );
+
       // Primary filter
-      const copyOfProducts = [...products];
+      const copyOfProducts = [...FilteredProducts];
       if (filterState === "Highest price") {
         copyOfProducts.sort((a, b) => b.price - a.price);
       } else if (filterState === "Lowest price") {
@@ -42,7 +63,7 @@ function Products() {
       } else if (filterState === "Most sold") {
         copyOfProducts.sort((a, b) => b.soldCount - a.soldCount);
       }
-      // Price filter (Handle scenario when data is not yet available)
+      // Sort by price (Handle scenario when data is not yet available)
       const sortByPrice = [...products].sort((a, b) => b.price - a.price);
       const highestPrice = sortByPrice.length ? sortByPrice[0].price : 0;
       const lowestPrice = sortByPrice.length
@@ -55,7 +76,7 @@ function Products() {
         (highestPrice - lowestPrice) / 3 + midPrice1
       );
 
-      // Sold filter
+      // Sort by Sold count
       const sortBySoldCount = [...products].sort(
         (a, b) => b.soldCount - a.soldCount
       );
@@ -82,7 +103,7 @@ function Products() {
           midSoldCount2,
         },
       ];
-    }, [filterState, products]);
+    }, [filterState, products, minPriceFilter, maxPriceFilter, soldFilter]);
 
   return (
     <div className="row mt-3">
@@ -100,29 +121,72 @@ function Products() {
               </Accordion.Header>
               <Accordion.Body>
                 <div className="row">
-                  <div className="col">
+                  <div className="col mx-0 px-0">
                     <label htmlFor="min-price">Min price</label>
-                    <input id="min-price" type="number" className="w-100" />
+                    <input
+                      id="min-price"
+                      type="text"
+                      className="w-100"
+                      value={minPriceFilterTemp}
+                      placeholder="Enter min price"
+                      onChange={(e) => {
+                        if (!isNaN(e.target.value) || e.target.value === "") {
+                          setMinPriceFilterTemp(e.target.value);
+                        }
+                        setPriceCategory("");
+                      }}
+                      onBlur={(e) => setMinPriceFilter(e.target.value)}
+                    />
                   </div>
                 </div>
                 <div className="row">
-                  <div className="col">
+                  <div className="col mx-0 px-0">
                     <label htmlFor="min-price">Max price</label>
-                    <input id="min-price" type="number" className="w-100" />
+                    <input
+                      id="max-price"
+                      type="text"
+                      className="w-100 "
+                      value={maxPriceFilterTemp}
+                      placeholder="Enter max price"
+                      onChange={(e) => {
+                        if (!isNaN(e.target.value) || e.target.value === "") {
+                          setMaxPriceFilterTemp(e.target.value);
+                        }
+                        setPriceCategory("");
+                      }}
+                      onBlur={(e) => setMaxPriceFilter(e.target.value)}
+                    />
                   </div>
                 </div>
                 {/*PRICE CATEGORIES*/}
-
                 <div className="row mt-3">
-                  <div className="col">
+                  <div className="col mx-0 px-0">
                     <input
                       type="checkbox"
                       className="btn-check"
                       id="btn-check"
                       checked={priceCategory === "high"}
-                      onClick={() =>
-                        setPriceCategory(priceCategory === "high" ? "" : "high")
-                      }
+                      onClick={() => {
+                        if (priceCategory === "high") {
+                          setPriceCategory("");
+                          setMinPriceFilter("");
+                          setMaxPriceFilter("");
+                          setMinPriceFilterTemp("");
+                          setMaxPriceFilterTemp("");
+                        } else {
+                          setPriceCategory("high");
+                          setMinPriceFilter(priceCategoriesNumbers.midPrice2);
+                          setMaxPriceFilter(
+                            priceCategoriesNumbers.highestPrice
+                          );
+                          setMinPriceFilterTemp(
+                            priceCategoriesNumbers.midPrice2
+                          );
+                          setMaxPriceFilterTemp(
+                            priceCategoriesNumbers.highestPrice
+                          );
+                        }
+                      }}
                     />
                     <label class="btn btn-primary checked" for="btn-check">
                       ${priceCategoriesNumbers.midPrice2}-$
@@ -131,15 +195,33 @@ function Products() {
                   </div>
                 </div>
                 <div className="row mt-3">
-                  <div className="col">
+                  <div className="col mx-0 px-0">
                     <input
                       type="checkbox"
                       className="btn-check"
                       id="btn-check2"
                       checked={priceCategory === "med"}
-                      onClick={() =>
-                        setPriceCategory(priceCategory === "med" ? "" : "med")
-                      }
+                      onClick={() => {
+                        if (priceCategory === "med") {
+                          setPriceCategory("");
+                          setMinPriceFilter("");
+                          setMaxPriceFilter("");
+                          setMinPriceFilterTemp("");
+                          setMaxPriceFilterTemp("");
+                        } else {
+                          setPriceCategory("med");
+                          setMinPriceFilter(priceCategoriesNumbers.midPrice1);
+                          setMaxPriceFilter(
+                            priceCategoriesNumbers.midPrice2 - 1
+                          );
+                          setMinPriceFilterTemp(
+                            priceCategoriesNumbers.midPrice1
+                          );
+                          setMaxPriceFilterTemp(
+                            priceCategoriesNumbers.midPrice2 - 1
+                          );
+                        }
+                      }}
                     />
                     <label class="btn btn-primary" for="btn-check2">
                       ${priceCategoriesNumbers.midPrice1}-$
@@ -148,15 +230,31 @@ function Products() {
                   </div>
                 </div>
                 <div className="row mt-3">
-                  <div className="col">
+                  <div className="col mx-0 px-0">
                     <input
                       type="checkbox"
                       className="btn-check"
                       id="btn-check3"
                       checked={priceCategory === "low"}
-                      onClick={() =>
-                        setPriceCategory(priceCategory === "low" ? "" : "low")
-                      }
+                      onClick={() => {
+                        if (priceCategory === "low") {
+                          setPriceCategory("");
+                          setMinPriceFilter("");
+                          setMaxPriceFilter("");
+                          setMinPriceFilterTemp("");
+                          setMaxPriceFilterTemp("");
+                        } else {
+                          setPriceCategory("low");
+                          setMinPriceFilter(0);
+                          setMaxPriceFilter(
+                            priceCategoriesNumbers.midPrice1 - 1
+                          );
+                          setMinPriceFilterTemp(0);
+                          setMaxPriceFilterTemp(
+                            priceCategoriesNumbers.midPrice1 - 1
+                          );
+                        }
+                      }}
                     />
                     <label class="btn btn-primary" for="btn-check3">
                       $0-${priceCategoriesNumbers.midPrice1 - 1}
@@ -176,10 +274,15 @@ function Products() {
                   <input
                     class="form-check-input"
                     type="radio"
-                    name="flexRadioDefault"
-                    id="flexRadioDefault1"
+                    name="sold-filter-radio1"
+                    onClick={() =>
+                      setSoldFilter(soldCountCategoriesNumbers.highestSoldCount)
+                    }
+                    checked={
+                      soldFilter === soldCountCategoriesNumbers.highestSoldCount
+                    }
                   />
-                  <label class="form-check-label" for="flexRadioDefault1">
+                  <label class="form-check-label" for="sold-filter-radio1">
                     {soldCountCategoriesNumbers.highestSoldCount} +
                   </label>
                 </div>
@@ -187,11 +290,15 @@ function Products() {
                   <input
                     class="form-check-input"
                     type="radio"
-                    name="flexRadioDefault"
-                    id="flexRadioDefault2"
-                    checked
+                    name="sold-filter-radio2"
+                    onClick={() =>
+                      setSoldFilter(soldCountCategoriesNumbers.midSoldCount2)
+                    }
+                    checked={
+                      soldFilter === soldCountCategoriesNumbers.midSoldCount2
+                    }
                   />
-                  <label class="form-check-label" for="flexRadioDefault2">
+                  <label class="form-check-label" for="sold-filter-radio2">
                     {soldCountCategoriesNumbers.midSoldCount2} +
                   </label>
                 </div>
@@ -199,11 +306,15 @@ function Products() {
                   <input
                     class="form-check-input"
                     type="radio"
-                    name="flexRadioDefault"
-                    id="flexRadioDefault2"
-                    checked
+                    name="sold-filter-radio3"
+                    onClick={() =>
+                      setSoldFilter(soldCountCategoriesNumbers.midSoldCount1)
+                    }
+                    checked={
+                      soldFilter === soldCountCategoriesNumbers.midSoldCount1
+                    }
                   />
-                  <label class="form-check-label" for="flexRadioDefault2">
+                  <label class="form-check-label" for="sold-filter-radio3">
                     {soldCountCategoriesNumbers.midSoldCount1} +
                   </label>
                 </div>
@@ -211,11 +322,11 @@ function Products() {
                   <input
                     class="form-check-input"
                     type="radio"
-                    name="flexRadioDefault"
-                    id="flexRadioDefault2"
-                    checked
+                    name="sold-filter-radio4"
+                    onClick={() => setSoldFilter(0)}
+                    checked={soldFilter === 0}
                   />
-                  <label class="form-check-label" for="flexRadioDefault2">
+                  <label class="form-check-label" for="sold-filter-radio4">
                     0 +
                   </label>
                 </div>
@@ -234,7 +345,7 @@ function Products() {
             <input type="text" className="text w-100"></input>
           </div>
           {/*FILTERS*/}
-          <div className="col-md-1 d-flex align-items-center">Filters</div>
+          <div className="col-md-1 d-flex align-items-center">Sort by:</div>
           <div className="col-2">
             <DropdownButton
               id="dropdown-basic-button"
