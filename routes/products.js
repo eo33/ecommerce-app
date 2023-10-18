@@ -67,6 +67,7 @@ router.post(
   checkFile,
   async (req, res) => {
     try {
+      console.log(req.file);
       const { name, price, description, soldCount } = req.body;
       const image = req.file.filename;
 

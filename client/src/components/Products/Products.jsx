@@ -342,7 +342,12 @@ function Products() {
         <div className="row">
           {/*SEARCH BAR*/}
           <div className="col-12 col-md-9 d-flex align-items-center">
-            <input type="text" className="text w-100"></input>
+            <input
+              type="text"
+              className="text w-100"
+              disabled
+              placeholder="Search item"
+            ></input>
           </div>
           {/*FILTERS*/}
           <div className="col-md-1 d-flex align-items-center">Sort by:</div>

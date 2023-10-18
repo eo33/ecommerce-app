@@ -11,10 +11,10 @@ The ecommerce project is planned to be completed within 9 weeks.
 | No  |                Feature                | W35 | W40 | W41 | W42 | W43 | W44 | W45 | W46 | W47 | W48 |
 | :-: | :-----------------------------------: | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 |  1  | User Authentication and Authorization | •   | •   |     |     |     |     |     |     |     |     |
-|  2  |           Product Listings            |     | •   | •   |     |     |     |     |     |     |     |
-|  3  |            Product Details            |     |     | •   |     |     |     |     |     |     |     |
-|  4  |             Shopping Cart             |     |     |     | •   |     |     |     |     |     |     |
-|  5  |          Checkout and Orders          |     |     |     | •   | •   |     |     |     |     |     |
+|  2  |           Product Listings            |     | •   | •   | •   |     |     |     |     |     |     |
+|  3  |            Product Details            |     |     |     | •   |     |     |     |     |     |     |
+|  4  |             Shopping Cart             |     |     |     |     | •   |     |     |     |     |     |
+|  5  |          Checkout and Orders          |     |     |     |     | •   |     |     |     |     |     |
 |  6  |              Admin Panel              |     |     |     |     | •   | •   |     |     |     |     |
 |  7  |         Search Functionality          |     |     |     |     |     | •   | •   |     |     |     |
 |  8  |          Payment Integration          |     |     |     |     |     |     | •   |     |     |     |
@@ -106,12 +106,10 @@ _Note: W35 starts from 28 Aug 2023_
 1. Create API endpoint to fetch list of products. (DONE)
 1. Integrate API call to fetch and display products on frontend. (DONE)
 1. Implement sorting options (e.g., by highest price, lowest price, sold count, etc) in UI. (DONE)
-1. Add filtering options (e.g., by items sold, price range).
-1. Implement pagination for long product lists.
+1. Add filtering options (e.g., by items sold, price range). (DONE)
 1. Task (Admin Functionality): Develop a secure admin panel with features for adding, editing, and deleting products.
-1. Task (Admin Functionality): Enhance the admin panel to include fields for uploading images and providing product details.
-1. Task (Development): Implement efficient database queries and frontend rendering techniques to achieve optimal performance.
-1. Task (Development): Implement responsive design principles to adapt the product listing UI to different screen sizes.
+1. Task (Development): Implement efficient database queries and frontend rendering techniques to achieve optimal performance. (DONE)
+1. Task (Development): Implement responsive design principles to adapt the product listing UI to different screen sizes. (DONE)
 
 ### Side notes
 
@@ -123,6 +121,8 @@ _Note: W35 starts from 28 Aug 2023_
 - 11 Oct 2023 - Work on products backend API
 - 12 Oct 2023 - Work on frontend product component (API call and sorting)
 - 16 Oct 2023 - Work on advance filter
+- 17 Oct 2023 - Completed filters
+- 18 Oct 2023 - Completed adding products from client side as an admin
 
 ## Feature 3: Product Details:
 
