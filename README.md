@@ -108,6 +108,7 @@ _Note: W35 starts from 28 Aug 2023_
 1. Implement sorting options (e.g., by highest price, lowest price, sold count, etc) in UI. (DONE)
 1. Add filtering options (e.g., by items sold, price range). (DONE)
 1. Task (Admin Functionality): Develop a secure admin panel with features for adding, editing, and deleting products.
+1. Task (Admin Functionality): Enhance the admin panel to include fields for uploading images and providing product details.
 1. Task (Development): Implement efficient database queries and frontend rendering techniques to achieve optimal performance. (DONE)
 1. Task (Development): Implement responsive design principles to adapt the product listing UI to different screen sizes. (DONE)
 
@@ -123,6 +124,7 @@ _Note: W35 starts from 28 Aug 2023_
 - 16 Oct 2023 - Work on advance filter
 - 17 Oct 2023 - Completed filters
 - 18 Oct 2023 - Completed adding products from client side as an admin
+- 19 Oct 2023 - Completed backend API for deleting and updating product as admin
 
 ## Feature 3: Product Details:
 

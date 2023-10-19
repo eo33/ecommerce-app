@@ -2,6 +2,7 @@
 const express = require("express");
 const router = express.Router();
 const authToken = require("../middleware/authToken");
+const authTokenAdmin = require("../middleware/authTokenAdmin");
 
 // Import mongoose model
 const Products = require("../model/Products");
@@ -67,7 +68,6 @@ router.post(
   checkFile,
   async (req, res) => {
     try {
-      console.log(req.file);
       const { name, price, description, soldCount } = req.body;
       const image = req.file.filename;
 
@@ -85,6 +85,78 @@ router.post(
     } catch (err) {
       console.error(err.message);
       return res.status(500).json({ msg: "request error" });
+    }
+  }
+);
+
+// @route   DELETE products/:image
+// @desc    Delete a product image and it's details
+// @acess   private
+
+router.delete("/:image", authTokenAdmin, async (req, res) => {
+  try {
+    const image = req.params.image;
+    // Delete from MongoDB
+    await Products.findOneAndDelete({ image: image });
+    // Delete from File system
+    const filePath = path.join(__dirname, "..", "uploads", image);
+    fs.unlink(filePath, (err) => {
+      if (err) {
+        console.error(err);
+        return res.status(500).json({ msg: "Error deleting file" });
+      }
+      console.log(`File ${image} deleted`);
+      return res.status(200).json({ msg: "Item deleted" });
+    });
+  } catch (err) {
+    console.error(err.message);
+    return res.status(500).json({ msg: "request error" });
+  }
+});
+
+// @route   PUT products/:image
+// @desc    Update a product image and it's details
+// @acess   private
+
+router.put(
+  "/:image",
+  authTokenAdmin,
+  upload.single("image"),
+  async (req, res) => {
+    try {
+      const oldImage = req.params.image;
+      const { name, price, description, soldCount } = req.body;
+      let image = oldImage;
+      // Check if a new file is uploaded
+      if (req.file) {
+        image = req.file.filename; // Set the new image to the uploaded file's filename
+        // Delete the old file from the file system
+        const filePath = path.join(__dirname, "..", "uploads", oldImage);
+        fs.unlink(filePath, (err) => {
+          if (err) {
+            console.error(err);
+            return res.status(500).json({ msg: "Error deleting old file" });
+          }
+          console.log(`File ${oldImage} deleted`);
+        });
+      }
+      // Update in MongoDB
+      const filter = { image: oldImage };
+      const update = { name, image, price, description, soldCount };
+      const updatedProduct = await Products.findOneAndUpdate(filter, update, {
+        new: true,
+      });
+
+      if (!updatedProduct) {
+        return res.status(404).json({ msg: "Product not found" });
+      }
+      return res.json({
+        msg: "Product updated successfully",
+        updatedProduct,
+      });
+    } catch (err) {
+      console.error(err.message);
+      return res.status(500).json({ msg: "Request error" });
     }
   }
 );
@@ -116,21 +188,5 @@ router.get("/", async (req, res) => {
     return res.status(500).json({ msg: "request error" });
   }
 });
-
-// @route   GET products/list
-// @desc    Get the list of products images names
-// @acess   private
-/*
-router.get("/list", (req, res) => {
-  try {
-    const uploadDirecotry = path.join(__dirname, "../uploads");
-    const list = fs.readdirSync(uploadDirecotry);
-    res.json({ list });
-  } catch (err) {
-    console.error(err.message);
-    return res.status(500).json({ msg: "request error" });
-  }
-});
-*/
 
 module.exports = router;
