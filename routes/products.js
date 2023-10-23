@@ -176,9 +176,25 @@ router.get("/:filename", async (req, res) => {
   }
 });
 
+// @route   GET products/details/:filename
+// @desc    Get the product details of a file
+// @acess   private
+
+router.get("/details/:filename", async (req, res) => {
+  try {
+    const filename = req.params.filename;
+    const selectedProduct = await Products.findOne({ image: filename });
+    res.json(selectedProduct);
+  } catch (err) {
+    console.error(err.message);
+    return res.status(500).json({ msg: "request error" });
+  }
+});
+
 // @route   GET products
 // @desc    Get the list of products from MongoDB
 // @acess   public
+
 router.get("/", async (req, res) => {
   try {
     const products = await Products.find({});

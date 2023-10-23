@@ -107,8 +107,8 @@ _Note: W35 starts from 28 Aug 2023_
 1. Integrate API call to fetch and display products on frontend. (DONE)
 1. Implement sorting options (e.g., by highest price, lowest price, sold count, etc) in UI. (DONE)
 1. Add filtering options (e.g., by items sold, price range). (DONE)
-1. Task (Admin Functionality): Develop a secure admin panel with features for adding, editing, and deleting products.
-1. Task (Admin Functionality): Enhance the admin panel to include fields for uploading images and providing product details.
+1. Task (Admin Functionality): Develop a secure admin panel with features for adding, editing, and deleting products. (DONE)
+1. Task (Admin Functionality): Enhance the admin panel to include fields for uploading images and providing product details. (DONE)
 1. Task (Development): Implement efficient database queries and frontend rendering techniques to achieve optimal performance. (DONE)
 1. Task (Development): Implement responsive design principles to adapt the product listing UI to different screen sizes. (DONE)
 
@@ -125,6 +125,7 @@ _Note: W35 starts from 28 Aug 2023_
 - 17 Oct 2023 - Completed filters
 - 18 Oct 2023 - Completed adding products from client side as an admin
 - 19 Oct 2023 - Completed backend API for deleting and updating product as admin
+- 23 Oct 2023 - Fix incorrect event handling
 
 ## Feature 3: Product Details:
 
@@ -145,13 +146,12 @@ _Note: W35 starts from 28 Aug 2023_
 #### Tasks:
 
 1. Create the user interface for the product detail page.
-1. Implement an image gallery on the product details page.
 1. Display product descriptions and specifications on the product detail page.
 1. Optimize the performance of the product details page, including image loading and rendering.
 1. Implement navigation controls that allow users to move between product detail pages and return to the product listings.
 1. Ensure that the product details page is designed to be responsive and accessible on different screen sizes.
-1. (Admin Functionality): Provide a secure admin panel with features for editing and updating product details.
-1. (Development): Optimize the API endpoint for retrieving product details and implement effective caching mechanisms.
+1. (Admin Functionality): Provide a secure admin panel with features for editing and updating product details. (Done)
+1. (Development): Optimize the API endpoint for retrieving product details and implement effective caching mechanisms.(Done)
 
 ## Feature 4: Shopping Cart:
 
@@ -177,15 +177,3 @@ _Note: W35 starts from 28 Aug 2023_
 ## Feature 8: Responsive Design:
 
 1. Ensure your app is responsive and works well on different devices and screen sizes.
-
-## Feature 9: Payment Integration:
-
-1. Integrate a payment gateway to handle transactions securely. Popular options include Stripe or PayPal.
-
-## Feature 10: Reviews and Ratings:
-
-1. Allow users to leave reviews and ratings for products they've purchased.
-
-## Feature 10: Wishlist/Favorites:
-
-1. Implement a wishlist or favorites feature for users to save products for later.

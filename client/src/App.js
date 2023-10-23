@@ -13,6 +13,7 @@ import Products from "./components/Products/Products";
 import Dashboard from "./components/ProtectedRoutes/Dashboard/Dashboard";
 import AdminProductsAdd from "./components/Products/AdminProductsAdd";
 import AdminProductsEdit from "./components/Products/AdminProductsEdit";
+import ProductDetails from "./components/Products/ProductDetails";
 
 function App() {
   const token = localStorage.getItem("token");
@@ -38,6 +39,7 @@ function App() {
                   path="/admin/products/edit"
                   element={<AdminProductsEdit />}
                 />
+                <Route path="/items/:id" element={<ProductDetails />} />
               </Routes>
             </div>
             <Footer />
