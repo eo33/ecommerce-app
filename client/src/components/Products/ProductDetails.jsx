@@ -1,20 +1,22 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 import axios from "axios";
+import ReactImageMagnify from "react-image-magnify";
+import "./Product.css";
 
 function ProductDetails() {
   const { id } = useParams();
   const [product, setProduct] = useState({});
-  const { name, image, price, description, soldCount } = product;
+  const { name, price, description, soldCount } = product;
+  const [quantity, setQuantity] = useState(1);
 
   useEffect(() => {
-    console.log("run");
     const fetchData = async () => {
       try {
         const response = await axios.get(`/products/details/${id}`);
-        const productData = response.data;
         // Set the product data to state
-        setProduct(productData);
+        setProduct(response.data);
       } catch (error) {
         // Handle errors here
         console.error("Error fetching product:", error);
@@ -26,37 +28,107 @@ function ProductDetails() {
   return (
     <div className="container">
       {product ? (
-        <div className="row mt-5 pt-2">
-          <div className="col-md-4">
-            <img
-              src={`/products/${image}`}
-              alt="a meaningful text"
-              className="img-thumbnail border-2"
-            />
+        <>
+          <div className="row mt-3">
+            <div className="col">
+              <Link to="/shop" className="w-25">
+                Go back
+              </Link>
+            </div>
           </div>
-          <div className="col-md-4">
-            {/*PRODUCT HEADERS*/}
-            <div className="row border-2 border-bottom">
-              <div className="col">
-                <h2 className="display-5">{name}</h2>
-                <h3 className="mt-4">Sold: {soldCount}</h3>
-                <h2 className="my-4">$ {price}</h2>
+
+          <div className="row mt-2 pt-2">
+            {/*COLUMN 1: PRODUCT IMAGE*/}
+            <div className="col-md-4">
+              <div className="img-thumbnail border-2 w-100">
+                <ReactImageMagnify
+                  {...{
+                    smallImage: {
+                      alt: "Wristwatch by Ted Baker London",
+                      isFluidWidth: true,
+                      src: `/products/${id}`,
+                    },
+                    largeImage: {
+                      src: `/products/${id}`,
+                      width: 2000,
+                      height: 2000,
+                    },
+                    isHintEnabled: true,
+                    shouldHideHintAfterFirstActivation: true,
+                  }}
+                />
               </div>
             </div>
-            {/*PRODUCT DESCRIPTION*/}
-            <div className="row">
-              <div className="col mt-3">{description}</div>
+            {/*COLUMN 2: PRODUCT HEADERS*/}
+            <div className="col-md-4 px-3">
+              <div className="row border-2 border-bottom">
+                <div className="col">
+                  <h2 className="display-5">{name}</h2>
+                  <h3 className="mt-4">Sold: {soldCount}</h3>
+                  <h2 className="my-4">$ {price}</h2>
+                </div>
+              </div>
+              <div className="row">
+                <div className="col mt-3">{description}</div>
+              </div>
+            </div>
+            {/*COLUMN 3: PRODUCT DESC*/}
+            <div className="col-md-3 border border-2 px-4 offset-md-1 mt-5 mt-md-0">
+              <h5 className="py-3 mb-0">Add to product</h5>
+              <div className="row border-2 border-top border-bottom py-3">
+                <div className="col-4">
+                  <img
+                    src={`/products/${id}`}
+                    alt="a meaningful text"
+                    className="img-thumbnail border-2"
+                  />
+                </div>
+                <h3 className="col-8 d-flex align-items-center overflow-hidden">
+                  {name}
+                </h3>
+              </div>
+              {/**ADD QUANTITY */}
+              <div
+                class="btn-group mt-5"
+                role="group"
+                aria-label="Basic example"
+              >
+                <button
+                  type="button"
+                  class="btn btn-secondary "
+                  onClick={() =>
+                    setQuantity((prev) => (prev > 1 ? prev - 1 : 1))
+                  }
+                  disabled={quantity > 1 ? false : true}
+                >
+                  -
+                </button>
+                <div className="px-3 px-lg-5 pt-2 quantity">
+                  <h5>{quantity}</h5>
+                </div>
+                <button
+                  type="button"
+                  class="btn btn-secondary"
+                  onClick={() => setQuantity((prev) => prev + 1)}
+                >
+                  +
+                </button>
+              </div>
+              {/**SUBTOTAL*/}
+              <div className="row mt-5">
+                <h4 className="col">Subtotal: ${price * quantity}</h4>
+              </div>
+              {/*Add to cart*/}
+              <button
+                type="button"
+                class="btn btn-light w-100 mt-3 border mt-5 mb-5 mb-md-3"
+                onClick={() => {}}
+              >
+                Add to cart
+              </button>
             </div>
           </div>
-          <div className="col-md-4">
-            <h5 className="border-2 border-bottom">Add to product</h5>
-            <img
-              src={`/products/${image}`}
-              alt="a meaningful text"
-              className="img-thumbnail border-2 w-25 mt-3"
-            />
-          </div>
-        </div>
+        </>
       ) : null}
     </div>
   );

@@ -398,11 +398,13 @@ function Products() {
               <div className="col-md-4 mt-4 d-flex justify-content-center">
                 <div className="card ">
                   <div className="col d-flex justify-content-center">
-                    <img
-                      className="card-img-top w-100"
-                      src={`products/${product.image}`}
-                      alt={`${product.name}`}
-                    />
+                    <a href={`shop/${product.image}`}>
+                      <img
+                        className="card-img-top w-100"
+                        src={`products/${product.image}`}
+                        alt={`${product.name}`}
+                      />
+                    </a>
                   </div>
                   <div className="card-body">
                     <h5 className="card-title m-0">{product.name}</h5>

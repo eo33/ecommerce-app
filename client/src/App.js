@@ -30,7 +30,7 @@ function App() {
               <Routes>
                 <Route path="/login" element={<LoginPage />} />
                 <Route path="/dashboard" element={<Dashboard />} />
-                <Route path="/products" element={<Products />} />
+                <Route path="/shop" element={<Products />} />
                 <Route
                   path="/admin/products/add"
                   element={<AdminProductsAdd />}
@@ -39,7 +39,7 @@ function App() {
                   path="/admin/products/edit"
                   element={<AdminProductsEdit />}
                 />
-                <Route path="/items/:id" element={<ProductDetails />} />
+                <Route path="/shop/:id" element={<ProductDetails />} />
               </Routes>
             </div>
             <Footer />

@@ -12,14 +12,11 @@ The ecommerce project is planned to be completed within 9 weeks.
 | :-: | :-----------------------------------: | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 |  1  | User Authentication and Authorization | •   | •   |     |     |     |     |     |     |     |     |
 |  2  |           Product Listings            |     | •   | •   | •   |     |     |     |     |     |     |
-|  3  |            Product Details            |     |     |     | •   |     |     |     |     |     |     |
-|  4  |             Shopping Cart             |     |     |     |     | •   |     |     |     |     |     |
-|  5  |          Checkout and Orders          |     |     |     |     | •   |     |     |     |     |     |
-|  6  |              Admin Panel              |     |     |     |     | •   | •   |     |     |     |     |
-|  7  |         Search Functionality          |     |     |     |     |     | •   | •   |     |     |     |
-|  8  |          Payment Integration          |     |     |     |     |     |     | •   |     |     |     |
-|  9  |          Reviews and Ratings          |     |     |     |     |     |     |     | •   |     |     |
-| 10  |          Wishlist/Favorites           |     |     |     |     |     |     |     | •   |     |     |
+|  3  |            Product Details            |     |     |     |     | •   |     |     |     |     |     |
+|  4  |             Shopping Cart             |     |     |     |     | •   | •   |     | •   |     |     |
+|  5  |          Checkout and Orders          |     |     |     |     |     |     |     | •   | •   |     |
+|  6  |              Admin Panel              |     |     |     |     |     |     |     |     | •   |     |
+|  7  |         Search Functionality          |     |     |     |     |     |     |     |     |     | •   |
 
 _Note: W35 starts from 28 Aug 2023_
 
@@ -41,6 +38,7 @@ _Note: W35 starts from 28 Aug 2023_
 - Axios
 - Router dom
 - Redux-devtools-extension
+- React-image-magnify
 
 ## Feature 1: User Authentication and Authorization
 
@@ -90,15 +88,15 @@ _Note: W35 starts from 28 Aug 2023_
 
 ### User stories:
 
-1. As a customer, I want to see a list of available furniture products on the website so that I can browse and select the items I'm interested in. (DONE)
-1. As a customer, I want the list of products to include essential information such as product images, names, and prices, so that I can make informed choices. (DONE)
-1. As a customer, I want the product listings to be sortable, so that I can easily arrange products based on my preferences. (DONE)
+1. As a customer, I want to see a list of available furniture products on the website so that I can browse and select the items I'm interested in.
+1. As a customer, I want the list of products to include essential information such as product images, names, and prices, so that I can make informed choices.
+1. As a customer, I want the product listings to be sortable, so that I can easily arrange products based on my preferences.
 1. As a customer, I want the product listings to be filterable, allowing me to narrow down my choices by various criteria like category and price range.
 1. As a customer, I want the product listings to be paginated if there are many products available, so that I can navigate through the list without overwhelming scrolling.
 1. As an administrator, I want to easily manage and update the product listings, including adding new products and modifying existing ones.
 1. As an administrator, I want to include images, names, prices, and descriptions when adding or editing products, ensuring that customers have accurate and appealing information.
-1. As a developer, I want to optimize the performance of the product listings to ensure fast loading times, even when handling large datasets. (DONE)
-1. As a developer, I want to ensure that the product listings are responsive and work seamlessly on various devices, including desktops, tablets, and mobile phones. (DONE)
+1. As a developer, I want to optimize the performance of the product listings to ensure fast loading times, even when handling large datasets.
+1. As a developer, I want to ensure that the product listings are responsive and work seamlessly on various devices, including desktops, tablets, and mobile phones.
 
 #### Tasks:
 
@@ -145,13 +143,20 @@ _Note: W35 starts from 28 Aug 2023_
 
 #### Tasks:
 
-1. Create the user interface for the product detail page.
-1. Display product descriptions and specifications on the product detail page.
-1. Optimize the performance of the product details page, including image loading and rendering.
-1. Implement navigation controls that allow users to move between product detail pages and return to the product listings.
-1. Ensure that the product details page is designed to be responsive and accessible on different screen sizes.
+1. Create the user interface for the product detail page. (Done)
+1. Display product descriptions and specifications on the product detail page. (Done)
+1. Optimize the performance of the product details page, including image loading and rendering. (Done)
+1. Implement navigation controls that allow users to move between product detail pages and return to the product listings. (Done)
+1. Implement zoom control that allow users to zoom at the product image. (DONE)
+1. Ensure that the product details page is designed to be responsive and accessible on different screen sizes. (Done)
 1. (Admin Functionality): Provide a secure admin panel with features for editing and updating product details. (Done)
 1. (Development): Optimize the API endpoint for retrieving product details and implement effective caching mechanisms.(Done)
+
+#### Work progress
+
+- 23 Oct 2023 - Made figma design
+- 25 Oct 2023 - Implemented Figma design
+- 26 Oct 2023 - Installed `react-image-magnify` so user can magnify images. Completed all the listed tasks.
 
 ## Feature 4: Shopping Cart:
 
@@ -159,21 +164,99 @@ _Note: W35 starts from 28 Aug 2023_
 1. Show a summary of the items in the cart with quantities and prices.
 1. Implement the ability to modify or remove items from the cart.
 
+### User stories:
+
+1. As a customer, I want to be able to add products to my cart while browsing, so that I can keep track of items I intend to purchase.
+1. As a customer, I want to see a concise summary of the items in my cart, including quantities and prices, so that I can review my selections before proceeding to checkout.
+1. As a customer, I want to have the ability to modify the quantities of items in my cart, allowing me to adjust my purchase quantities based on my preferences.
+1. As a customer, I want to be able to remove items from my cart easily, giving me the flexibility to change my mind about certain products.
+1. As a customer, I want to see the total price of all the items in my cart, including any applicable taxes or fees, so that I can understand the overall cost of my purchase.
+1. As a customer, I expect my shopping cart to be accessible and persist across different pages, allowing me to add items to the cart from various product pages.
+1. As a customer, I expect the shopping cart to update dynamically when I add or remove items, providing me with real-time feedback on my shopping selections.
+1. As an administrator, I want to be able to view and manage the active shopping carts of users, enabling me to provide support and assistance as needed.
+
+#### Tasks:
+
+1. Implement an intuitive mechanism for adding products to the shopping cart.
+1. Develop a user-friendly cart interface that displays a clear summary of the items, quantities, and individual prices.
+1. Implement functionality that enables users to modify the quantities of items directly within the cart interface.
+1. Integrate a simple process that allows users to remove items from the cart with minimal effort.
+1. Calculate and display the total price of the items in the cart, considering any taxes or fees that may apply.
+1. Implement a persistent shopping cart functionality that remains accessible throughout the user's browsing session.
+1. Integrate dynamic updates to the shopping cart interface to reflect changes in quantities and items without requiring a page refresh.
+1. (Admin Functionality): Develop an admin panel feature that allows administrators to monitor and manage user shopping carts effectively.
+
+#### Work progress
+
+- 26 Oct 2023 - Added the user stories, tasks and understanding the requirement.
+
 ## Feature 5: Checkout and Orders:
 
 1. Create a checkout process that guides users through providing shipping and payment information.
 1. Generate order summaries with a breakdown of costs and delivery details.
 1. Allow users to view their order history.
 
+### User stories:
+
+1. As a customer, I want a streamlined checkout process that guides me through providing shipping and payment information, making it convenient for me to complete my purchase.
+1. As a customer, I expect the checkout process to be secure and to safeguard my sensitive payment information, ensuring that my data is protected from unauthorized access.
+1. As a customer, I want to receive an order summary after completing the checkout, providing me with a detailed breakdown of costs, including item prices, taxes, shipping fees, and the total amount due.
+1. As a customer, I want to receive confirmation of my order via email, providing me with a record of my purchase and important order-related information.
+1. As a customer, I expect to be able to view my order history, enabling me to track past purchases and access information about previous orders whenever necessary.
+1. As a customer, I want to be able to track the status of my orders, including information about shipment and delivery, so that I can stay informed about the progress of my purchases.
+1. As an administrator, I want to be able to manage and process incoming orders efficiently, enabling me to track order statuses, update delivery information, and handle customer inquiries.
+
+#### Tasks:
+
+1. Task: Develop a user-friendly checkout interface with clear steps for providing shipping and payment details.
+1. Task: Implement industry-standard security protocols, such as SSL encryption, to secure the checkout process and protect users' payment information.
+1. Task: Generate and display a comprehensive order summary for customers upon successful checkout, outlining all relevant cost details.
+1. Task: Set up an automated email notification system that sends order confirmations to customers after successful checkouts.
+1. Task: Implement a user-friendly order history section that allows customers to access and review their previous orders.
+1. Task: Integrate a tracking mechanism that provides customers with real-time updates on the status of their orders, including shipment and delivery details.
+1. Task (Admin Functionality): Develop an admin panel feature that allows administrators to monitor and manage incoming orders effectively, including order processing and customer support.
+
+#### Work progress
+
 ## Feature 6: Admin Panel:
 
 1. Implement an admin panel to manage products, orders, and users.
 1. Add functionality for adding new products, updating existing ones, and managing inventory.
 
+### User stories:
+
+1. As an administrator, I want to access a secure admin panel that allows me to manage products, orders, and users efficiently, enabling me to oversee and control various aspects of the e-commerce platform.
+1. As an administrator, I want to have the ability to add new products to the platform easily, including uploading product images, providing detailed descriptions, and specifying pricing and inventory information.
+1. As an administrator, I want to be able to update existing product information, enabling me to make necessary changes to product details, prices, and inventory levels as required.
+1. As an administrator, I need to manage product inventory effectively, including monitoring stock levels, receiving notifications for low inventory, and updating stock availability to prevent overselling.
+1. As an administrator, I want to view and manage incoming orders, including processing orders, updating order statuses, and addressing customer inquiries related to orders.
+1. As an administrator, I want to have the ability to manage user accounts, including viewing user profiles, modifying user information, and addressing any account-related issues or inquiries.
+1. As an administrator, I want to ensure that the admin panel is user-friendly and intuitive, providing me with a seamless experience for managing products, orders, and users without encountering technical difficulties.
+
+#### Tasks:
+
+1. Set up a secure login system for administrators to access the admin panel.
+1. Task: Develop a user-friendly interface in the admin panel that facilitates the addition of new products with comprehensive details and inventory management options.
+1. Implement functionality within the admin panel that allows administrators to modify and update existing product information seamlessly.
+1. Integrate inventory management features into the admin panel, providing administrators with tools to track and manage product stock efficiently.
+1. Develop an order management system within the admin panel that allows administrators to handle incoming orders and track their statuses.
+1. Implement user management functionalities in the admin panel, enabling administrators to oversee and manage user accounts effectively.
+1. Design and develop an intuitive user interface for the admin panel, focusing on ease of use and efficient management of key e-commerce platform elements.
+
+#### Work progress
+
 ## Feature 7: Search Functionality:
 
 1. Integrate a search bar that allows users to search for specific products based on keywords.
 
-## Feature 8: Responsive Design:
+### User stories:
 
-1. Ensure your app is responsive and works well on different devices and screen sizes.
+1. As a customer, I want to be able to use a search bar to find specific products quickly and efficiently based on relevant keywords, enabling me to locate desired items without the need for extensive browsing.
+
+#### Tasks:
+
+1. Task: Integrate a search bar prominently into the user interface, allowing customers to input keywords and search for products based on various attributes such as product names, categories, and descriptions.
+
+#### Work progress
+
+ChatGPT link: https://chat.openai.com/c/a89c0192-59a3-4f8b-96ab-f0c0e0000752
