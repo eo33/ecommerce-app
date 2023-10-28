@@ -2,7 +2,7 @@ import "bootstrap/dist/css/bootstrap.css";
 import "./Navbar.css";
 import { useState, useContext } from "react";
 import { LoginContext } from "../Context/LoginContext";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 function Navbar() {
   // Login context
@@ -16,7 +16,7 @@ function Navbar() {
   return (
     <nav class="navbar navbar-expand-lg border-3 border-secondary border-bottom">
       <div class="container-fluid">
-        <a class="navbar-brand" href="./">
+        <Link class="navbar-brand" to="./">
           <img
             src="./assets/logo.jpeg"
             width="auto"
@@ -24,7 +24,7 @@ function Navbar() {
             class="d-inline-block align-top"
             alt=""
           />
-        </a>
+        </Link>
         <button
           class="navbar-toggler"
           type="button"
@@ -37,14 +37,14 @@ function Navbar() {
           <div className="col d-flex justify-content-start">
             <ul class="navbar-nav mb-2 mb-lg-0 text-dark">
               <li class="nav-item">
-                <a class="nav-link" href="/#">
+                <Link class="nav-link" to="/#">
                   Main
-                </a>
+                </Link>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="/#">
+                <Link class="nav-link" to="/shop">
                   Shop
-                </a>
+                </Link>
               </li>
             </ul>
           </div>

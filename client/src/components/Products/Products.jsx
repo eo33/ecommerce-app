@@ -1,4 +1,5 @@
 import { useEffect, useState, useMemo } from "react";
+import { Link } from "react-router-dom";
 import axios from "axios";
 import Dropdown from "react-bootstrap/Dropdown";
 import DropdownButton from "react-bootstrap/DropdownButton";
@@ -398,13 +399,13 @@ function Products() {
               <div className="col-md-4 mt-4 d-flex justify-content-center">
                 <div className="card ">
                   <div className="col d-flex justify-content-center">
-                    <a href={`shop/${product.image}`}>
+                    <Link to={`/shop/${product.image}`}>
                       <img
                         className="card-img-top w-100"
-                        src={`products/${product.image}`}
+                        src={`/products/${product.image}`}
                         alt={`${product.name}`}
                       />
-                    </a>
+                    </Link>
                   </div>
                   <div className="card-body">
                     <h5 className="card-title m-0">{product.name}</h5>
