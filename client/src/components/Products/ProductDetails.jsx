@@ -10,7 +10,9 @@ function ProductDetails() {
   const [product, setProduct] = useState({});
   const { name, price, description, soldCount } = product;
   const [quantity, setQuantity] = useState(1);
+  const token = localStorage.getItem("token");
 
+  // Fetch data of product
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -25,6 +27,29 @@ function ProductDetails() {
     fetchData();
   }, [id]);
 
+  // Handle add to cart event
+  const handleAdd = async (e) => {
+    e.preventDefault();
+    console.log("added item");
+    // Add item to cart
+    try {
+      const config = {
+        headers: {
+          Authorization: token,
+          "Content-Type": "application/json",
+        },
+      };
+      const body = {
+        productId: product._id,
+        quantity: quantity,
+      };
+      console.log(config, body);
+      await axios.post(`/cart/add`, body, config);
+      console.log("SUCCESS");
+    } catch (err) {
+      console.error(err.message);
+    }
+  };
   return (
     <div className="container">
       {product ? (
@@ -119,13 +144,23 @@ function ProductDetails() {
                 <h4 className="col">Subtotal: ${price * quantity}</h4>
               </div>
               {/*Add to cart*/}
-              <button
-                type="button"
-                class="btn btn-light w-100 mt-3 border mt-5 mb-5 mb-md-3"
-                onClick={() => {}}
-              >
-                Add to cart
-              </button>
+
+              {token ? (
+                <button
+                  type="button"
+                  class="btn btn-light w-100 mt-3 border mt-5 mb-5 mb-md-3"
+                  onClick={handleAdd}
+                >
+                  Add to cart
+                </button>
+              ) : (
+                <Link
+                  to="/login"
+                  className="btn btn-light w-100 mt-3 border mt-5 mb-5 mb-md-3"
+                >
+                  Login to add item
+                </Link>
+              )}
             </div>
           </div>
         </>

@@ -16,7 +16,7 @@ function authenticateJWT(req, res, next) {
       return res.status(403).json({ message: "Forbidden" });
     }
 
-    req.user = user; // Store user information in the request for further processing.
+    req.payload = user; // Store user information in the request for further processing.
     next();
   });
 }
