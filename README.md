@@ -177,8 +177,8 @@ _Note: W35 starts from 28 Aug 2023_
 
 #### Tasks:
 
-1. Implement an intuitive mechanism for adding products to the shopping cart from the product page.
-1. Develop a user-friendly cart interface that displays a clear summary of the items, quantities, and individual prices.
+1. Implement an intuitive mechanism for adding products to the shopping cart from the product page. (DONE)
+1. Develop a user-friendly cart interface that displays a clear summary of the items, quantities, and individual prices.(DONE)
 1. Implement functionality that enables users to modify the quantities of items directly within the cart interface.
 1. Integrate a simple process that allows users to remove items from the cart with minimal effort.
 1. Calculate and display the total price of the items in the cart, considering any taxes or fees that may apply.
@@ -189,8 +189,9 @@ _Note: W35 starts from 28 Aug 2023_
 #### Work progress
 
 - 26 Oct 2023 - Added the user stories, tasks and understanding the requirement.
-- 28 Oct 2023 - Worked on cart schema and API backend
-- 30 Oct 2023 - Worked on add cart API, and cart interface design in Figma
+- 28 Oct 2023 - Worked on cart schema and API backend.
+- 30 Oct 2023 - Worked on add cart API, and cart interface design in Figma. Finished task #1.
+- 31 Oct 2023 - Implemented Figma design.
 
 ## Feature 5: Checkout and Orders:
 

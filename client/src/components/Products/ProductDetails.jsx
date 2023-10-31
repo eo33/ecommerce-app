@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
+import Modal from "react-bootstrap/Modal";
+
 import axios from "axios";
 import ReactImageMagnify from "react-image-magnify";
 import "./Product.css";
@@ -10,6 +12,11 @@ function ProductDetails() {
   const [product, setProduct] = useState({});
   const { name, price, description, soldCount } = product;
   const [quantity, setQuantity] = useState(1);
+
+  // For modal dialog
+  const [show, setShow] = useState(false);
+
+  // For login ID
   const token = localStorage.getItem("token");
 
   // Fetch data of product
@@ -45,7 +52,8 @@ function ProductDetails() {
       };
       console.log(config, body);
       await axios.post(`/cart/add`, body, config);
-      console.log("SUCCESS");
+      setShow(true);
+      setQuantity(0);
     } catch (err) {
       console.error(err.message);
     }
@@ -54,6 +62,22 @@ function ProductDetails() {
     <div className="container">
       {product ? (
         <>
+          <div
+            className="modal show"
+            style={{ display: "block", position: "initial" }}
+          >
+            <Modal show={show} onHide={() => setShow(false)} centered>
+              <Modal.Header closeButton>
+                <Modal.Title>Added to cart</Modal.Title>
+              </Modal.Header>
+
+              <Modal.Footer>
+                <Link to="/cart" className="btn btn-success">
+                  View cart
+                </Link>
+              </Modal.Footer>
+            </Modal>
+          </div>
           <div className="row mt-3">
             <div className="col">
               <Link to="/shop" className="w-25">
