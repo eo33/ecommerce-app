@@ -6,7 +6,7 @@ _Note: Feature, user stories and tasks are auto-generated using ChatGPT. Texts t
 
 ## Development plan
 
-The ecommerce project is planned to be completed within 9 weeks.
+The ecommerce project is planned to be completed within 9 weeks (1 week break).
 
 | No  |                Feature                | W35 | W40 | W41 | W42 | W43 | W44 | W45 | W46 | W47 | W48 |
 | :-: | :-----------------------------------: | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
@@ -179,7 +179,7 @@ _Note: W35 starts from 28 Aug 2023_
 
 1. Implement an intuitive mechanism for adding products to the shopping cart from the product page. (DONE)
 1. Develop a user-friendly cart interface that displays a clear summary of the items, quantities, and individual prices.(DONE)
-1. Implement functionality that enables users to modify the quantities of items directly within the cart interface.
+1. Implement functionality that enables users to modify the quantities of items directly within the cart interface. (DONE)
 1. Integrate a simple process that allows users to remove items from the cart with minimal effort.
 1. Calculate and display the total price of the items in the cart, considering any taxes or fees that may apply.
 1. Implement a persistent shopping cart functionality that remains accessible throughout the user's browsing session.
@@ -192,6 +192,7 @@ _Note: W35 starts from 28 Aug 2023_
 - 28 Oct 2023 - Worked on cart schema and API backend.
 - 30 Oct 2023 - Worked on add cart API, and cart interface design in Figma. Finished task #1.
 - 31 Oct 2023 - Implemented Figma design.
+- 12 Nov 2023 -
 
 ## Feature 5: Checkout and Orders:
 

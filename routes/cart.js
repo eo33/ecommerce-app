@@ -4,6 +4,7 @@ const router = express.Router();
 const authToken = require("../middleware/authToken");
 const jwt = require("jsonwebtoken");
 const config = require("config");
+const mongoose = require("mongoose");
 
 // Import mongoose model
 const Cart = require("../model/cart");
@@ -69,6 +70,99 @@ router.get("/items", authToken, async (req, res) => {
       .populate("items.product");
 
     res.json(cartData);
+  } catch (err) {
+    console.error(err.message);
+    return res.status(500).json({ msg: "request error" });
+  }
+});
+
+/*
+// @route   PUT cart/increment
+// @desc    Increment the product quantity by 1
+// @acess   private
+
+router.put("/increment", authToken, async (req, res) => {
+  try {
+    //Get the user id from JWT payload
+    const user = req.payload.user.id;
+    //Get the user id from JWT payload
+    const { productId } = req.body;
+
+    // Find cart and modify the items array
+    const updatedCart = await Cart.findOneAndUpdate(
+      { user, "items.product": new mongoose.Types.ObjectId(productId) },
+      { $inc: { "items.$.quantity": 1 } },
+      { new: true }
+    );
+
+    if (!updatedCart) {
+      return res.status(404).json({ msg: "Cart not found" });
+    }
+
+    res.json(updatedCart);
+  } catch (err) {
+    console.error(err.message);
+    return res.status(500).json({ msg: "request error" });
+  }
+});
+
+// @route   PUT cart/decrement
+// @desc    Decrement the product quantity by 1
+// @acess   private
+
+router.put("/decrement", authToken, async (req, res) => {
+  try {
+    //Get the user id from JWT payload
+    const user = req.payload.user.id;
+    //Get the user id from JWT payload
+    const { productId } = req.body;
+
+    // Find cart and modify the items array
+    const updatedCart = await Cart.findOneAndUpdate(
+      { user, "items.product": new mongoose.Types.ObjectId(productId) },
+      { $inc: { "items.$.quantity": -1 } },
+      { new: true }
+    );
+
+    if (!updatedCart) {
+      return res.status(404).json({ msg: "Cart not found" });
+    }
+
+    res.json(updatedCart);
+  } catch (err) {
+    console.error(err.message);
+    return res.status(500).json({ msg: "request error" });
+  }
+});
+*/
+
+// @route   PUT cart/edit
+// @desc    Edit the product quantity by the specified amount
+// @acess   private
+
+router.put("/edit", authToken, async (req, res) => {
+  try {
+    //Get the user id from JWT payload
+    const user = req.payload.user.id;
+    //Get the user id from JWT payload
+    const { productId, quantity } = req.body;
+
+    if (quantity == null) {
+      return res.status(404).json({ msg: "product qty null" });
+    }
+
+    // Find cart and modify the items array
+    const updatedCart = await Cart.findOneAndUpdate(
+      { user, "items.product": new mongoose.Types.ObjectId(productId) },
+      { $set: { "items.$.quantity": quantity } },
+      { new: true }
+    );
+
+    if (!updatedCart) {
+      return res.status(404).json({ msg: "Cart not found" });
+    }
+
+    res.json(updatedCart);
   } catch (err) {
     console.error(err.message);
     return res.status(500).json({ msg: "request error" });
