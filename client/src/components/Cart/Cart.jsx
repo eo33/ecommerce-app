@@ -2,9 +2,17 @@ import { useEffect, useState } from "react";
 import "./Cart.css";
 import axios from "axios";
 
+import Modal from "react-bootstrap/Modal";
+import Button from "react-bootstrap/Button";
+
 function Cart() {
   const [data, setData] = useState({ items: [] });
+  const [selectAll, setSelectAll] = useState(false);
+  const [deleteOption, setDeleteOption] = useState(false);
   const token = localStorage.getItem("token");
+
+  // For modal dialog
+  const [showModal, setShowModal] = useState(false);
 
   // Fetch cart data of user from MongoDB
   useEffect(() => {
@@ -17,7 +25,14 @@ function Cart() {
           },
         };
         const response = await axios.get("/cart/items", config);
-        setData(response.data);
+
+        // Add "selection" key to items
+        const newItems = response.data.items.map((item) => ({
+          ...item,
+          selected: false,
+        }));
+
+        setData({ ...response.data, items: newItems });
       } catch (err) {
         console.error(err.message);
       }
@@ -67,22 +82,127 @@ function Cart() {
     modifyData(productId, newValue);
   };
 
+  // Event handler for selecting items
+  const handleSelection = (index) => {
+    // Toggle the selected item to opposite state
+    const newItems = data.items.map((item, i) =>
+      i === index ? { ...item, selected: !item.selected } : item
+    );
+
+    // Update state of data
+    setData(() => ({
+      ...data,
+      items: newItems,
+    }));
+
+    // Update selected all based on whether all of the items are selected or not
+    const selectedCount = newItems.reduce(
+      (acc, elem) => acc + elem.selected,
+      0
+    );
+    setSelectAll(selectedCount === data.items.length ? true : false);
+    // If at least one item is selected, enable delete button
+    setDeleteOption(selectedCount > 0 ? true : false);
+  };
+
+  // Event handler for selecting all items
+  const handleSelectAll = (e) => {
+    setSelectAll((prev) => !prev);
+    setData((prev) => ({
+      ...prev,
+      items: prev.items.map((item) => ({
+        ...item,
+        selected: e.target.checked,
+      })),
+    }));
+
+    // enable delete option
+
+    setDeleteOption(e.target.checked ? true : false);
+  };
+
+  // Event handler for deleting item(s)
+  const handleDelete = () => {
+    // Delete items in the frontend
+    setData(() => ({
+      ...data,
+      items: data.items.filter((item) => !item.selected),
+    }));
+    // Delete items in the backend
+    const itemsToDelete = data.items.filter((item) => item.selected);
+    const deleteItems = async () => {
+      try {
+        const config = {
+          headers: {
+            Authorization: token,
+            "Content-Type": "application/json",
+          },
+        };
+        const body = { items: itemsToDelete.map((item) => item._id) };
+        const response = await axios.delete("/cart/delete", {
+          ...config,
+          data: JSON.stringify(body),
+        });
+        console.log(response);
+      } catch (err) {
+        console.error(err.message);
+      }
+    };
+    deleteItems();
+    setShowModal(false);
+    setDeleteOption(false);
+  };
   // Calculate total items and total price
   return (
     <div className="container">
+      {/**Show Modal dialog*/}
+      <Modal show={showModal} onHide={() => setShowModal(false)} centered>
+        <Modal.Header closeButton>
+          <Modal.Title>Delete item?</Modal.Title>
+        </Modal.Header>
+
+        <Modal.Body>
+          <p>This will delete Item name</p>
+        </Modal.Body>
+
+        <Modal.Footer>
+          <Button variant="secondary" onClick={() => setShowModal(false)}>
+            Close
+          </Button>
+          <Button variant="danger" onClick={() => handleDelete()}>
+            Delete
+          </Button>
+        </Modal.Footer>
+      </Modal>
+
       {/**SELECT ALL + DELETE ALL*/}
       <div className="row px-4 mt-4">
-        <div className=" col form-check">
+        <div className="col form-check d-flex align-items-center">
           <input
-            className="form-check-input border border-2"
+            className="form-check-input border border-2 p-3"
             type="checkbox"
             value=""
             id="flexCheckDefault"
+            onChange={(e) => handleSelectAll(e)}
+            checked={selectAll}
           />
-          <label className="form-check-label" htmlFor="flexCheckDefault">
-            Select all
+          <label className="form-check-label px-3" htmlFor="flexCheckDefault">
+            <h5 className="m-0">Select all</h5>
           </label>
         </div>
+        {deleteOption ? (
+          <div className=" col offset-4 d-flex align-items-center">
+            <button
+              type="button"
+              class="btn btn-link"
+              onClick={() => {
+                setShowModal(true);
+              }}
+            >
+              Delete
+            </button>
+          </div>
+        ) : null}
       </div>
       {/**Items at cart + Checkout*/}
       {/*              
@@ -95,13 +215,15 @@ function Cart() {
         {/**Items at cart */}
         <div className="col-12 col-md-9">
           {/**Render out each item */}
-          {data.items.map((item) => (
+          {data.items.map((item, index) => (
             <div className="row px-4 py-3 border mt-3">
               {/**Checkbox*/}
               <div className="col-1 form-check d-flex align-items-center">
                 <input
-                  className="form-check-input border border-2"
+                  className="form-check-input border border-2 p-3"
                   type="checkbox"
+                  checked={item.selected}
+                  onChange={() => handleSelection(index)}
                 />
               </div>
               {/**Image*/}
@@ -118,42 +240,53 @@ function Cart() {
                   <h4 className="col">${item.product.price}</h4>
                 </div>
               </div>
-              <div className="col d-flex align-items-end justify-content-end">
-                <div
-                  className="btn-group mt-5"
-                  role="group"
-                  aria-label="Basic example"
-                >
-                  <button
-                    type="button"
-                    className="btn btn-secondary "
-                    onClick={() =>
-                      handleQuantity(
-                        item.product.image,
-                        item.quantity - 1,
-                        item.product._id
-                      )
-                    }
-                    disabled={item.quantity === 1 ? true : false}
-                  >
-                    -
-                  </button>
-                  <div className="px-3 px-lg-5 pt-2 quantity">
-                    <h5>{item.quantity}</h5>
+              <div className="col d-flex">
+                <div className="row align-items-end justify-content-end">
+                  <div className="btn-group ">
+                    <button
+                      type="button"
+                      className="btn btn-secondary "
+                      onClick={() =>
+                        handleQuantity(
+                          item.product.image,
+                          item.quantity - 1,
+                          item.product._id
+                        )
+                      }
+                      disabled={item.quantity === 1 ? true : false}
+                    >
+                      -
+                    </button>
+                    <input
+                      type="text"
+                      className="form-control rounded-0 w-50 input-group"
+                      value={item.quantity}
+                      onChange={(e) => {
+                        e.preventDefault();
+                        const inputValue = parseInt(e.target.value);
+                        if (!isNaN(inputValue)) {
+                          handleQuantity(
+                            item.product.image,
+                            inputValue,
+                            item.product._id
+                          );
+                        }
+                      }}
+                    ></input>
+                    <button
+                      type="button"
+                      className="btn btn-secondary"
+                      onClick={() =>
+                        handleQuantity(
+                          item.product.image,
+                          item.quantity + 1,
+                          item.product._id
+                        )
+                      }
+                    >
+                      +
+                    </button>
                   </div>
-                  <button
-                    type="button"
-                    className="btn btn-secondary"
-                    onClick={() =>
-                      handleQuantity(
-                        item.product.image,
-                        item.quantity + 1,
-                        item.product._id
-                      )
-                    }
-                  >
-                    +
-                  </button>
                 </div>
               </div>
             </div>

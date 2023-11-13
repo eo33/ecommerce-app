@@ -173,18 +173,16 @@ _Note: W35 starts from 28 Aug 2023_
 1. As a customer, I want to see the total price of all the items in my cart, including any applicable taxes or fees, so that I can understand the overall cost of my purchase.
 1. As a customer, I expect my shopping cart to be accessible and persist across different pages, allowing me to add items to the cart from various product pages.
 1. As a customer, I expect the shopping cart to update dynamically when I add or remove items, providing me with real-time feedback on my shopping selections.
-1. As an administrator, I want to be able to view and manage the active shopping carts of users, enabling me to provide support and assistance as needed.
 
 #### Tasks:
 
 1. Implement an intuitive mechanism for adding products to the shopping cart from the product page. (DONE)
 1. Develop a user-friendly cart interface that displays a clear summary of the items, quantities, and individual prices.(DONE)
 1. Implement functionality that enables users to modify the quantities of items directly within the cart interface. (DONE)
-1. Integrate a simple process that allows users to remove items from the cart with minimal effort.
+1. Integrate a simple process that allows users to remove items from the cart with minimal effort. (DONE)
 1. Calculate and display the total price of the items in the cart, considering any taxes or fees that may apply.
-1. Implement a persistent shopping cart functionality that remains accessible throughout the user's browsing session.
-1. Integrate dynamic updates to the shopping cart interface to reflect changes in quantities and items without requiring a page refresh.
-1. (Admin Functionality): Develop an admin panel feature that allows administrators to monitor and manage user shopping carts effectively.
+1. Implement a persistent shopping cart functionality that remains accessible throughout the user's browsing session. (DONE)
+1. Integrate dynamic updates to the shopping cart interface to reflect changes in quantities and items without requiring a page refresh. (DONE)
 
 #### Work progress
 
@@ -192,7 +190,8 @@ _Note: W35 starts from 28 Aug 2023_
 - 28 Oct 2023 - Worked on cart schema and API backend.
 - 30 Oct 2023 - Worked on add cart API, and cart interface design in Figma. Finished task #1.
 - 31 Oct 2023 - Implemented Figma design.
-- 12 Nov 2023 -
+- 12 Nov 2023 - Worked on updating the product qty in the frontend and backend.
+- 13 Nov 2023 - Made backend API for deleting item. Added it to the frontend.
 
 ## Feature 5: Checkout and Orders:
 
@@ -236,6 +235,7 @@ _Note: W35 starts from 28 Aug 2023_
 1. As an administrator, I want to view and manage incoming orders, including processing orders, updating order statuses, and addressing customer inquiries related to orders.
 1. As an administrator, I want to have the ability to manage user accounts, including viewing user profiles, modifying user information, and addressing any account-related issues or inquiries.
 1. As an administrator, I want to ensure that the admin panel is user-friendly and intuitive, providing me with a seamless experience for managing products, orders, and users without encountering technical difficulties.
+1. As an administrator, I want to be able to view and manage the active shopping carts of users, enabling me to provide support and assistance as needed.
 
 #### Tasks:
 
@@ -246,6 +246,7 @@ _Note: W35 starts from 28 Aug 2023_
 1. Develop an order management system within the admin panel that allows administrators to handle incoming orders and track their statuses.
 1. Implement user management functionalities in the admin panel, enabling administrators to oversee and manage user accounts effectively.
 1. Design and develop an intuitive user interface for the admin panel, focusing on ease of use and efficient management of key e-commerce platform elements.
+1. Develop an admin panel feature that allows administrators to monitor and manage user shopping carts effectively.
 
 #### Work progress
 

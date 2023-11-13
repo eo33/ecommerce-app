@@ -76,65 +76,27 @@ router.get("/items", authToken, async (req, res) => {
   }
 });
 
-/*
-// @route   PUT cart/increment
-// @desc    Increment the product quantity by 1
+// @route   GET cart/delete
+// @desc    Delete the cart item(s) of the logged in user
 // @acess   private
-
-router.put("/increment", authToken, async (req, res) => {
+router.delete("/delete", authToken, async (req, res) => {
   try {
     //Get the user id from JWT payload
-    const user = req.payload.user.id;
-    //Get the user id from JWT payload
-    const { productId } = req.body;
+    const userID = req.payload.user.id;
+    //Get the items to delete from the request body
+    const items = req.body.items;
 
-    // Find cart and modify the items array
-    const updatedCart = await Cart.findOneAndUpdate(
-      { user, "items.product": new mongoose.Types.ObjectId(productId) },
-      { $inc: { "items.$.quantity": 1 } },
+    const cartData = await Cart.findOneAndUpdate(
+      { user: userID },
+      { $pull: { items: { _id: { $in: items } } } },
       { new: true }
     );
-
-    if (!updatedCart) {
-      return res.status(404).json({ msg: "Cart not found" });
-    }
-
-    res.json(updatedCart);
+    return res.json(cartData);
   } catch (err) {
     console.error(err.message);
     return res.status(500).json({ msg: "request error" });
   }
 });
-
-// @route   PUT cart/decrement
-// @desc    Decrement the product quantity by 1
-// @acess   private
-
-router.put("/decrement", authToken, async (req, res) => {
-  try {
-    //Get the user id from JWT payload
-    const user = req.payload.user.id;
-    //Get the user id from JWT payload
-    const { productId } = req.body;
-
-    // Find cart and modify the items array
-    const updatedCart = await Cart.findOneAndUpdate(
-      { user, "items.product": new mongoose.Types.ObjectId(productId) },
-      { $inc: { "items.$.quantity": -1 } },
-      { new: true }
-    );
-
-    if (!updatedCart) {
-      return res.status(404).json({ msg: "Cart not found" });
-    }
-
-    res.json(updatedCart);
-  } catch (err) {
-    console.error(err.message);
-    return res.status(500).json({ msg: "request error" });
-  }
-});
-*/
 
 // @route   PUT cart/edit
 // @desc    Edit the product quantity by the specified amount
@@ -144,7 +106,7 @@ router.put("/edit", authToken, async (req, res) => {
   try {
     //Get the user id from JWT payload
     const user = req.payload.user.id;
-    //Get the user id from JWT payload
+    //Get the productId and quantity from the request body
     const { productId, quantity } = req.body;
 
     if (quantity == null) {

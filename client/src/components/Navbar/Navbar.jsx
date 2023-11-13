@@ -46,6 +46,13 @@ function Navbar() {
                   Shop
                 </Link>
               </li>
+              {authenticated ? (
+                <li class="nav-item">
+                  <Link class="nav-link" to="/cart">
+                    Cart
+                  </Link>
+                </li>
+              ) : null}
             </ul>
           </div>
           <ul class="navbar-nav mb-2 mb-lg-0 text-dark">
@@ -62,9 +69,9 @@ function Navbar() {
                   Logout
                 </button>
               ) : (
-                <a class="nav-link" href="/login">
+                <Link class="nav-link" to="/login">
                   Login
-                </a>
+                </Link>
               )}
             </li>
           </ul>
