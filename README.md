@@ -180,7 +180,7 @@ _Note: W35 starts from 28 Aug 2023_
 1. Develop a user-friendly cart interface that displays a clear summary of the items, quantities, and individual prices.(DONE)
 1. Implement functionality that enables users to modify the quantities of items directly within the cart interface. (DONE)
 1. Integrate a simple process that allows users to remove items from the cart with minimal effort. (DONE)
-1. Calculate and display the total price of the items in the cart, considering any taxes or fees that may apply.
+1. Calculate and display the total price of the items in the cart, considering any taxes or fees that may apply. (DONE)
 1. Implement a persistent shopping cart functionality that remains accessible throughout the user's browsing session. (DONE)
 1. Integrate dynamic updates to the shopping cart interface to reflect changes in quantities and items without requiring a page refresh. (DONE)
 
@@ -192,6 +192,7 @@ _Note: W35 starts from 28 Aug 2023_
 - 31 Oct 2023 - Implemented Figma design.
 - 12 Nov 2023 - Worked on updating the product qty in the frontend and backend.
 - 13 Nov 2023 - Made backend API for deleting item. Added it to the frontend.
+- 14 Nov 2023 - Added total items and price calculation
 
 ## Feature 5: Checkout and Orders:
 

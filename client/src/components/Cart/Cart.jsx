@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import "./Cart.css";
 import axios from "axios";
 
@@ -152,17 +152,31 @@ function Cart() {
     setShowModal(false);
     setDeleteOption(false);
   };
+
   // Calculate total items and total price
+  const { totalItems, totalPrice } = useMemo(() => {
+    const selectedItems = data.items.filter((item) => item.selected);
+    const totalItems = selectedItems.reduce(
+      (acc, item) => acc + item.quantity,
+      0
+    );
+    const totalPrice = selectedItems.reduce(
+      (acc, item) => acc + item.quantity * item.product.price,
+      0
+    );
+    return { totalItems, totalPrice };
+  }, [data.items]);
+
   return (
     <div className="container">
       {/**Show Modal dialog*/}
       <Modal show={showModal} onHide={() => setShowModal(false)} centered>
         <Modal.Header closeButton>
-          <Modal.Title>Delete item?</Modal.Title>
+          <Modal.Title>Delete item(s)?</Modal.Title>
         </Modal.Header>
 
         <Modal.Body>
-          <p>This will delete Item name</p>
+          <p>This will delete the selected items</p>
         </Modal.Body>
 
         <Modal.Footer>
@@ -293,22 +307,36 @@ function Cart() {
           ))}
         </div>
         {/**Checkout summary*/}
-        <div className="col-12 col-md-3">
+        <div className="col-12 col-md-3 px-2">
           <div className="row p-md-3 border mt-3 mx-md-1">
             <div className="col">
               <div className="row">
                 <h5 className="col d-flex align-items-center bold">Summary</h5>
               </div>
               <div className="row border-top border-bottom my-md-2 py-md-3">
-                <div className="col-12 col-lg-9">Total items ({30} items):</div>
-                <div className="col-2 d-flex align-items-center">$400</div>
+                <div className="col-12 col-lg-9">
+                  Total items ({totalItems || "-"} items):
+                </div>
+                <div className="col-2 d-flex align-items-center">
+                  ${totalPrice || "-"}
+                </div>
               </div>
               <div className="row">
                 <div className="col-12 col-lg-9 ">
                   <h5 className="bold">Total Price:</h5>
                 </div>
-                <h5 className="col-2 d-flex bold">$400</h5>
+                <h5 className="col-2 d-flex bold">${totalPrice || "-"}</h5>
               </div>
+              {/**only show button when user has at least 1 item */}
+              {totalItems && (
+                <button
+                  type="button"
+                  class="btn btn-secondary w-100 mt-4"
+                  onClick={() => {}}
+                >
+                  Checkout
+                </button>
+              )}
             </div>
           </div>
         </div>
