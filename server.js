@@ -11,6 +11,7 @@ const db = config.get("mongoURI");
 const auth = require("./routes/auth");
 const products = require("./routes/products");
 const cart = require("./routes/cart");
+const address = require("./routes/address");
 
 // Connect to MongoDB atlas cluster using mongoose
 mongoose
@@ -27,7 +28,7 @@ app.use(express.json());
 
 // Setup main route
 app.get("/", (req, res) => {
-  console.log("Here");
+  console.log("Test");
   res.json({ msg: "de" });
 });
 
@@ -35,6 +36,7 @@ app.get("/", (req, res) => {
 app.use("/auth", auth);
 app.use("/products", products);
 app.use("/cart", cart);
+app.use("/address", address);
 
 // Setup port
 const PORT = process.env.PORT || 5000;

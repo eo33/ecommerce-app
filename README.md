@@ -203,24 +203,24 @@ _Note: W35 starts from 28 Aug 2023_
 ### User stories:
 
 1. As a customer, I want a streamlined checkout process that guides me through providing shipping and payment information, making it convenient for me to complete my purchase.
-1. As a customer, I expect the checkout process to be secure and to safeguard my sensitive payment information, ensuring that my data is protected from unauthorized access.
-1. As a customer, I want to receive an order summary after completing the checkout, providing me with a detailed breakdown of costs, including item prices, taxes, shipping fees, and the total amount due.
-1. As a customer, I want to receive confirmation of my order via email, providing me with a record of my purchase and important order-related information.
-1. As a customer, I expect to be able to view my order history, enabling me to track past purchases and access information about previous orders whenever necessary.
-1. As a customer, I want to be able to track the status of my orders, including information about shipment and delivery, so that I can stay informed about the progress of my purchases.
+1. As a customer, I want to be able to add multiple addresses that can be saved, and later select.
+1. As a customer, I want to be able to pick the shipment method for each type of item.
+1. As a customer, I want to be able to see the detailed breakdown of costs, including item prices, taxes, shipping fees, and the total amount due.
+1. As a customer, I expect to be able to view my order status, such as: pending, shipping, arrived.
 1. As an administrator, I want to be able to manage and process incoming orders efficiently, enabling me to track order statuses, update delivery information, and handle customer inquiries.
 
 #### Tasks:
 
-1. Task: Develop a user-friendly checkout interface with clear steps for providing shipping and payment details.
-1. Task: Implement industry-standard security protocols, such as SSL encryption, to secure the checkout process and protect users' payment information.
-1. Task: Generate and display a comprehensive order summary for customers upon successful checkout, outlining all relevant cost details.
-1. Task: Set up an automated email notification system that sends order confirmations to customers after successful checkouts.
-1. Task: Implement a user-friendly order history section that allows customers to access and review their previous orders.
-1. Task: Integrate a tracking mechanism that provides customers with real-time updates on the status of their orders, including shipment and delivery details.
+1. Task: Develop a user-friendly checkout interface with clear steps for providing shipping and payment details. (DONE)
+1. Task: Implement a functionality that allows user to save multiple addresses.
+1. Task: Implement a functionality that allows user to select the type of shipping for each item.
+1. Task: Display a comprehensive order summary, outlining all relevant cost details.
+1. Task: Implement a user-friendly order history section that allows customers to access the current status of the order.
 1. Task (Admin Functionality): Develop an admin panel feature that allows administrators to monitor and manage incoming orders effectively, including order processing and customer support.
 
 #### Work progress
+
+- 15 Nov 2023 - Made figma design for checkout page, and work on how to add an addresss
 
 ## Feature 6: Admin Panel:
 

@@ -1,11 +1,18 @@
-import { useEffect, useState, useMemo } from "react";
+import { useEffect, useState, useMemo, useContext } from "react";
+import { Link } from "react-router-dom";
 import "./Cart.css";
 import axios from "axios";
+
+import { CartContext } from "../Context/CartContext";
 
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 
 function Cart() {
+  // Cart context
+  const { setCartItems } = useContext(CartContext);
+
+  // States for data
   const [data, setData] = useState({ items: [] });
   const [selectAll, setSelectAll] = useState(false);
   const [deleteOption, setDeleteOption] = useState(false);
@@ -329,13 +336,15 @@ function Cart() {
               </div>
               {/**only show button when user has at least 1 item */}
               {totalItems && (
-                <button
-                  type="button"
+                <Link
                   class="btn btn-secondary w-100 mt-4"
-                  onClick={() => {}}
+                  to="/checkout"
+                  onClick={() => {
+                    setCartItems(data.items);
+                  }}
                 >
-                  Checkout
-                </button>
+                  Checkout ({totalItems})
+                </Link>
               )}
             </div>
           </div>
