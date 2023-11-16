@@ -7,17 +7,9 @@ const addressSchema = new mongoose.Schema({
     ref: "user",
     required: true,
   },
-  address: [
+  addresses: [
     {
       address: {
-        type: String,
-        required: true,
-      },
-      postal: {
-        type: Number,
-        required: true,
-      },
-      city: {
         type: String,
         required: true,
       },
@@ -30,10 +22,11 @@ const addressSchema = new mongoose.Schema({
 });
 
 // Database validation to ensure only one main address
+/*
 addressSchema.path("address").validate(function (value) {
   const mainAddresses = value.filter((address) => address.main);
   return mainAddresses.length <= 1; // There should be at most one main address
 }, "Only one main address is allowed");
-
+*/
 // export mongoose model as default
 module.exports = mongoose.model("address", addressSchema);

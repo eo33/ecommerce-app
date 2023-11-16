@@ -221,6 +221,7 @@ _Note: W35 starts from 28 Aug 2023_
 #### Work progress
 
 - 15 Nov 2023 - Made figma design for checkout page, and work on how to add an addresss
+- 16 Nov 2023 - Installed `react-google-autocomplete` for address form.
 
 ## Feature 6: Admin Panel:
 

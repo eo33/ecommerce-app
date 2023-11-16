@@ -335,7 +335,7 @@ function Cart() {
                 <h5 className="col-2 d-flex bold">${totalPrice || "-"}</h5>
               </div>
               {/**only show button when user has at least 1 item */}
-              {totalItems && (
+              {totalItems !== 0 && (
                 <Link
                   class="btn btn-secondary w-100 mt-4"
                   to="/checkout"
