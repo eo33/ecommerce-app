@@ -39,6 +39,7 @@ _Note: W35 starts from 28 Aug 2023_
 - Router dom
 - Redux-devtools-extension
 - React-image-magnify
+- react-google-autocomplete
 
 ## Feature 1: User Authentication and Authorization
 

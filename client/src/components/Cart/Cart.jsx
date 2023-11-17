@@ -146,11 +146,10 @@ function Cart() {
           },
         };
         const body = { items: itemsToDelete.map((item) => item._id) };
-        const response = await axios.delete("/cart/delete", {
+        await axios.delete("/cart/delete", {
           ...config,
           data: JSON.stringify(body),
         });
-        console.log(response);
       } catch (err) {
         console.error(err.message);
       }
