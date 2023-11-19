@@ -30,19 +30,18 @@ function AddressModal(props) {
 
       // If selected address is a main address, pick the next address to be main
       if (main) {
-        const nextIndexId = data.addresses.filter(
+        const nextAddress = data.addresses.filter(
           (address) => address._id !== addressId
-        )[0]._id;
+        )[0];
         const res2 = await axios.put(
           "/address/select",
-          JSON.stringify({ addressId: nextIndexId }),
+          JSON.stringify({ addressId: nextAddress._id }),
           config
         );
         setData(res2.data);
-        setSelectedAddress("--");
+        setSelectedAddress(nextAddress.address);
       } else {
         setData(res.data);
-        setSelectedAddress("--");
       }
     } catch (err) {
       console.error(err);

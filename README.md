@@ -213,8 +213,8 @@ _Note: W35 starts from 28 Aug 2023_
 #### Tasks:
 
 1. Task: Develop a user-friendly checkout interface with clear steps for providing shipping and payment details. (DONE)
-1. Task: Implement a functionality that allows user to save multiple addresses.
-1. Task: Implement a functionality that allows user to select the type of shipping for each item.
+1. Task: Implement a functionality that allows user to save multiple addresses. (DONE)
+1. Task: Implement a functionality that allows user to select the type of shipping for each item. (DONE)
 1. Task: Display a comprehensive order summary, outlining all relevant cost details.
 1. Task: Implement a user-friendly order history section that allows customers to access the current status of the order.
 1. Task (Admin Functionality): Develop an admin panel feature that allows administrators to monitor and manage incoming orders effectively, including order processing and customer support.
@@ -223,6 +223,7 @@ _Note: W35 starts from 28 Aug 2023_
 
 - 15 Nov 2023 - Made figma design for checkout page, and work on how to add an addresss
 - 16 Nov 2023 - Installed `react-google-autocomplete` for address form.
+- 17 Nov 2023 - Finished address functionality
 
 ## Feature 6: Admin Panel:
 

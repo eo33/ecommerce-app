@@ -53,7 +53,7 @@ function ProductDetails() {
       console.log(config, body);
       await axios.post(`/cart/add`, body, config);
       setShow(true);
-      setQuantity(0);
+      setQuantity(1);
     } catch (err) {
       console.error(err.message);
     }
