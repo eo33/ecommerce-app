@@ -10,7 +10,7 @@ import Button from "react-bootstrap/Button";
 
 function Cart() {
   // Cart context
-  const { setCartItems } = useContext(CartContext);
+  const { cartItems, setCartItems } = useContext(CartContext);
 
   // States for data
   const [data, setData] = useState({ items: [] });
@@ -339,7 +339,7 @@ function Cart() {
                   class="btn btn-secondary w-100 mt-4"
                   to="/checkout"
                   onClick={() => {
-                    setCartItems(data.items);
+                    setCartItems(data.items.filter((item) => item.selected));
                   }}
                 >
                   Checkout ({totalItems})

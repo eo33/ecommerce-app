@@ -195,11 +195,10 @@ _Note: W35 starts from 28 Aug 2023_
 - 13 Nov 2023 - Made backend API for deleting item. Added it to the frontend.
 - 14 Nov 2023 - Added total items and price calculation
 
-## Feature 5: Checkout and Orders:
+## Feature 5: Checkout :
 
 1. Create a checkout process that guides users through providing shipping and payment information.
 1. Generate order summaries with a breakdown of costs and delivery details.
-1. Allow users to view their order history.
 
 ### User stories:
 
@@ -207,25 +206,39 @@ _Note: W35 starts from 28 Aug 2023_
 1. As a customer, I want to be able to add multiple addresses that can be saved, and later select.
 1. As a customer, I want to be able to pick the shipment method for each type of item.
 1. As a customer, I want to be able to see the detailed breakdown of costs, including item prices, taxes, shipping fees, and the total amount due.
-1. As a customer, I expect to be able to view my order status, such as: pending, shipping, arrived.
-1. As an administrator, I want to be able to manage and process incoming orders efficiently, enabling me to track order statuses, update delivery information, and handle customer inquiries.
+1. As a customer, I want to be able to see if my orders go through.
 
 #### Tasks:
 
 1. Task: Develop a user-friendly checkout interface with clear steps for providing shipping and payment details. (DONE)
 1. Task: Implement a functionality that allows user to save multiple addresses. (DONE)
 1. Task: Implement a functionality that allows user to select the type of shipping for each item. (DONE)
-1. Task: Display a comprehensive order summary, outlining all relevant cost details.
-1. Task: Implement a user-friendly order history section that allows customers to access the current status of the order.
-1. Task (Admin Functionality): Develop an admin panel feature that allows administrators to monitor and manage incoming orders effectively, including order processing and customer support.
+1. Task: Display a comprehensive order summary, outlining all relevant cost details. (DONE)
+1. Task: Display a 'thank you' page to show that the orders go through.
 
 #### Work progress
 
 - 15 Nov 2023 - Made figma design for checkout page, and work on how to add an addresss
 - 16 Nov 2023 - Installed `react-google-autocomplete` for address form.
 - 17 Nov 2023 - Finished address functionality
+- 19 Nov 2023 - Finished type of shipping for each item functionality
+- 20 Nov 2023 - Finished order sumamary functionality, and made a new feature task.
 
-## Feature 6: Admin Panel:
+## Feature 6: Orders :
+
+1. Allow users to view their current order status page.
+
+### User stories:
+
+1. As a customer, I want to be able to access the order status page.
+1. As a customer, I want to be able to view my order status, such as: pending, shipping, arrived.
+
+#### Tasks:
+
+1. Task: Implement a user-friendly that allows customers to access the current status of the order.
+1. Task: Implement a functionality that allows user to see the order status of their orders.
+
+## Feature 7: Admin Panel:
 
 1. Implement an admin panel to manage products, orders, and users.
 1. Add functionality for adding new products, updating existing ones, and managing inventory.
@@ -240,6 +253,7 @@ _Note: W35 starts from 28 Aug 2023_
 1. As an administrator, I want to have the ability to manage user accounts, including viewing user profiles, modifying user information, and addressing any account-related issues or inquiries.
 1. As an administrator, I want to ensure that the admin panel is user-friendly and intuitive, providing me with a seamless experience for managing products, orders, and users without encountering technical difficulties.
 1. As an administrator, I want to be able to view and manage the active shopping carts of users, enabling me to provide support and assistance as needed.
+1. As an administrator, I want to be able to manage and process incoming orders efficiently, enabling me to track order statuses, update delivery information, and handle customer inquiries.
 
 #### Tasks:
 
@@ -254,18 +268,6 @@ _Note: W35 starts from 28 Aug 2023_
 
 #### Work progress
 
-## Feature 7: Search Functionality:
-
-1. Integrate a search bar that allows users to search for specific products based on keywords.
-
-### User stories:
-
-1. As a customer, I want to be able to use a search bar to find specific products quickly and efficiently based on relevant keywords, enabling me to locate desired items without the need for extensive browsing.
-
-#### Tasks:
-
-1. Task: Integrate a search bar prominently into the user interface, allowing customers to input keywords and search for products based on various attributes such as product names, categories, and descriptions.
-
-#### Work progress
+## Reference
 
 ChatGPT link: https://chat.openai.com/c/a89c0192-59a3-4f8b-96ab-f0c0e0000752
