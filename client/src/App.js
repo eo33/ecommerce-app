@@ -17,6 +17,8 @@ import AdminProductsEdit from "./components/Products/AdminProductsEdit";
 import ProductDetails from "./components/Products/ProductDetails";
 import Cart from "./components/Cart/Cart";
 import Checkout from "./components/Checkout/Checkout";
+import ThankYou from "./components/Checkout/ThankYou";
+import Orders from "./components/Orders/Orders";
 
 function App() {
   const token = localStorage.getItem("token");
@@ -47,6 +49,8 @@ function App() {
                   <Route path="/shop/:id" element={<ProductDetails />} />
                   <Route path="/cart" element={<Cart />} />
                   <Route path="/checkout" element={<Checkout />} />
+                  <Route path="/checkout/thank-you" element={<ThankYou />} />
+                  <Route path="/orders" element={<Orders />} />
                 </Routes>
               </div>
               <Footer />

@@ -11,16 +11,16 @@ function authenticateJWT(req, res, next) {
   }
 
   // Verify and check if token is admin or not
-  jwt.verify(token, config.get("jwtSecret"), (err, user) => {
+  jwt.verify(token, config.get("jwtSecret"), (err, data) => {
     if (err) {
       return res.status(403).json({ message: "Forbidden" });
     }
-    if (user.admin === false) {
+    if (data.user.admin === false) {
       return res
         .status(403)
         .json({ msg: "unauthorized user, you are not an administrator" });
     }
-    req.user = user; // Store user information in the request for further processing.
+    req.user = data; // Store user information in the request for further processing.
     next();
   });
 }

@@ -2,21 +2,26 @@ import { useContext, useEffect, useState, useRef } from "react";
 import { CartContext } from "../Context/CartContext";
 import axios from "axios";
 import AddressModal from "./AddressModal";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import Dropdown from "react-bootstrap/Dropdown";
 import "./Checkout.css";
 
 function Checkout() {
+  const navigate = useNavigate();
   // Import context
-  const { cartItems, setCartItems } = useContext(CartContext);
+  const { cartItems } = useContext(CartContext);
 
   // State variables
   const [data, setData] = useState();
   const [selectedAddress, setSelectedAddress] = useState();
   const [showModal, setShowModal] = useState(false);
   const [shipping, setShipping] = useState(
-    cartItems.map((item) => ({ ...item.product, shipping: "Regular" }))
+    cartItems.map((item) => ({
+      ...item.product,
+      shipping: "Regular",
+      quantity: item.quantity,
+    }))
   );
 
   // Ref for user name to persist across renders
@@ -52,6 +57,36 @@ function Checkout() {
     fetch();
   }, [showModal]);
 
+  // Handle checkout
+
+  const handleCheckout = async (e) => {
+    e.preventDefault();
+    try {
+      const token = localStorage.getItem("token");
+      // Extract items from cartItems
+      const items = shipping.map((item) => ({
+        product: item._id,
+        quantity: item.quantity,
+        shipping: item.shipping,
+      }));
+      // Get current address
+      const config = {
+        headers: {
+          Authorization: token,
+          "Content-Type": "application/json",
+        },
+      };
+      const body = {
+        items,
+        address: selectedAddress,
+      };
+      await axios.post("orders/add", body, config);
+      navigate("/checkout/thank-you");
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
   // Calculate the price
   const totalItemsPrice = cartItems.reduce(
     (acc, elem) => acc + elem.quantity * elem.product.price,
@@ -78,8 +113,6 @@ function Checkout() {
       deliveryFee[2] += deliveryPrice[2];
     }
   }
-  console.log(deliveryCount);
-  console.log(deliveryFee);
 
   return (
     <div className="container">
@@ -268,9 +301,12 @@ function Checkout() {
                     0.1 * totalItemsPrice}
                 </h5>
               </div>
-              <Link class="btn btn-secondary w-100 mt-4" to="/orders">
+              <button
+                class="btn btn-secondary w-100 mt-4"
+                onClick={(e) => handleCheckout(e)}
+              >
                 Proceed
-              </Link>
+              </button>
             </div>
           </div>
         </div>

@@ -14,9 +14,10 @@ The ecommerce project is planned to be completed within 9 weeks (1 week break).
 |  2  |           Product Listings            |     | •   | •   | •   |     |     |     |     |     |     |
 |  3  |            Product Details            |     |     |     |     | •   |     |     |     |     |     |
 |  4  |             Shopping Cart             |     |     |     |     | •   | •   |     | •   |     |     |
-|  5  |          Checkout and Orders          |     |     |     |     |     |     |     | •   | •   |     |
-|  6  |              Admin Panel              |     |     |     |     |     |     |     |     | •   |     |
-|  7  |         Search Functionality          |     |     |     |     |     |     |     |     |     | •   |
+|  5  |               Checkout                |     |     |     |     |     |     |     | •   | •   |     |
+|  6  |                Orders                 |     |     |     |     |     |     |     | •   | •   |     |
+|  7  |              Admin Panel              |     |     |     |     |     |     |     |     | •   |     |
+|  8  |             Landing page              |     |     |     |     |     |     |     |     |     | •   |
 
 _Note: W35 starts from 28 Aug 2023_
 
@@ -214,7 +215,6 @@ _Note: W35 starts from 28 Aug 2023_
 1. Task: Implement a functionality that allows user to save multiple addresses. (DONE)
 1. Task: Implement a functionality that allows user to select the type of shipping for each item. (DONE)
 1. Task: Display a comprehensive order summary, outlining all relevant cost details. (DONE)
-1. Task: Display a 'thank you' page to show that the orders go through.
 
 #### Work progress
 
@@ -230,11 +230,13 @@ _Note: W35 starts from 28 Aug 2023_
 
 ### User stories:
 
+1. As a customer, I want to be able to see the thank you page when my orders go through.
 1. As a customer, I want to be able to access the order status page.
 1. As a customer, I want to be able to view my order status, such as: pending, shipping, arrived.
 
 #### Tasks:
 
+1. Task: Display a 'thank you' page to show that the orders go through.
 1. Task: Implement a user-friendly that allows customers to access the current status of the order.
 1. Task: Implement a functionality that allows user to see the order status of their orders.
 
@@ -267,6 +269,8 @@ _Note: W35 starts from 28 Aug 2023_
 1. Develop an admin panel feature that allows administrators to monitor and manage user shopping carts effectively.
 
 #### Work progress
+
+## Feature 8: Landing page
 
 ## Reference
 

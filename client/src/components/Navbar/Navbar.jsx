@@ -56,7 +56,12 @@ function Navbar() {
             </ul>
           </div>
           <ul class="navbar-nav mb-2 mb-lg-0 text-dark">
-            <li class="nav-item ml-auto">
+            <li class="nav-item">
+              <Link class="nav-link" to="/orders">
+                Orders
+              </Link>
+            </li>
+            <li class="nav-item">
               {authenticated ? (
                 <button
                   class="nav-link"

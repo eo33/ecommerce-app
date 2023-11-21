@@ -10,7 +10,7 @@ import Button from "react-bootstrap/Button";
 
 function Cart() {
   // Cart context
-  const { cartItems, setCartItems } = useContext(CartContext);
+  const { setCartItems } = useContext(CartContext);
 
   // States for data
   const [data, setData] = useState({ items: [] });
@@ -54,7 +54,7 @@ function Cart() {
     setData((prev) => {
       // Look for item that has the product image
       const newItemsArray = prev.items.map((item) =>
-        item.product.image === productImage
+        item.product && item.product.image === productImage
           ? { ...item, quantity: newValue }
           : item
       );
@@ -235,82 +235,84 @@ function Cart() {
         {/**Items at cart */}
         <div className="col-12 col-md-9">
           {/**Render out each item */}
-          {data.items.map((item, index) => (
-            <div className="row px-4 py-3 border mt-3">
-              {/**Checkbox*/}
-              <div className="col-1 form-check d-flex align-items-center">
-                <input
-                  className="form-check-input border border-2 p-3"
-                  type="checkbox"
-                  checked={item.selected}
-                  onChange={() => handleSelection(index)}
+          {data.items.map((item, index) =>
+            item.product ? (
+              <div className="row px-4 py-3 border mt-3">
+                {/**Checkbox*/}
+                <div className="col-1 form-check d-flex align-items-center">
+                  <input
+                    className="form-check-input border border-2 p-3"
+                    type="checkbox"
+                    checked={item.selected}
+                    onChange={() => handleSelection(index)}
+                  />
+                </div>
+                {/**Image*/}
+                <img
+                  src={`/products/${item.product.image}`}
+                  alt="a meaningful text"
+                  className="img-thumbnail col-3 border-2"
                 />
-              </div>
-              {/**Image*/}
-              <img
-                src={`/products/${item.product.image}`}
-                alt="a meaningful text"
-                className="img-thumbnail col-3 border-2"
-              />
-              <div className="col-4 d-flex flex-column justify-content-center">
-                <div className="row">
-                  <h3 className="col">{item.product.name}</h3>
+                <div className="col-4 d-flex flex-column justify-content-center">
+                  <div className="row">
+                    <h3 className="col">{item.product.name}</h3>
+                  </div>
+                  <div className="row mt-4">
+                    <h4 className="col">${item.product.price}</h4>
+                  </div>
                 </div>
-                <div className="row mt-4">
-                  <h4 className="col">${item.product.price}</h4>
-                </div>
-              </div>
-              <div className="col d-flex">
-                <div className="row align-items-end justify-content-end">
-                  <div className="btn-group ">
-                    <button
-                      type="button"
-                      className="btn btn-secondary "
-                      onClick={() =>
-                        handleQuantity(
-                          item.product.image,
-                          item.quantity - 1,
-                          item.product._id
-                        )
-                      }
-                      disabled={item.quantity === 1 ? true : false}
-                    >
-                      -
-                    </button>
-                    <input
-                      type="text"
-                      className="form-control rounded-0 w-50 input-group"
-                      value={item.quantity}
-                      onChange={(e) => {
-                        e.preventDefault();
-                        const inputValue = parseInt(e.target.value);
-                        if (!isNaN(inputValue)) {
+                <div className="col d-flex">
+                  <div className="row align-items-end justify-content-end">
+                    <div className="btn-group ">
+                      <button
+                        type="button"
+                        className="btn btn-secondary "
+                        onClick={() =>
                           handleQuantity(
                             item.product.image,
-                            inputValue,
+                            item.quantity - 1,
                             item.product._id
-                          );
+                          )
                         }
-                      }}
-                    ></input>
-                    <button
-                      type="button"
-                      className="btn btn-secondary"
-                      onClick={() =>
-                        handleQuantity(
-                          item.product.image,
-                          item.quantity + 1,
-                          item.product._id
-                        )
-                      }
-                    >
-                      +
-                    </button>
+                        disabled={item.quantity === 1 ? true : false}
+                      >
+                        -
+                      </button>
+                      <input
+                        type="text"
+                        className="form-control rounded-0 w-50 input-group"
+                        value={item.quantity}
+                        onChange={(e) => {
+                          e.preventDefault();
+                          const inputValue = parseInt(e.target.value);
+                          if (!isNaN(inputValue)) {
+                            handleQuantity(
+                              item.product.image,
+                              inputValue,
+                              item.product._id
+                            );
+                          }
+                        }}
+                      ></input>
+                      <button
+                        type="button"
+                        className="btn btn-secondary"
+                        onClick={() =>
+                          handleQuantity(
+                            item.product.image,
+                            item.quantity + 1,
+                            item.product._id
+                          )
+                        }
+                      >
+                        +
+                      </button>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-          ))}
+            ) : null
+          )}
         </div>
         {/**Checkout summary*/}
         <div className="col-12 col-md-3 px-2">
