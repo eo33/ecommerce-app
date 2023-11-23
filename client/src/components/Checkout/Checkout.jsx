@@ -60,7 +60,6 @@ function Checkout() {
   // Handle checkout
 
   const handleCheckout = async (e) => {
-    e.preventDefault();
     try {
       const token = localStorage.getItem("token");
       // Extract items from cartItems
@@ -80,7 +79,14 @@ function Checkout() {
         items,
         address: selectedAddress,
       };
+      // Add to orders collection
       await axios.post("orders/add", body, config);
+      // remove items from the cart
+
+      await axios.delete("/cart/delete", {
+        ...config,
+        data: { items: cartItems.map((item) => item._id) },
+      });
       navigate("/checkout/thank-you");
     } catch (err) {
       console.error(err);
@@ -97,7 +103,7 @@ function Checkout() {
     0
   );
   const deliveryCount = { "Next day": 0, Regular: 0, Budget: 0 };
-  const deliveryPrice = [15, 10, 0];
+  const deliveryPrice = [15, 10, 5];
   const deliveryFee = [0, 0, 0];
   for (let i = 0; i < shipping.length; i++) {
     // calculate shipping price

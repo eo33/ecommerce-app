@@ -64,45 +64,69 @@ router.post("/change-status/:id", authTokenAdmin, async (req, res) => {
   }
 });
 
-/**
- * router.post("/add", authToken, async (req, res) => {
+// @route   GET orders/get_all
+// @desc    GET my orders based on the page number
+// @acess   private
+router.get("/get_all", authToken, async (req, res) => {
   try {
     //Get the user id from JWT payload
-    const user = req.payload.user.id;
-    //Get the items from the request body
-    const { productId, quantity } = req.body;
+    const { id } = req.payload.user;
 
-    // Step 1: Check if user already has a cart
-    const existingCart = await Cart.findOne({ user: user });
-    if (existingCart) {
-      // Step 2: If user has an existing cart, check and update the items
-      let itemExists = false;
-      for (let item of existingCart.items) {
-        if (item.product.toString() === productId.toString()) {
-          item.quantity += quantity; // Update the quantity if the item already exists
-          itemExists = true;
-          break;
-        }
-      }
-      if (!itemExists) {
-        existingCart.items.push({ product: productId, quantity: quantity }); // Add the new item to the cart
-      }
-      await existingCart.save(); // Save the updated car
-    } else {
-      // Step 3: If user doesnt have a new cart, instantiate a new cart
-      const newCart = new Cart({
-        user: user,
-        items: [{ product: productId, quantity: quantity }],
-      });
-      await newCart.save(); // Save the new cart
-    }
+    // get the object Id of the order
 
-    res.send("POST REQUEST SUCCESS");
+    const orders = await Orders.find({ user: id })
+      .select(["items", "status", "createdAt"])
+      .populate("items.product")
+      .sort({ createdAt: 1 });
+    const itemList = [];
+    // Logic for only returning the product
+    orders.forEach((order, index) => {
+      const { items } = order;
+      const newItems = items.map(
+        ({ product: { _id, image, name, price }, quantity, shipping }) => ({
+          orderId: order._id,
+          productId: _id,
+          image,
+          name,
+          price,
+          quantity,
+          shipping,
+          status: order.status,
+          createdAt: new Date(order.createdAt).toLocaleDateString("en-US", {
+            day: "numeric",
+            month: "long",
+            year: "numeric",
+          }),
+          orderNum: index + 1,
+        })
+      );
+      itemList.push(...newItems);
+    });
+    const sortedItemList = itemList.sort((a, b) => b.orderNum - a.orderNum);
+    res.send(sortedItemList);
   } catch (err) {
     console.error(err.message);
     return res.status(500).json({ msg: "request error" });
   }
 });
- */
 
 module.exports = router;
+/**
+ * 
+ *     // Logic for only returning the product
+    orders.forEach((order) => {
+      const { items } = order;
+      const newItems = items.map(
+        ({ product: { image, name, price }, quantity, shipping }) => ({
+          image,
+          name,
+          price,
+          quantity,
+          shipping,
+          status: order.status,
+          createdAt: order.createdAt,
+        })
+      );
+      itemList.push(...newItems);
+    });
+ */
