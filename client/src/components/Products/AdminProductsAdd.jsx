@@ -74,7 +74,7 @@ function AdminProductsAdd({
             {editMode ? (
               <div className="col-2">
                 <button
-                  className="btn btn-light border"
+                  className="btn btn-light border mt-2"
                   onClick={() => setShowEdit(false)}
                 >
                   Back

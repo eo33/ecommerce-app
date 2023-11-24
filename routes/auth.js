@@ -137,4 +137,26 @@ router.post(
   }
 );
 
+// @route   POST auth/validate
+// @desc    Check if token is valid or not, and is an admin or not
+// @acess   Public
+
+router.get("/validate", async (req, res) => {
+  // Get token from header
+  const token = req.header("Authorization");
+
+  // Check if no token
+  if (!token) {
+    return res.send({ authenticate: false, admin: false });
+  }
+
+  // Verify
+  jwt.verify(token, config.get("jwtSecret"), (err, user) => {
+    if (err) {
+      return res.send({ authenticate: false, admin: false });
+    }
+    return res.send({ authenticate: true, admin: user.user.admin });
+  });
+});
+
 module.exports = router;

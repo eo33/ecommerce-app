@@ -402,6 +402,9 @@ function Products() {
                     <Link to={`/shop/${product.image}`}>
                       <img
                         className="card-img-top w-100"
+                        style={{
+                          maxWidth: "250px",
+                        }}
                         src={`/products/${product.image}`}
                         alt={`${product.name}`}
                       />

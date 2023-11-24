@@ -122,69 +122,73 @@ function ProductDetails() {
               </div>
             </div>
             {/*COLUMN 3: PRODUCT DESC*/}
-            <div className="col-md-3 border border-2 px-4 offset-md-1 mt-5 mt-md-0">
-              <h5 className="py-3 mb-0">Add to product</h5>
-              <div className="row border-2 border-top border-bottom py-3">
-                <div className="col-4">
-                  <img
-                    src={`/products/${id}`}
-                    alt="a meaningful text"
-                    className="img-thumbnail border-2"
-                  />
-                </div>
-                <h3 className="col-8 d-flex align-items-center overflow-hidden">
-                  {name}
-                </h3>
-              </div>
-              {/**ADD QUANTITY */}
-              <div
-                class="btn-group mt-5"
-                role="group"
-                aria-label="Basic example"
-              >
-                <button
-                  type="button"
-                  class="btn btn-secondary "
-                  onClick={() =>
-                    setQuantity((prev) => (prev > 1 ? prev - 1 : 1))
-                  }
-                  disabled={quantity > 1 ? false : true}
-                >
-                  -
-                </button>
-                <div className="px-3 px-lg-5 pt-2 quantity">
-                  <h5>{quantity}</h5>
-                </div>
-                <button
-                  type="button"
-                  class="btn btn-secondary"
-                  onClick={() => setQuantity((prev) => prev + 1)}
-                >
-                  +
-                </button>
-              </div>
-              {/**SUBTOTAL*/}
-              <div className="row mt-5">
-                <h4 className="col">Subtotal: ${price * quantity}</h4>
-              </div>
-              {/*Add to cart*/}
+            <div className="col-md-3 offset-md-1 mt-5 mt-md-0">
+              <div className="row">
+                <div className="col border border-2 px-4 ">
+                  <h5 className="py-3 mb-0">Add to product</h5>
+                  <div className="row border-2 border-top border-bottom py-3">
+                    <div className="col-5">
+                      <img
+                        src={`/products/${id}`}
+                        alt="a meaningful text"
+                        className="img-thumbnail border-2"
+                      />
+                    </div>
+                    <h3 className="col-7 d-flex align-items-center overflow-hidden">
+                      {name}
+                    </h3>
+                  </div>
+                  {/**ADD QUANTITY */}
+                  <div
+                    class="btn-group mt-5"
+                    role="group"
+                    aria-label="Basic example"
+                  >
+                    <button
+                      type="button"
+                      class="btn btn-secondary "
+                      onClick={() =>
+                        setQuantity((prev) => (prev > 1 ? prev - 1 : 1))
+                      }
+                      disabled={quantity > 1 ? false : true}
+                    >
+                      -
+                    </button>
+                    <div className="px-3 px-lg-5 pt-2 quantity">
+                      <h5>{quantity}</h5>
+                    </div>
+                    <button
+                      type="button"
+                      class="btn btn-secondary"
+                      onClick={() => setQuantity((prev) => prev + 1)}
+                    >
+                      +
+                    </button>
+                  </div>
+                  {/**SUBTOTAL*/}
+                  <div className="row mt-5">
+                    <h4 className="col">Subtotal: ${price * quantity}</h4>
+                  </div>
+                  {/*Add to cart*/}
 
-              {token ? (
-                <button
-                  type="button"
-                  class="btn btn-light w-100 mt-3 border mt-5 mb-5 mb-md-3"
-                  onClick={handleAdd}
-                >
-                  Add to cart
-                </button>
-              ) : (
-                <Link
-                  to="/login"
-                  className="btn btn-light w-100 mt-3 border mt-5 mb-5 mb-md-3"
-                >
-                  Login to add item
-                </Link>
-              )}
+                  {token ? (
+                    <button
+                      type="button"
+                      class="btn btn-light w-100 mt-3 border mt-5 mb-5 mb-md-3"
+                      onClick={handleAdd}
+                    >
+                      Add to cart
+                    </button>
+                  ) : (
+                    <Link
+                      to="/login"
+                      className="btn btn-light w-100 mt-3 border mt-5 mb-5 mb-md-3"
+                    >
+                      Login to add item
+                    </Link>
+                  )}
+                </div>
+              </div>
             </div>
           </div>
         </>

@@ -239,13 +239,14 @@ _Note: W35 starts from 28 Aug 2023_
 1. Task: Display a 'thank you' page to show that the orders go through. (DONE)
 1. Task: Implement a user-friendly that allows customers to access the current status of the order. (DONE)
 1. Task: Implement a functionality that allows user to see the order status of their orders. (DONE)
-1. Task: Implement pagination that limits order shown.
+1. Task: Implement pagination that limits order shown. (DONE)
 
 #### Work progress
 
 - 21 Nov 2023 - Created orders functionality, such as the db schema, API and client-side request. Also made a thank you page to show the orders go through. Worked on the Figma design as well.
 - 22 Nov 2023 - Worked on the backend logic to retrieve data
 - 23 Nov 2023 - Worked on the frontend functionality, which includes the filtering.
+- 24 Nov 2023 - Worked on pagination. Used `react-paginate` to implement it.
 
 ## Feature 7: Admin Panel:
 

@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import Button from "react-bootstrap/Button";
 import { useNavigate } from "react-router-dom";
+import ReactPaginate from "react-paginate";
 
 import "./Orders.css";
 
@@ -46,6 +47,7 @@ function Orders() {
     } else {
       setFilteredData(data);
     }
+    setPage(1);
   };
   const handleBuy = async (e, productId) => {
     e.preventDefault();
@@ -71,6 +73,12 @@ function Orders() {
   };
 
   // Pagination feature
+  const ordersPerPage = 5;
+  const paginate = ({ selected }) => {
+    setPage(selected + 1);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
   return (
     <div className="container">
       <div className="row mt-2">
@@ -120,66 +128,96 @@ function Orders() {
             </div>
           </div>
           {/**Map over the data*/}
-          {filteredData.slice((page - 1) * 6, page * 6).map((item) => (
-            <div className="row border mt-3">
-              <div className="col-12 col-md-10 ">
-                {/**Date + order number */}
-                <div className="row py-2 px-1 align-items-center">
-                  <div className="col-8 col-md-7 col-lg-5 col-xl-4">
-                    Date order: {item.createdAt}
-                  </div>
-                  <div className="col-4">
-                    Order: #{item.orderNum.toString().padStart(6, "0")}
-                  </div>
-                </div>
-                {/**item + total payment */}
-                <div className="row my-2">
-                  <div className="col-3 col-md-2 d-flex justify-content-center align-items-center">
-                    <img
-                      src={`/products/${item.image}`}
-                      alt="a meaningful text"
-                      className="img-thumbnail w-100"
-                    />
-                  </div>
-                  <div className="col-5 col-md-6 col-lg-7 d-flex flex-column justify-content-center">
-                    <div className="row">
-                      <div className="col">{item.name}</div>
+          {filteredData
+            .slice((page - 1) * ordersPerPage, page * ordersPerPage)
+            .map((item) => (
+              <div className="row border mt-3">
+                <div className="col-12 col-md-10 ">
+                  {/**Date + order number */}
+                  <div className="row py-2 px-1 align-items-center">
+                    <div className="col-8 col-md-7 col-lg-5 col-xl-4">
+                      Date order: {item.createdAt}
                     </div>
-                    <div className="row">
-                      <div className="col">
-                        {item.quantity} items x ${item.price}
+                    <div className="col-4">
+                      Order: #{item.orderNum.toString().padStart(6, "0")}
+                    </div>
+                  </div>
+                  {/**item + total payment */}
+                  <div className="row my-2">
+                    <div className="col-3 col-md-2 d-flex justify-content-center align-items-center">
+                      <img
+                        src={`/products/${item.image}`}
+                        alt="a meaningful text"
+                        className="img-thumbnail w-100"
+                      />
+                    </div>
+                    <div className="col-5 col-md-6 col-lg-7 d-flex flex-column justify-content-center">
+                      <div className="row">
+                        <div className="col">
+                          <h5 className="bold">{item.name}</h5>
+                        </div>
+                      </div>
+                      <div className="row">
+                        <div className="col">
+                          {item.quantity} items x ${item.price}
+                        </div>
+                      </div>
+                    </div>
+                    <div className="col-4 col-lg-3 border-start  d-flex flex-column justify-content-center">
+                      <div className="row">
+                        <div className="col">
+                          <h5>Total payment</h5>
+                        </div>
+                      </div>
+                      <div className="row">
+                        <div className="col">
+                          <p className="bold">${item.quantity * item.price}</p>
+                        </div>
                       </div>
                     </div>
                   </div>
-                  <div className="col-4 col-lg-3 border-start  d-flex flex-column justify-content-center">
-                    <div className="row">
-                      <div className="col">Total payment</div>
+                  {/**Status + buy again payment */}
+                  <div className="row py-2 px-1 align-items-center mb-md-2">
+                    <div className="col-8 col-md-4">Status: {item.status}</div>
+                    <div className="col-4 offset-md-4 d-flex justify-content-center">
+                      <Button
+                        variant="outline-secondary"
+                        className="py-0"
+                        onClick={(e) => {
+                          handleBuy(e, item.productId);
+                        }}
+                      >
+                        Buy again
+                      </Button>
                     </div>
-                    <div className="row">
-                      <div className="col">${item.quantity * item.price}</div>
-                    </div>
-                  </div>
-                </div>
-                {/**Status + buy again payment */}
-                <div className="row py-2 px-1 align-items-center mb-md-2">
-                  <div className="col-8 col-md-4">Status: {item.status}</div>
-                  <div className="col-4 offset-md-4 d-flex justify-content-center">
-                    <Button
-                      variant="outline-secondary"
-                      className="py-0"
-                      onClick={(e) => {
-                        handleBuy(e, item.productId);
-                      }}
-                    >
-                      Buy again
-                    </Button>
                   </div>
                 </div>
               </div>
+            ))}
+          <div className="row mt-3">
+            <div className="col d-flex justify-content-center mt-3">
+              <ReactPaginate
+                nextLabel="Next"
+                onPageChange={paginate}
+                pageCount={Math.ceil(filteredData.length / ordersPerPage)}
+                previousLabel="Prev"
+                breakLabel="..."
+                marginPagesDisplayed={1}
+                pageRangeDisplayed={3}
+                pageClassName="page-item"
+                pageLinkClassName="page-link"
+                previousClassName="page-item"
+                previousLinkClassName="page-link"
+                nextClassName="page-item"
+                nextLinkClassName="page-link"
+                breakClassName="page-item"
+                breakLinkClassName="page-link"
+                containerClassName="pagination"
+                activeClassName="active"
+                renderOnZeroPageCount={null}
+                forcePage={page - 1}
+              />
             </div>
-          ))}
-          <div className="row">
-            <div className="col d-flex justify-content-center mt-2">{`<`}1</div>
           </div>
         </div>
       </div>
