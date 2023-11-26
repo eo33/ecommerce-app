@@ -256,9 +256,8 @@ _Note: W35 starts from 28 Aug 2023_
 ### User stories:
 
 1. As an administrator, I want to access a secure admin panel that allows me to manage products, orders, and users efficiently, enabling me to oversee and control various aspects of the e-commerce platform.
-1. As an administrator, I want to have the ability to add new products to the platform easily, including uploading product images, providing detailed descriptions, and specifying pricing and inventory information.
-1. As an administrator, I want to be able to update existing product information, enabling me to make necessary changes to product details, prices, and inventory levels as required.
-1. As an administrator, I need to manage product inventory effectively, including monitoring stock levels, receiving notifications for low inventory, and updating stock availability to prevent overselling.
+1. As an administrator, I want to have the ability to add new products to the platform easily, including uploading product images, providing detailed descriptions, and specifying pricing and inventory information. (DONE)
+1. As an administrator, I want to be able to update existing product information, enabling me to make necessary changes to product details, prices, and inventory levels as required. (DONE)
 1. As an administrator, I want to view and manage incoming orders, including processing orders, updating order statuses, and addressing customer inquiries related to orders.
 1. As an administrator, I want to have the ability to manage user accounts, including viewing user profiles, modifying user information, and addressing any account-related issues or inquiries.
 1. As an administrator, I want to ensure that the admin panel is user-friendly and intuitive, providing me with a seamless experience for managing products, orders, and users without encountering technical difficulties.
@@ -267,16 +266,19 @@ _Note: W35 starts from 28 Aug 2023_
 
 #### Tasks:
 
-1. Set up a secure login system for administrators to access the admin panel.
-1. Task: Develop a user-friendly interface in the admin panel that facilitates the addition of new products with comprehensive details and inventory management options.
-1. Implement functionality within the admin panel that allows administrators to modify and update existing product information seamlessly.
-1. Integrate inventory management features into the admin panel, providing administrators with tools to track and manage product stock efficiently.
-1. Develop an order management system within the admin panel that allows administrators to handle incoming orders and track their statuses.
-1. Implement user management functionalities in the admin panel, enabling administrators to oversee and manage user accounts effectively.
-1. Design and develop an intuitive user interface for the admin panel, focusing on ease of use and efficient management of key e-commerce platform elements.
-1. Develop an admin panel feature that allows administrators to monitor and manage user shopping carts effectively.
+1. [ROUTING] Set up a secure login system for administrators to access the admin panel. (DONE)
+1. [ADMIN] Design and develop an intuitive user interface for the admin panel, focusing on ease of use and efficient management of key e-commerce platform elements.
+1. [ADMIN] In the admin page, add a sidebar so that user can navigate through the different routes, show important information, and product statistics table.
+1. [PRODUCTS] Implement functionality within the admin panel that allows administrators to modify and update existing product information seamlessly. (DONE)
+1. [PRODUCTS] Develop a user-friendly interface in the admin panel that facilitates the addition of new products with comprehensive details. (DONE)
+1. [ORDERS] Develop an admin panel feature that allows administrators to monitor and manage user shopping carts effectively.
+1. [ORDERS] Develop an order management system within the admin panel that allows administrators to handle incoming orders and track their statuses.
+1. [USERS] Implement user management functionalities in the admin panel, enabling administrators to oversee and manage user accounts effectively.
 
 #### Work progress
+
+- 24 Nov 2023 - Understand the user stories. Also worked on setting up the admin routes.
+- 25 Nov 2023 - Made the figma design for admin dashboard.
 
 ## Feature 8: Landing page
 

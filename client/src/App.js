@@ -58,16 +58,25 @@ function App() {
           <LoginContext.Provider value={{ authenticated, setAuthenticated }}>
             <CartContext.Provider value={{ cartItems, setCartItems }}>
               <div className="min-vh-100">
-                <Navbar />
+                <Navbar isAdmin={adminAuthorization} />
                 <Routes>
-                  <Route path="/login" element={<LoginPage />} />
-                  <Route path="/dashboard" element={<Dashboard />} />
-                  <Route path="/shop" element={<Products />} />
-                  <Route path="/shop/:id" element={<ProductDetails />} />
-                  <Route path="/cart" element={<Cart />} />
-                  <Route path="/checkout" element={<Checkout />} />
-                  <Route path="/checkout/thank-you" element={<ThankYou />} />
-                  <Route path="/orders" element={<Orders />} />
+                  {/**Regular user route */}
+                  <Route
+                    element={
+                      adminAuthorization === false ? null : (
+                        <> You can't access regular pages as admin</>
+                      )
+                    }
+                  >
+                    <Route path="/login" element={<LoginPage />} />
+                    <Route path="/dashboard" element={<Dashboard />} />
+                    <Route path="/shop" element={<Products />} />
+                    <Route path="/shop/:id" element={<ProductDetails />} />
+                    <Route path="/cart" element={<Cart />} />
+                    <Route path="/checkout" element={<Checkout />} />
+                    <Route path="/checkout/thank-you" element={<ThankYou />} />
+                    <Route path="/orders" element={<Orders />} />
+                  </Route>
                   {/**Admin routes */}
                   <Route
                     path="/admin"
@@ -81,7 +90,6 @@ function App() {
                       element={<AdminProductsEdit />}
                     />
                   </Route>
-
                   {/**Not found */}
                   <Route path="*" element={<h2>404 Not found</h2>} />
                 </Routes>

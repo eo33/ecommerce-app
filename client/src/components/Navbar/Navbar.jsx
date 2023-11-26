@@ -4,7 +4,7 @@ import { useState, useContext } from "react";
 import { LoginContext } from "../Context/LoginContext";
 import { useNavigate, Link } from "react-router-dom";
 
-function Navbar() {
+function Navbar({ isAdmin }) {
   // Login context
   const { authenticated, setAuthenticated } = useContext(LoginContext);
   // To route to dashboard after signing up
