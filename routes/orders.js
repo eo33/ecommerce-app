@@ -3,9 +3,6 @@ const express = require("express");
 const router = express.Router();
 const authToken = require("../middleware/authToken");
 const authTokenAdmin = require("../middleware/authTokenAdmin");
-const jwt = require("jsonwebtoken");
-const config = require("config");
-const mongoose = require("mongoose");
 
 // Import mongoose model
 const Orders = require("../model/orders");
@@ -111,22 +108,3 @@ router.get("/get_all", authToken, async (req, res) => {
 });
 
 module.exports = router;
-/**
- * 
- *     // Logic for only returning the product
-    orders.forEach((order) => {
-      const { items } = order;
-      const newItems = items.map(
-        ({ product: { image, name, price }, quantity, shipping }) => ({
-          image,
-          name,
-          price,
-          quantity,
-          shipping,
-          status: order.status,
-          createdAt: order.createdAt,
-        })
-      );
-      itemList.push(...newItems);
-    });
- */

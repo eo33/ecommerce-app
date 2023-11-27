@@ -19,9 +19,8 @@ import Checkout from "./components/Checkout/Checkout";
 import ThankYou from "./components/Checkout/ThankYou";
 import Orders from "./components/Orders/Orders";
 
-import Admin from "./components/Admin/Admin";
 import AdminHomepage from "./components/Admin/AdminHomepage";
-
+import Sidebar from "./components/Admin/Sidebar";
 import Unauthorized from "./components/Admin/Unauthorized";
 import AdminProducts from "./components/Admin/AdminProducts";
 import AdminProductsAdd from "./components/Products/AdminProductsAdd";
@@ -80,15 +79,17 @@ function App() {
                   {/**Admin routes */}
                   <Route
                     path="/admin"
-                    element={adminAuthorization ? null : <Unauthorized />}
+                    element={
+                      adminAuthorization ? <Sidebar /> : <Unauthorized />
+                    }
                   >
                     <Route index element={<AdminHomepage />} />
-                    <Route path="products" element={<AdminProducts />} />
+                    {/**Orders route */}
+                    {/**Products route */}
+                    <Route path="products" element={<AdminProductsEdit />} />
                     <Route path="products/add" element={<AdminProductsAdd />} />
-                    <Route
-                      path="products/edit"
-                      element={<AdminProductsEdit />}
-                    />
+
+                    {/**Users route */}
                   </Route>
                   {/**Not found */}
                   <Route path="*" element={<h2>404 Not found</h2>} />
