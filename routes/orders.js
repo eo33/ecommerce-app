@@ -34,7 +34,7 @@ router.post("/add", authToken, async (req, res) => {
 });
 
 // @route   POST orders/change-status/:id
-// @desc    Edit orders to DB as an admin
+// @desc    Change the order status. This will include all the items in the order.
 // @acess   private
 router.post("/change-status/:id", authTokenAdmin, async (req, res) => {
   try {

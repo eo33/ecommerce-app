@@ -25,6 +25,7 @@ import Unauthorized from "./components/Admin/Unauthorized";
 import AdminProducts from "./components/Admin/AdminProducts";
 import AdminProductsAdd from "./components/Products/AdminProductsAdd";
 import AdminProductsEdit from "./components/Products/AdminProductsEdit";
+import AdminOrders from "./components/Admin/AdminOrders";
 
 function App() {
   const token = localStorage.getItem("token");
@@ -85,6 +86,10 @@ function App() {
                   >
                     <Route index element={<AdminHomepage />} />
                     {/**Orders route */}
+                    <Route
+                      path="orders/:orderStatus?"
+                      element={<AdminOrders />}
+                    />
                     {/**Products route */}
                     <Route path="products" element={<AdminProductsEdit />} />
                     <Route path="products/add" element={<AdminProductsAdd />} />

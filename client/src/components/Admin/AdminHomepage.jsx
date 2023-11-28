@@ -7,8 +7,10 @@ import ReactPaginate from "react-paginate";
 function AdminHomepage() {
   const navigate = useNavigate();
   const [stats, setStats] = useState([]);
+  const [table, setTable] = useState([]);
   const [page, setPage] = useState(1);
 
+  // Fetch statistics data
   useEffect(() => {
     const fetchStats = async () => {
       try {
@@ -24,8 +26,28 @@ function AdminHomepage() {
         console.error(err);
       }
     };
+
     fetchStats();
   }, []);
+
+  // Fetch table data
+  useEffect(() => {
+    const fetchTable = async () => {
+      try {
+        const token = localStorage.getItem("token");
+        const config = {
+          headers: {
+            Authorization: token,
+          },
+        };
+        const res = await axios.get(`/stats/productTable/${page}`, config);
+        setTable(res.data);
+      } catch (err) {
+        console.error(err);
+      }
+    };
+    fetchTable();
+  }, [page]);
 
   // Pagination feature
   let allProducts =
@@ -67,7 +89,7 @@ function AdminHomepage() {
       {/**Table stats */}
       <div className="row my-3 border-bottom">
         <div className="col">
-          <h2>Product statistics</h2>
+          <h2>Product table</h2>
         </div>
       </div>
       <table class="table">
@@ -76,76 +98,34 @@ function AdminHomepage() {
             <th scope="col">#</th>
             <th scope="col">Product</th>
             <th scope="col">Sold count</th>
-            <th scope="col">In cart</th>
             <th scope="col">Pending</th>
             <th scope="col">Delivery</th>
             <th scope="col">Completed</th>
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <th scope="row">1</th>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>@mdo</td>
-            <td>de</td>
-            <td>de</td>
-            <td>de</td>
-          </tr>
-          <tr>
-            <th scope="row">2</th>
-            <td>Jacob</td>
-            <td>Thornton</td>
-            <td>@fat</td>
-            <td>de</td>
-            <td>de</td>
-            <td>de</td>
-          </tr>
-          <tr>
-            <th scope="row">3</th>
-            <td>Larry</td>
-            <td>the Bird</td>
-            <td>@twitter</td>
-            <td>de</td>
-            <td>de</td>
-            <td>de</td>
-          </tr>
-          <tr>
-            <th scope="row">4</th>
-            <td>Larry</td>
-            <td>the Bird</td>
-            <td>@twitter</td>
-            <td>de</td>
-            <td>de</td>
-            <td>de</td>
-          </tr>
-          <tr>
-            <th scope="row">5</th>
-            <td>Larry</td>
-            <td>the Bird</td>
-            <td>@twitter</td>
-            <td>de</td>
-            <td>de</td>
-            <td>de</td>
-          </tr>
-          <tr>
-            <th scope="row">6</th>
-            <td>Larry</td>
-            <td>the Bird</td>
-            <td>@twitter</td>
-            <td>de</td>
-            <td>de</td>
-            <td>de</td>
-          </tr>
-          <tr>
-            <th scope="row">7</th>
-            <td>Larry</td>
-            <td>the Bird</td>
-            <td>@twitter</td>
-            <td>de</td>
-            <td>de</td>
-            <td>de</td>
-          </tr>
+          {table.map((product, index) => (
+            <tr>
+              <th scope="row">{index + 1}</th>
+              <td>{product.name}</td>
+              <td>{product.soldCount}</td>
+              <td>
+                {product.counts.pending
+                  ? product.counts.pending.totalQuantity || 0
+                  : 0}
+              </td>
+              <td>
+                {product.counts.delivery
+                  ? product.counts.delivery.totalQuantity || 0
+                  : 0}
+              </td>
+              <td>
+                {product.counts.completed
+                  ? product.counts.completed.totalQuantity || 0
+                  : 0}
+              </td>
+            </tr>
+          ))}
         </tbody>
       </table>
       <div className="row">

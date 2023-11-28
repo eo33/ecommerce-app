@@ -8,22 +8,23 @@ _Note: Feature, user stories and tasks are auto-generated using ChatGPT. Texts t
 
 The ecommerce project is planned to be completed within 9 weeks (1 week break).
 
-| No  |                Feature                | W35 | W40 | W41 | W42 | W43 | W44 | W45 | W46 | W47 | W48 |
-| :-: | :-----------------------------------: | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-|  1  | User Authentication and Authorization | •   | •   |     |     |     |     |     |     |     |     |
-|  2  |           Product Listings            |     | •   | •   | •   |     |     |     |     |     |     |
-|  3  |            Product Details            |     |     |     |     | •   |     |     |     |     |     |
-|  4  |             Shopping Cart             |     |     |     |     | •   | •   |     | •   |     |     |
-|  5  |               Checkout                |     |     |     |     |     |     |     | •   | •   |     |
-|  6  |                Orders                 |     |     |     |     |     |     |     | •   | •   |     |
-|  7  |              Admin Panel              |     |     |     |     |     |     |     |     | •   | •   |
-|  8  |             Landing page              |     |     |     |     |     |     |     |     |     | •   |
+| No  |                Feature                | W35 | W40 | W41 | W42 | W43 | W44 | W45 | W46 | W47 | W48 | W49 |
+| :-: | :-----------------------------------: | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+|  1  | User Authentication and Authorization | •   | •   |     |     |     |     |     |     |     |     |     |
+|  2  |           Product Listings            |     | •   | •   | •   |     |     |     |     |     |     |     |
+|  3  |            Product Details            |     |     |     |     | •   |     |     |     |     |     |     |
+|  4  |             Shopping Cart             |     |     |     |     | •   | •   |     | •   |     |     |     |
+|  5  |               Checkout                |     |     |     |     |     |     |     | •   | •   |     |     |
+|  6  |                Orders                 |     |     |     |     |     |     |     | •   | •   |     |     |
+|  7  |              Admin Panel              |     |     |     |     |     |     |     |     | •   | •   | •   |
+|  8  |             Landing page              |     |     |     |     |     |     |     |     |     |     | •   |
 
 _Note: W35 starts from 28 Aug 2023_
+_Note: Added 1 week (W49) because admin feature takes additional time to complete_
 
 ### Packages used for backend (Express):
 
-- config (for deployment)
+- Config (for deployment)
 - Express
 - Mongoose
 - Express validator
@@ -36,11 +37,13 @@ _Note: W35 starts from 28 Aug 2023_
 ### Packages used for frontend (React):
 
 - Bootstrap
+- React-Bootstrap
 - Axios
-- Router dom
+- React router dom
 - Redux-devtools-extension
 - React-image-magnify
-- react-google-autocomplete
+- React-google-autocomplete
+- React-paginate
 
 ## Feature 1: User Authentication and Authorization
 
@@ -256,8 +259,8 @@ _Note: W35 starts from 28 Aug 2023_
 ### User stories:
 
 1. As an administrator, I want to access a secure admin panel that allows me to manage products, orders, and users efficiently, enabling me to oversee and control various aspects of the e-commerce platform.
-1. As an administrator, I want to have the ability to add new products to the platform easily, including uploading product images, providing detailed descriptions, and specifying pricing and inventory information. (DONE)
-1. As an administrator, I want to be able to update existing product information, enabling me to make necessary changes to product details, prices, and inventory levels as required. (DONE)
+1. As an administrator, I want to have the ability to add new products to the platform easily, including uploading product images, providing detailed descriptions, and specifying pricing and inventory information.
+1. As an administrator, I want to be able to update existing product information, enabling me to make necessary changes to product details, prices, and inventory levels as required.
 1. As an administrator, I want to view and manage incoming orders, including processing orders, updating order statuses, and addressing customer inquiries related to orders.
 1. As an administrator, I want to have the ability to manage user accounts, including viewing user profiles, modifying user information, and addressing any account-related issues or inquiries.
 1. As an administrator, I want to ensure that the admin panel is user-friendly and intuitive, providing me with a seamless experience for managing products, orders, and users without encountering technical difficulties.
@@ -267,8 +270,8 @@ _Note: W35 starts from 28 Aug 2023_
 #### Tasks:
 
 1. [ROUTING] Set up a secure login system for administrators to access the admin panel. (DONE)
-1. [ADMIN] Design and develop an intuitive user interface for the admin panel, focusing on ease of use and efficient management of key e-commerce platform elements.
-1. [ADMIN] In the admin page, add a sidebar so that user can navigate through the different routes, show important information, and product statistics table.
+1. [ADMIN] Design and develop an intuitive user interface for the admin panel, focusing on ease of use and efficient management of key e-commerce platform elements. (DONE)
+1. [ADMIN] In the admin page, add a sidebar so that user can navigate through the different routes, show important information, and product statistics table. (DONE)
 1. [PRODUCTS] Implement functionality within the admin panel that allows administrators to modify and update existing product information seamlessly. (DONE)
 1. [PRODUCTS] Develop a user-friendly interface in the admin panel that facilitates the addition of new products with comprehensive details. (DONE)
 1. [ORDERS] Develop an admin panel feature that allows administrators to monitor and manage user shopping carts effectively.
@@ -279,8 +282,11 @@ _Note: W35 starts from 28 Aug 2023_
 
 - 24 Nov 2023 - Understand the user stories. Also worked on setting up the admin routes.
 - 25 Nov 2023 - Made the figma design for admin dashboard.
+- 26 Nov 2023 - Configured routes and work on sidebar to make it a shared component for the children routes.
+- 27 Nov 2023 - Finish sidebar and admin dashboard requests.
+- 28 Nov 2023 - Added pagination to products. Worked on orders figma design.
 
-## Feature 8: Landing page
+## (Additional) Feature 8: Landing page
 
 ## Reference
 

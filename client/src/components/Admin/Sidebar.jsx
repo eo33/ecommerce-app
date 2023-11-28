@@ -96,7 +96,16 @@ function Sidebar() {
                     <button
                       type="button"
                       class="btn btn-sm px-1 py-0 text-start border-0 sidebar-button w-100"
-                      onClick={() => navigate("products/edit")}
+                      onClick={() => navigate("orders")}
+                    >
+                      All
+                    </button>
+                  </li>
+                  <li>
+                    <button
+                      type="button"
+                      class="btn btn-sm px-1 py-0 text-start border-0 sidebar-button w-100"
+                      onClick={() => navigate("orders/pending")}
                     >
                       Pending
                     </button>
@@ -105,9 +114,18 @@ function Sidebar() {
                     <button
                       type="button"
                       class="btn btn-sm px-1 py-0 text-start border-0 sidebar-button w-100"
-                      onClick={() => navigate("products")}
+                      onClick={() => navigate("orders/delivery")}
                     >
-                      All
+                      Delivery
+                    </button>
+                  </li>
+                  <li>
+                    <button
+                      type="button"
+                      class="btn btn-sm px-1 py-0 text-start border-0 sidebar-button w-100"
+                      onClick={() => navigate("orders/completed")}
+                    >
+                      Completed
                     </button>
                   </li>
                 </ul>
@@ -138,7 +156,7 @@ function Sidebar() {
           </Card>
         </Accordion>
       </div>
-      <div className="col-9 col-md-10">
+      <div className="col-9 col-md-10 border-left sidebar-border">
         <div className="container">
           <Outlet />
         </div>
