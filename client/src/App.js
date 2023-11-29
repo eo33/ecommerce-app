@@ -1,5 +1,5 @@
 // React routers and hooks
-import { BrowserRouter, Routes, Route, Outlet } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { useState, useEffect } from "react";
 import axios from "axios";
 
@@ -22,10 +22,10 @@ import Orders from "./components/Orders/Orders";
 import AdminHomepage from "./components/Admin/AdminHomepage";
 import Sidebar from "./components/Admin/Sidebar";
 import Unauthorized from "./components/Admin/Unauthorized";
-import AdminProducts from "./components/Admin/AdminProducts";
 import AdminProductsAdd from "./components/Products/AdminProductsAdd";
 import AdminProductsEdit from "./components/Products/AdminProductsEdit";
 import AdminOrders from "./components/Admin/AdminOrders";
+import AdminUsers from "./components/Admin/AdminUsers";
 
 function App() {
   const token = localStorage.getItem("token");
@@ -93,8 +93,8 @@ function App() {
                     {/**Products route */}
                     <Route path="products" element={<AdminProductsEdit />} />
                     <Route path="products/add" element={<AdminProductsAdd />} />
-
                     {/**Users route */}
+                    <Route path="users" element={<AdminUsers />} />
                   </Route>
                   {/**Not found */}
                   <Route path="*" element={<h2>404 Not found</h2>} />

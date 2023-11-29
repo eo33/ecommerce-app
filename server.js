@@ -14,6 +14,7 @@ const cart = require("./routes/cart");
 const address = require("./routes/address");
 const orders = require("./routes/orders");
 const stats = require("./routes/stats");
+const users = require("./routes/users");
 
 // Connect to MongoDB atlas cluster using mongoose
 mongoose
@@ -41,6 +42,7 @@ app.use("/cart", cart);
 app.use("/address", address);
 app.use("/orders", orders);
 app.use("/stats", stats);
+app.use("/users", users);
 
 // Setup port
 const PORT = process.env.PORT || 5000;

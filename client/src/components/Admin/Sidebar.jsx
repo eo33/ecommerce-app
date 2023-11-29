@@ -145,7 +145,7 @@ function Sidebar() {
                     <button
                       type="button"
                       class="btn btn-sm px-1 py-0 text-start border-0 sidebar-button w-100"
-                      onClick={() => navigate("products/edit")}
+                      onClick={() => navigate("users")}
                     >
                       Manage
                     </button>

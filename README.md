@@ -283,7 +283,7 @@ _Note: Added 1 week (W49) because admin feature takes additional time to complet
 - 26 Nov 2023 - Configured routes and work on sidebar to make it a shared component for the children routes.
 - 27 Nov 2023 - Finish sidebar and admin dashboard requests.
 - 28 Nov 2023 - Added pagination to products. Worked on order functionality (design, routing, backend API and front display).
-- 29 Nov 2023 - Implemented dropdown on order status so that admin can change the status of an order.
+- 29 Nov 2023 - Implemented update status and delete button. Finished the figma design, backend API and routing for users.
 
 ## (Additional) Feature 8: Landing page
 
