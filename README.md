@@ -17,7 +17,7 @@ The ecommerce project is planned to be completed within 9 weeks (1 week break).
 |  5  |               Checkout                |     |     |     |     |     |     |     | •   | •   |     |     |
 |  6  |                Orders                 |     |     |     |     |     |     |     | •   | •   |     |     |
 |  7  |              Admin Panel              |     |     |     |     |     |     |     |     | •   | •   | •   |
-|  8  |             Landing page              |     |     |     |     |     |     |     |     |     |     | •   |
+|  8  |       Landing page & Deployment       |     |     |     |     |     |     |     |     |     |     | •   |
 
 _Note: W35 starts from 28 Aug 2023_
 _Note: Added 1 week (W49) because admin feature takes additional time to complete_
@@ -264,7 +264,6 @@ _Note: Added 1 week (W49) because admin feature takes additional time to complet
 1. As an administrator, I want to view and manage incoming orders, including processing orders, updating order statuses, and addressing customer inquiries related to orders.
 1. As an administrator, I want to have the ability to manage user accounts, including viewing user profiles, modifying user information, and addressing any account-related issues or inquiries.
 1. As an administrator, I want to ensure that the admin panel is user-friendly and intuitive, providing me with a seamless experience for managing products, orders, and users without encountering technical difficulties.
-1. As an administrator, I want to be able to view and manage the active shopping carts of users, enabling me to provide support and assistance as needed.
 1. As an administrator, I want to be able to manage and process incoming orders efficiently, enabling me to track order statuses, update delivery information, and handle customer inquiries.
 
 #### Tasks:
@@ -274,8 +273,7 @@ _Note: Added 1 week (W49) because admin feature takes additional time to complet
 1. [ADMIN] In the admin page, add a sidebar so that user can navigate through the different routes, show important information, and product statistics table. (DONE)
 1. [PRODUCTS] Implement functionality within the admin panel that allows administrators to modify and update existing product information seamlessly. (DONE)
 1. [PRODUCTS] Develop a user-friendly interface in the admin panel that facilitates the addition of new products with comprehensive details. (DONE)
-1. [ORDERS] Develop an admin panel feature that allows administrators to monitor and manage user shopping carts effectively.
-1. [ORDERS] Develop an order management system within the admin panel that allows administrators to handle incoming orders and track their statuses.
+1. [ORDERS] Develop an order management system within the admin panel that allows administrators to handle incoming orders and track their statuses.(DONE)
 1. [USERS] Implement user management functionalities in the admin panel, enabling administrators to oversee and manage user accounts effectively.
 
 #### Work progress
@@ -284,7 +282,8 @@ _Note: Added 1 week (W49) because admin feature takes additional time to complet
 - 25 Nov 2023 - Made the figma design for admin dashboard.
 - 26 Nov 2023 - Configured routes and work on sidebar to make it a shared component for the children routes.
 - 27 Nov 2023 - Finish sidebar and admin dashboard requests.
-- 28 Nov 2023 - Added pagination to products. Worked on orders figma design.
+- 28 Nov 2023 - Added pagination to products. Worked on order functionality (design, routing, backend API and front display).
+- 29 Nov 2023 - Implemented dropdown on order status so that admin can change the status of an order.
 
 ## (Additional) Feature 8: Landing page
 

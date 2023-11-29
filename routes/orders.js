@@ -33,31 +33,51 @@ router.post("/add", authToken, async (req, res) => {
   }
 });
 
-// @route   POST orders/change-status/:id
-// @desc    Change the order status. This will include all the items in the order.
+// @route   POST orders/change-status
+// @desc    Change the order(s) status. This includes all the items in the order.
 // @acess   private
-router.post("/change-status/:id", authTokenAdmin, async (req, res) => {
+
+router.post("/change-status", authTokenAdmin, async (req, res) => {
   try {
-    // get the object Id of the order
-    const orderId = req.params.id;
-    const newStatus = req.body.status;
-    // validate status
-    if (
-      !(
-        newStatus === "pending" ||
-        newStatus === "delivery" ||
-        newStatus === "completed"
-      )
-    ) {
-      throw new Error("Invalid status");
-    }
-    const order = await Orders.findOne({ _id: orderId });
-    order.status = newStatus;
-    order.save();
-    res.send(order);
+    // Get the object Ids of the orders
+    const items = req.body.items;
+    const updateOperations = items.map((item) => ({
+      updateOne: {
+        filter: { _id: item.orderId },
+        update: { $set: { status: item.status } },
+      },
+    }));
+
+    // Perform bulk write operation and get the result
+    await Orders.bulkWrite(updateOperations);
+
+    // Fetch the updated documents based on the orderIds
+    const updatedOrders = await Orders.find({
+      _id: { $in: items.map((item) => item.orderId) },
+    });
+
+    // Send the updated orders as the response
+    res.json(updatedOrders);
   } catch (err) {
     console.error(err.message);
-    return res.status(500).json({ msg: "request error" });
+    return res.status(500).json({ msg: "request error", error: err.message });
+  }
+});
+
+// @route   POST orders/delete
+// @desc    Delete the order(s) status. This includes all the items in the order.
+// @acess   private
+router.post("/delete", authTokenAdmin, async (req, res) => {
+  try {
+    // Get the object Ids of the orders
+    const orderId = req.body.orderId;
+    const result = await Orders.deleteMany({ _id: { $in: orderId } });
+
+    // Send the updated orders as the response
+    res.json(result);
+  } catch (err) {
+    console.error(err.message);
+    return res.status(500).json({ msg: "request error", error: err.message });
   }
 });
 
