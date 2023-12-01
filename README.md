@@ -17,7 +17,7 @@ The ecommerce project is planned to be completed within 9 weeks (1 week break).
 |  5  |               Checkout                |     |     |     |     |     |     |     | •   | •   |     |     |
 |  6  |                Orders                 |     |     |     |     |     |     |     | •   | •   |     |     |
 |  7  |              Admin Panel              |     |     |     |     |     |     |     |     | •   | •   | •   |
-|  8  |       Landing page & Deployment       |     |     |     |     |     |     |     |     |     |     | •   |
+|  8  |    Landing page, Deployment, Docs     |     |     |     |     |     |     |     |     |     |     | •   |
 
 _Note: W35 starts from 28 Aug 2023_
 _Note: Added 1 week (W49) because admin feature takes additional time to complete_
@@ -284,8 +284,9 @@ _Note: Added 1 week (W49) because admin feature takes additional time to complet
 - 27 Nov 2023 - Finish sidebar and admin dashboard requests.
 - 28 Nov 2023 - Added pagination to products. Worked on order functionality (design, routing, backend API and front display).
 - 29 Nov 2023 - Implemented update status and delete button. Finished the figma design, backend API and routing for users.
+- 30 Nov 2023 - Worked on the user table for FE. Added pagination on product.
 
-## (Additional) Feature 8: Landing page
+## Feature 8: Landing page, Deployment, Docs
 
 ## Reference
 

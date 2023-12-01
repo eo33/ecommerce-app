@@ -16,7 +16,7 @@ function Navbar({ isAdmin }) {
   return (
     <nav class="navbar navbar-expand-lg border-3 border-secondary border-bottom">
       <div class="container-fluid">
-        <Link class="navbar-brand" to="./">
+        <Link class="navbar-brand" to={isAdmin ? "/admin" : "/"}>
           <img
             src="./assets/logo.jpeg"
             width="auto"
@@ -35,31 +35,43 @@ function Navbar({ isAdmin }) {
 
         <div class={`${toggleNavBar ? "collapse" : ""} navbar-collapse `}>
           <div className="col d-flex justify-content-start">
-            <ul class="navbar-nav mb-2 mb-lg-0 text-dark">
-              <li class="nav-item">
-                <Link class="nav-link" to="/#">
-                  Main
-                </Link>
-              </li>
-              <li class="nav-item">
-                <Link class="nav-link" to="/shop">
-                  Shop
-                </Link>
-              </li>
-              {authenticated ? (
+            {isAdmin ? (
+              <ul class="navbar-nav mb-2 mb-lg-0 text-dark">
                 <li class="nav-item">
-                  <Link class="nav-link" to="/cart">
-                    Cart
+                  <div class="nav-link">Admin mode</div>
+                </li>
+              </ul>
+            ) : (
+              <ul class="navbar-nav mb-2 mb-lg-0 text-dark">
+                <li class="nav-item">
+                  <Link class="nav-link" to="/#">
+                    Main
                   </Link>
                 </li>
-              ) : null}
-            </ul>
+                <li class="nav-item">
+                  <Link class="nav-link" to="/shop">
+                    Shop
+                  </Link>
+                </li>
+                {authenticated ? (
+                  <li class="nav-item">
+                    <Link class="nav-link" to="/cart">
+                      Cart
+                    </Link>
+                  </li>
+                ) : null}
+              </ul>
+            )}
           </div>
           <ul class="navbar-nav mb-2 mb-lg-0 text-dark">
             <li class="nav-item">
-              <Link class="nav-link" to="/orders">
-                Orders
-              </Link>
+              {isAdmin || !authenticated ? (
+                <></>
+              ) : (
+                <Link class="nav-link" to="/orders">
+                  Orders
+                </Link>
+              )}
             </li>
             <li class="nav-item">
               {authenticated ? (

@@ -28,8 +28,12 @@ function LoginForm({ setSignUpMode }) {
       localStorage.setItem("token", res.data.token);
       // Set log in to true in the context api
       setAuthenticated(true);
-      // Go to dashboard
-      navigate("/dashboard");
+      // Go to page
+      if (res.data.user.admin) {
+        navigate("/admin");
+      } else {
+        navigate("/");
+      }
     } catch (err) {
       setIsValid(false);
       console.error(err);

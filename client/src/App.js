@@ -11,8 +11,8 @@ import { CartContext } from "./components/Context/CartContext";
 import Navbar from "./components/Navbar/Navbar";
 import LoginPage from "./components/LoginPage/LoginPage";
 import Footer from "./components/Footer/Footer";
+import LandingPage from "./components/LandingPage/LandingPage";
 import Products from "./components/Products/Products";
-import Dashboard from "./components/ProtectedRoutes/Dashboard/Dashboard";
 import ProductDetails from "./components/Products/ProductDetails";
 import Cart from "./components/Cart/Cart";
 import Checkout from "./components/Checkout/Checkout";
@@ -60,7 +60,7 @@ function App() {
               <div className="min-vh-100">
                 <Navbar isAdmin={adminAuthorization} />
                 <Routes>
-                  {/**Regular user route */}
+                  {/**Public route */}
                   <Route
                     element={
                       adminAuthorization === false ? null : (
@@ -68,14 +68,22 @@ function App() {
                       )
                     }
                   >
+                    <Route path="/" element={<LandingPage />} />
                     <Route path="/login" element={<LoginPage />} />
-                    <Route path="/dashboard" element={<Dashboard />} />
                     <Route path="/shop" element={<Products />} />
                     <Route path="/shop/:id" element={<ProductDetails />} />
-                    <Route path="/cart" element={<Cart />} />
-                    <Route path="/checkout" element={<Checkout />} />
-                    <Route path="/checkout/thank-you" element={<ThankYou />} />
-                    <Route path="/orders" element={<Orders />} />
+                    {/**Logged in user routes*/}
+                    {authenticated ? (
+                      <>
+                        <Route path="/cart" element={<Cart />} />
+                        <Route path="/checkout" element={<Checkout />} />
+                        <Route
+                          path="/checkout/thank-you"
+                          element={<ThankYou />}
+                        />
+                        <Route path="/orders" element={<Orders />} />
+                      </>
+                    ) : null}
                   </Route>
                   {/**Admin routes */}
                   <Route
@@ -100,7 +108,7 @@ function App() {
                   <Route path="*" element={<h2>404 Not found</h2>} />
                 </Routes>
               </div>
-              <Footer />
+              <Footer isAdmin={adminAuthorization} />
             </CartContext.Provider>
           </LoginContext.Provider>
         </div>

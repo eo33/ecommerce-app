@@ -59,7 +59,7 @@ function SignupForm() {
         // Set log in to true in the context api
         setAuthenticated(true);
         // Go to dashboard
-        navigate("/dashboard");
+        navigate("/");
       } catch (err) {
         setIsValid(false);
         console.error(err);

@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState, useRef } from "react";
+import { useContext, useEffect, useState } from "react";
 import { CartContext } from "../Context/CartContext";
 import axios from "axios";
 import AddressModal from "./AddressModal";
@@ -13,7 +13,7 @@ function Checkout() {
   const { cartItems } = useContext(CartContext);
 
   // State variables
-  const [data, setData] = useState();
+  const [data, setData] = useState({ addresses: [] });
   const [selectedAddress, setSelectedAddress] = useState();
   const [showModal, setShowModal] = useState(false);
   const [shipping, setShipping] = useState(
@@ -23,9 +23,6 @@ function Checkout() {
       quantity: item.quantity,
     }))
   );
-
-  // Ref for user name to persist across renders
-  const userNameRef = useRef("--");
 
   // Fetch data
   useEffect(() => {
@@ -38,17 +35,13 @@ function Checkout() {
           },
         };
         const res = await axios.get("/address/list", config);
-        setData(res.data);
-
-        // Set user name using ref to avoid re-renders
-        if (res.data && res.data.user && res.data.user.name) {
-          userNameRef.current = res.data.user.name;
+        if (res.data) {
+          setData(res.data);
+          // change selected addresses
+          setSelectedAddress(
+            () => res.data.addresses.filter((item) => item.main)[0].address
+          );
         }
-
-        // change selected addresses
-        setSelectedAddress(
-          () => res.data.addresses.filter((item) => item.main)[0].address
-        );
       } catch (err) {
         console.error(err);
       }
@@ -149,8 +142,7 @@ function Checkout() {
                 <div className="col d-flex flex-column border border-secondary border-2 border-start-0 border-end-0 py-3">
                   {data ? (
                     <>
-                      <h5>{userNameRef.current}</h5>
-                      <h5>{selectedAddress}</h5>
+                      <h5>{selectedAddress || "--"}</h5>
                     </>
                   ) : (
                     <>
@@ -307,11 +299,13 @@ function Checkout() {
                     0.1 * totalItemsPrice}
                 </h5>
               </div>
+
               <button
                 class="btn btn-secondary w-100 mt-4"
                 onClick={(e) => handleCheckout(e)}
+                disabled={selectedAddress ? false : true}
               >
-                Proceed
+                {selectedAddress ? "Proceed" : "Add address to proceed"}
               </button>
             </div>
           </div>

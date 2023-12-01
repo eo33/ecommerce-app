@@ -5,6 +5,8 @@ import Dropdown from "react-bootstrap/Dropdown";
 import DropdownButton from "react-bootstrap/DropdownButton";
 import ButtonGroup from "react-bootstrap/ButtonGroup";
 import Accordion from "react-bootstrap/Accordion";
+import ReactPaginate from "react-paginate";
+
 import "./Product.css";
 
 function Products() {
@@ -23,6 +25,9 @@ function Products() {
 
   // Sold filter variables
   const [soldFilter, setSoldFilter] = useState(0);
+
+  // Page variable
+  const [page, setPage] = useState(1);
 
   // Fetch the list of Products
   useEffect(() => {
@@ -50,7 +55,6 @@ function Products() {
         );
       }
       // Advance filter: sold
-      console.log(FilteredProducts);
       FilteredProducts = FilteredProducts.filter(
         (item) => item.soldCount >= soldFilter
       );
@@ -106,6 +110,12 @@ function Products() {
       ];
     }, [filterState, products, minPriceFilter, maxPriceFilter, soldFilter]);
 
+  // Pagination feature
+  const ordersPerPage = 6;
+  const paginate = ({ selected }) => {
+    setPage(selected + 1);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
   return (
     <div className="row mt-3">
       {/**FILTERS*/}
@@ -123,25 +133,6 @@ function Products() {
               <Accordion.Body>
                 <div className="row">
                   <div className="col mx-0 px-0">
-                    <label htmlFor="min-price">Min price</label>
-                    <input
-                      id="min-price"
-                      type="text"
-                      className="w-100"
-                      value={minPriceFilterTemp}
-                      placeholder="Enter min price"
-                      onChange={(e) => {
-                        if (!isNaN(e.target.value) || e.target.value === "") {
-                          setMinPriceFilterTemp(e.target.value);
-                        }
-                        setPriceCategory("");
-                      }}
-                      onBlur={(e) => setMinPriceFilter(e.target.value)}
-                    />
-                  </div>
-                </div>
-                <div className="row">
-                  <div className="col mx-0 px-0">
                     <label htmlFor="min-price">Max price</label>
                     <input
                       id="max-price"
@@ -154,8 +145,35 @@ function Products() {
                           setMaxPriceFilterTemp(e.target.value);
                         }
                         setPriceCategory("");
+                        setPage(1);
                       }}
-                      onBlur={(e) => setMaxPriceFilter(e.target.value)}
+                      onBlur={(e) => {
+                        setMaxPriceFilter(e.target.value);
+                        setPage(1);
+                      }}
+                    />
+                  </div>
+                </div>
+                <div className="row">
+                  <div className="col mx-0 px-0">
+                    <label htmlFor="min-price">Min price</label>
+                    <input
+                      id="min-price"
+                      type="text"
+                      className="w-100"
+                      value={minPriceFilterTemp}
+                      placeholder="Enter min price"
+                      onChange={(e) => {
+                        if (!isNaN(e.target.value) || e.target.value === "") {
+                          setMinPriceFilterTemp(e.target.value);
+                        }
+                        setPriceCategory("");
+                        setPage(1);
+                      }}
+                      onBlur={(e) => {
+                        setMinPriceFilter(e.target.value);
+                        setPage(1);
+                      }}
                     />
                   </div>
                 </div>
@@ -187,6 +205,7 @@ function Products() {
                             priceCategoriesNumbers.highestPrice
                           );
                         }
+                        setPage(1);
                       }}
                     />
                     <label class="btn btn-primary checked" for="btn-check">
@@ -222,6 +241,7 @@ function Products() {
                             priceCategoriesNumbers.midPrice2 - 1
                           );
                         }
+                        setPage(1);
                       }}
                     />
                     <label class="btn btn-primary" for="btn-check2">
@@ -255,6 +275,7 @@ function Products() {
                             priceCategoriesNumbers.midPrice1 - 1
                           );
                         }
+                        setPage(1);
                       }}
                     />
                     <label class="btn btn-primary" for="btn-check3">
@@ -276,9 +297,12 @@ function Products() {
                     class="form-check-input"
                     type="radio"
                     name="sold-filter-radio1"
-                    onClick={() =>
-                      setSoldFilter(soldCountCategoriesNumbers.highestSoldCount)
-                    }
+                    onClick={() => {
+                      setSoldFilter(
+                        soldCountCategoriesNumbers.highestSoldCount
+                      );
+                      setPage(1);
+                    }}
                     checked={
                       soldFilter === soldCountCategoriesNumbers.highestSoldCount
                     }
@@ -292,9 +316,10 @@ function Products() {
                     class="form-check-input"
                     type="radio"
                     name="sold-filter-radio2"
-                    onClick={() =>
-                      setSoldFilter(soldCountCategoriesNumbers.midSoldCount2)
-                    }
+                    onClick={() => {
+                      setSoldFilter(soldCountCategoriesNumbers.midSoldCount2);
+                      setPage(1);
+                    }}
                     checked={
                       soldFilter === soldCountCategoriesNumbers.midSoldCount2
                     }
@@ -308,9 +333,10 @@ function Products() {
                     class="form-check-input"
                     type="radio"
                     name="sold-filter-radio3"
-                    onClick={() =>
-                      setSoldFilter(soldCountCategoriesNumbers.midSoldCount1)
-                    }
+                    onClick={() => {
+                      setSoldFilter(soldCountCategoriesNumbers.midSoldCount1);
+                      setPage(1);
+                    }}
                     checked={
                       soldFilter === soldCountCategoriesNumbers.midSoldCount1
                     }
@@ -324,7 +350,10 @@ function Products() {
                     class="form-check-input"
                     type="radio"
                     name="sold-filter-radio4"
-                    onClick={() => setSoldFilter(0)}
+                    onClick={() => {
+                      setSoldFilter(0);
+                      setPage(1);
+                    }}
                     checked={soldFilter === 0}
                   />
                   <label class="form-check-label" for="sold-filter-radio4">
@@ -361,6 +390,7 @@ function Products() {
               title={filterState}
               onSelect={(e) => {
                 setFilterState(e);
+                setPage(1);
               }}
             >
               <Dropdown.Item
@@ -393,39 +423,70 @@ function Products() {
 
         {/**CREATE A 2 by 4 grid*/}
         <div className="container">
-          <div className="row">
+          <div className="row mb-5">
             {/**MAP EACH PRODUCT*/}
-            {sortedProducts.map((product) => (
-              <div className="col-md-4 mt-4 d-flex justify-content-center">
-                <div className="card ">
-                  <div className="col d-flex justify-content-center">
-                    <Link to={`/shop/${product.image}`}>
-                      <img
-                        className="card-img-top w-100"
-                        style={{
-                          maxWidth: "250px",
-                        }}
-                        src={`/products/${product.image}`}
-                        alt={`${product.name}`}
-                      />
-                    </Link>
+            {sortedProducts
+              .slice((page - 1) * ordersPerPage, page * ordersPerPage)
+              .map((product) => (
+                <div className="col-md-4 mt-3 d-flex justify-content-center">
+                  <div className="card ">
+                    <div className="col d-flex justify-content-center align-items-center">
+                      <Link to={`/shop/${product.image}`}>
+                        <div className="col d-flex justify-content-center p-0">
+                          <img
+                            className="card-img-top w-75 "
+                            style={{
+                              maxWidth: "250px",
+                            }}
+                            src={`/products/${product.image}`}
+                            alt={`${product.name}`}
+                          />
+                        </div>
+                      </Link>
+                    </div>
+                    <div className="card-body">
+                      <div className="col d-flex justify-content-center ">
+                        <h5 className="card-title m-0">{product.name}</h5>
+                      </div>
+                    </div>
+                    <ul class="list-group list-group-flush d-flex align-items-center">
+                      <li class="list-group-item w-100">
+                        <p className="d-flex justify-content-center mb-0 text-bold fw-bold">
+                          ${product.price}.00
+                        </p>
+                      </li>
+                      <li class="list-group-item ">
+                        Sold count: {product.soldCount}
+                      </li>
+                    </ul>
                   </div>
-                  <div className="card-body">
-                    <h5 className="card-title m-0">{product.name}</h5>
-                  </div>
-                  <ul class="list-group list-group-flush d-flex align-items-center">
-                    <li class="list-group-item w-100">
-                      <p className="d-flex justify-content-center mb-0 text-bold fw-bold">
-                        ${product.price}.00
-                      </p>
-                    </li>
-                    <li class="list-group-item ">
-                      Sold count: {product.soldCount}
-                    </li>
-                  </ul>
                 </div>
-              </div>
-            ))}
+              ))}
+          </div>
+          <div className="row">
+            <div className="col d-flex justify-content-center mt-3">
+              <ReactPaginate
+                nextLabel="Next"
+                onPageChange={paginate}
+                pageCount={Math.ceil(sortedProducts.length / ordersPerPage)}
+                previousLabel="Prev"
+                breakLabel="..."
+                marginPagesDisplayed={1}
+                pageRangeDisplayed={3}
+                pageClassName="page-item"
+                pageLinkClassName="page-link"
+                previousClassName="page-item"
+                previousLinkClassName="page-link"
+                nextClassName="page-item"
+                nextLinkClassName="page-link"
+                breakClassName="page-item"
+                breakLinkClassName="page-link"
+                containerClassName="pagination"
+                activeClassName="active"
+                renderOnZeroPageCount={null}
+                forcePage={page - 1}
+              />
+            </div>
           </div>
         </div>
       </div>
