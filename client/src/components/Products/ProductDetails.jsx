@@ -31,6 +31,7 @@ function ProductDetails() {
         console.error("Error fetching product:", error);
       }
     };
+    window.scrollTo(0, 0);
     fetchData();
   }, [id]);
 
@@ -81,7 +82,7 @@ function ProductDetails() {
           <div className="row mt-3">
             <div className="col">
               <Link to="/shop" className="w-25">
-                Go back
+                Back to shop
               </Link>
             </div>
           </div>

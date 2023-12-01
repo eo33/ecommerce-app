@@ -288,6 +288,26 @@ _Note: Added 1 week (W49) because admin feature takes additional time to complet
 
 ## Feature 8: Landing page, Deployment, Docs
 
+1. Create the landing page.
+2. Deploy the web app.
+3. Finish up the documentation.
+
+### User stories:
+
+1. As a user, I want to be able to see the landing page.
+2. As a user, I should be able to access the app from the web.
+3. As a developer, I want to see how the web app is built.
+
+#### Tasks:
+
+1. Create the landing page, and set up the fetch request to request for random products. (DONE)
+2. Deploy the web app.
+3. Finish up remianing docs.
+
+#### Work progress
+
+- 1 Dec 2023 - Finished the FE design, and implement it. Also made API to retrieve random product data.
+
 ## Reference
 
 ChatGPT link: https://chat.openai.com/c/a89c0192-59a3-4f8b-96ab-f0c0e0000752

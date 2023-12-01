@@ -205,4 +205,26 @@ router.get("/", async (req, res) => {
   }
 });
 
+// @route   GET products/random/:count
+// @desc    Get X (count) random number of products
+// @acess   public
+
+router.get("/random/:count", async (req, res) => {
+  try {
+    const count = parseInt(req.params.count, 10);
+
+    if (isNaN(count) || count <= 0) {
+      return res.status(400).json({ msg: "Invalid count parameter" });
+    }
+    const randomProducts = await Products.aggregate([
+      { $sample: { size: count } },
+    ]);
+
+    res.json(randomProducts);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).json({ msg: "Internal Server Error" });
+  }
+});
+
 module.exports = router;
