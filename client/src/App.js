@@ -51,6 +51,10 @@ function App() {
     validateToken();
   }, [token]);
 
+  if (authenticated === false) {
+    localStorage.clear("token");
+  }
+
   return (
     <div className="App">
       <BrowserRouter>

@@ -6,6 +6,7 @@ const app = express();
 const mongoose = require("mongoose");
 const config = require("config");
 const db = config.get("mongoURI");
+const path = require("path");
 
 // Import routes
 const auth = require("./routes/auth");
@@ -29,12 +30,6 @@ mongoose
 // Init middleware (to parse body in JSON format)
 app.use(express.json());
 
-// Setup main route
-app.get("/", (req, res) => {
-  console.log("Test");
-  res.json({ msg: "de" });
-});
-
 // Setup routes
 app.use("/auth", auth);
 app.use("/products", products);
@@ -43,6 +38,14 @@ app.use("/address", address);
 app.use("/orders", orders);
 app.use("/stats", stats);
 app.use("/users", users);
+
+// Serve static assets in production
+if (process.env.NODE_ENV == "production") {
+  app.use(expres.static("client/build"));
+  app.get("*", (req, res) => {
+    res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
+  });
+}
 
 // Setup port
 const PORT = process.env.PORT || 5000;
