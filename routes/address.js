@@ -2,6 +2,7 @@
 const express = require("express");
 const router = express.Router();
 const authToken = require("../middleware/authToken");
+const config = require("config");
 
 // Import mongoose model
 const Address = require("../model/address");
@@ -112,6 +113,19 @@ router.put("/select", authToken, async (req, res) => {
     );
 
     return res.json(result);
+  } catch (err) {
+    console.error(err.message);
+    return res.status(500).json({ msg: "request error" });
+  }
+});
+
+// @route   POST address/api_key
+// @desc    Change the main address of a user
+// @acess   private
+router.get("/api_key", authToken, async (req, res) => {
+  try {
+    const apiKey = config.get("googleApiKey");
+    res.json(apiKey);
   } catch (err) {
     console.error(err.message);
     return res.status(500).json({ msg: "request error" });
