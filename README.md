@@ -1,12 +1,25 @@
 # Ecommerce app
 
-I'm building an Ecommerce app using the MERN stack. There are 10 features I'm going to implement.
+I'm building an Ecommerce app using Monggo, Express, React and Node (MERN) stack. There are 8 features that are going to be implemented.
+Checkout the deployed app [here](https://desolate-reef-25578-0bcc1c956f71.herokuapp.com/).
 
-_Note: Feature, user stories and tasks are auto-generated using ChatGPT. Texts that are not auto generated are labelled with (Custom). Texts under side notes are written by me._
+## Table of content
+
+1. [Development plan](#development-plan)
+1. [Feature 1: User auth](#feature-1-user-authentication-and-authorization)
+1. [Feature 2: Product listings](#feature-2-product-listings)
+1. [Feature 3: Product details](#feature-3-product-details)
+1. [Feature 4: Shopping cart](#feature-4-shopping-cart)
+1. [Feature 5: Checkout](#feature-5-checkout)
+1. [Feature 6: Orders](#feature-6-orders)
+1. [Feature 7: Admin panel](#feature-7-admin-panel)
+1. [Feature 8: Landing pages, deployment & docs](#feature-8-landing-page-deployment-docs)
+1. [Bugs found](#bugs-found)
+1. [References](#reference)
 
 ## Development plan
 
-The ecommerce project is planned to be completed within 9 weeks (1 week break).
+The ecommerce project is planned to be completed within 8 weeks (1 week break), finishing in W47.
 
 | No  |                Feature                | W35 | W40 | W41 | W42 | W43 | W44 | W45 | W46 | W47 | W48 | W49 |
 | :-: | :-----------------------------------: | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
@@ -16,11 +29,12 @@ The ecommerce project is planned to be completed within 9 weeks (1 week break).
 |  4  |             Shopping Cart             |     |     |     |     | •   | •   |     | •   |     |     |     |
 |  5  |               Checkout                |     |     |     |     |     |     |     | •   | •   |     |     |
 |  6  |                Orders                 |     |     |     |     |     |     |     | •   | •   |     |     |
-|  7  |              Admin Panel              |     |     |     |     |     |     |     |     | •   | •   | •   |
+|  7  |              Admin Panel              |     |     |     |     |     |     |     |     | •   | •   |     |
 |  8  |    Landing page, Deployment, Docs     |     |     |     |     |     |     |     |     |     |     | •   |
 
-_Note: W35 starts from 28 Aug 2023_
-_Note: Added 1 week (W49) because admin feature takes additional time to complete_
+_Note 1: Week 35 (W35) starts from 28 Aug 2023_
+_Note 2: Added 2 weeks (W48 & W49) because some features took additional time to complete_
+_Note 3: Feature, user stories and tasks are partially generated with the help of ChatGPT._
 
 ### Packages used for backend (Express):
 
@@ -33,6 +47,7 @@ _Note: Added 1 week (W49) because admin feature takes additional time to complet
 - jsonwebtoken
 - Nodemon (dev only)
 - Multer (for file upload)
+- heroku cli (for deployment)
 
 ### Packages used for frontend (React):
 
@@ -44,6 +59,10 @@ _Note: Added 1 week (W49) because admin feature takes additional time to complet
 - React-image-magnify
 - React-google-autocomplete
 - React-paginate
+
+### Third party API:
+
+- Google places (for address lookup)
 
 ## Feature 1: User Authentication and Authorization
 
@@ -274,7 +293,7 @@ _Note: Added 1 week (W49) because admin feature takes additional time to complet
 1. [PRODUCTS] Implement functionality within the admin panel that allows administrators to modify and update existing product information seamlessly. (DONE)
 1. [PRODUCTS] Develop a user-friendly interface in the admin panel that facilitates the addition of new products with comprehensive details. (DONE)
 1. [ORDERS] Develop an order management system within the admin panel that allows administrators to handle incoming orders and track their statuses.(DONE)
-1. [USERS] Implement user management functionalities in the admin panel, enabling administrators to oversee and manage user accounts effectively.
+1. [USERS] Implement user management functionalities in the admin panel, enabling administrators to oversee and manage user accounts effectively. (DONE)
 
 #### Work progress
 
@@ -301,13 +320,19 @@ _Note: Added 1 week (W49) because admin feature takes additional time to complet
 #### Tasks:
 
 1. Create the landing page, and set up the fetch request to request for random products. (DONE)
-2. Deploy the web app.
-3. Finish up remianing docs.
+2. Deploy the web app. (DONE)
+3. Finish up remianing docs. (DONE)
 
 #### Work progress
 
 - 1 Dec 2023 - Finished the FE design, and implement it. Also made API to retrieve random product data.
+- 4 Dec 2023 - Finished the deployment to heroku. Uninstalled some dependencies for deployment to work.
+
+## Bugs found:
+
+1. When you reload / refresh the page from the address bar, the logo disappears.
 
 ## Reference
 
-ChatGPT link: https://chat.openai.com/c/a89c0192-59a3-4f8b-96ab-f0c0e0000752
+1. Postman requests for testing API: [here](./Ecommerce.postman_collection.json)
+1. ChatGPT link: https://chat.openai.com/c/a89c0192-59a3-4f8b-96ab-f0c0e0000752
