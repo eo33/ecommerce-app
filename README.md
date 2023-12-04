@@ -6,6 +6,15 @@ I'm building an Ecommerce app using Mongo, Express, React and Node (MERN) stack.
 1. Checkout the deployed app [here](https://desolate-reef-25578-0bcc1c956f71.herokuapp.com/).
 1. Watch a video explanation of the web app [here](https://www.loom.com/share/9e074a6cea434832a18eb4518fa9def6?sid=4e9e9e9d-53c4-4da3-85be-8c4a738c9741).
 
+## Account credential
+You can access the web app using the following credential:
+1. Regular account: 
+- Username: first_account@gmail.com
+- Password: 123456
+2. Admin account
+- Username: john_doe@gmail.com
+- Password: 123456
+
 ## Table of content
 
 1. [Development plan](#development-plan)
