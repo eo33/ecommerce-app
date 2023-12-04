@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 import Modal from "react-bootstrap/Modal";
 
 import axios from "axios";
-import ReactImageMagnify from "react-image-magnify";
 import "./Product.css";
 
 function ProductDetails() {
@@ -90,22 +89,11 @@ function ProductDetails() {
           <div className="row mt-2 pt-2">
             {/*COLUMN 1: PRODUCT IMAGE*/}
             <div className="col-md-4">
-              <div className="img-thumbnail border-2 w-100">
-                <ReactImageMagnify
-                  {...{
-                    smallImage: {
-                      alt: "Wristwatch by Ted Baker London",
-                      isFluidWidth: true,
-                      src: `/products/${id}`,
-                    },
-                    largeImage: {
-                      src: `/products/${id}`,
-                      width: 2000,
-                      height: 2000,
-                    },
-                    isHintEnabled: true,
-                    shouldHideHintAfterFirstActivation: true,
-                  }}
+              <div className="img-thumbnail ">
+                <img
+                  src={`/products/${id}`}
+                  className="w-100"
+                  alt="a meaningful text"
                 />
               </div>
             </div>
