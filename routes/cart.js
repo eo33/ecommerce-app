@@ -6,8 +6,6 @@ const mongoose = require("mongoose");
 
 // Import mongoose model
 const Cart = require("../model/cart");
-//const User = require("../model/user");
-//const Product = require("../model/Products");
 
 // API routes
 
