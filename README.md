@@ -1,7 +1,10 @@
 # Ecommerce app
 
-I'm building an Ecommerce app using Monggo, Express, React and Node (MERN) stack. There are 8 features that are going to be implemented.
-Checkout the deployed app [here](https://desolate-reef-25578-0bcc1c956f71.herokuapp.com/).
+I'm building an Ecommerce app using Mongo, Express, React and Node (MERN) stack.
+
+1. There are 8 features that are going to be implemented.
+1. Checkout the deployed app [here](https://desolate-reef-25578-0bcc1c956f71.herokuapp.com/).
+1. Watch a video explanation of the web app [here](https://www.loom.com/share/9e074a6cea434832a18eb4518fa9def6?sid=4e9e9e9d-53c4-4da3-85be-8c4a738c9741).
 
 ## Table of content
 
@@ -97,11 +100,11 @@ _Note 3: Feature, user stories and tasks are partially generated with the help o
 
 - 29 Aug 2023: Wrote user stories, setup local environemnt, and configured MongoDB Atlas Cluster.
 - 30 Aug 2023: Setup express server: register route, ignore node.
-- 31 Aug 2023: Setup mongoose and completed register route request
+- 31 Aug 2023: Setup mongoose and completed register route request.
 - 01 Sept 2023: Implemented server side validation using express-validator, and design UI using Figma—[**Link to design**](https://www.figma.com/file/SeMCwhaQm3TieAG5Eo7COL/Ecommerce?type=design&node-id=0%3A1&mode=design&t=VHVPkV9jfHeoMaRj-1). Installed concurrently to run express and react together.
-- 02 Sept 2023: Learning how to implement authentication
-- 02 Oct 2023: Implemented Bcrypt for user registration
-- 03 Oct 2023: Implemented JWT for authentication
+- 02 Sept 2023: Learned how to implement authentication.
+- 02 Oct 2023: Implemented Bcrypt for user registration.
+- 03 Oct 2023: Implemented JWT for authentication.
 - 04 Oct 2023: Created user login API endpoint.
 - 05 Oct 2023: Implemented protected route and useContext API.
 
