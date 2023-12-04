@@ -330,7 +330,7 @@ _Note 3: Feature, user stories and tasks are partially generated with the help o
 
 ## Bugs found:
 
-1. When you reload / refresh the page from the address bar, the logo disappears.
+1. The logo disappears When you reload or refresh the page from the address bar, .
 
 ## Reference
 
