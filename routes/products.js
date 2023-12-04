@@ -5,7 +5,7 @@ const authToken = require("../middleware/authToken");
 const authTokenAdmin = require("../middleware/authTokenAdmin");
 
 // Import mongoose model
-const Products = require("../model/Products");
+const Products = require("../model/products");
 
 // Multer: libraries
 const path = require("path");

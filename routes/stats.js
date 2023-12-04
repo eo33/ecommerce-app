@@ -6,7 +6,7 @@ const authTokenAdmin = require("../middleware/authTokenAdmin");
 // Models
 const Orders = require("../model/orders");
 const Users = require("../model/user");
-const Products = require("../model/Products");
+const Products = require("../model/products");
 
 // @route   GET stats/dashboard
 // @desc    GET all the dashboard statistics, including order (pending, delivery, complete),
