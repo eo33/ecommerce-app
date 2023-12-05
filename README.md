@@ -3,7 +3,7 @@
 I'm building an Ecommerce app using Mongo, Express, React and Node (MERN) stack.
 
 1. There are 8 features that are going to be implemented.
-1. Checkout the deployed app [here](https://desolate-reef-25578-0bcc1c956f71.herokuapp.com/).
+1. Check out the deployed app [here](https://desolate-reef-25578-0bcc1c956f71.herokuapp.com/)!
 1. Watch a video explanation of the web app [here](https://www.loom.com/share/9e074a6cea434832a18eb4518fa9def6?sid=4e9e9e9d-53c4-4da3-85be-8c4a738c9741).
 
 ## Account credential demo
