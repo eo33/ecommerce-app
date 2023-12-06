@@ -206,8 +206,12 @@ function AdminOrders() {
                 {order.items.map((item) => (
                   <div className="row">
                     <div className="col">
-                      {item.product.name} x {item.quantity} @ $
-                      {item.product.price}
+                      {item.product && (
+                        <>
+                          {item.product.name} x {item.quantity} @ $
+                          {item.product.price}
+                        </>
+                      )}
                     </div>
                   </div>
                 ))}
