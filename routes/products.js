@@ -222,7 +222,7 @@ router.post(
  *       200:
  *         description: Successful response
  *       403:
- *         description: Unauthorized, reuqires adminitrator privilege
+ *         description: Unauthorized, reuqires adminitrator privilege.
  */
 
 router.delete("/:image", authTokenAdmin, async (req, res) => {
