@@ -347,10 +347,6 @@ _Note 3: Feature, user stories and tasks are partially generated with the help o
 - 1 Dec 2023 - Finished the FE design, and implement it. Also made API to retrieve random product data.
 - 4 Dec 2023 - Finished the deployment to heroku. Uninstalled some dependencies for deployment to work.
 
-## Bugs found:
-
-1. The logo disappears When you reload or refresh the page from the address bar, .
-
 ## Reference
 
 1. Postman requests for testing API: [here](./Ecommerce.postman_collection.json)
