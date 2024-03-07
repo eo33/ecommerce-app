@@ -11,7 +11,7 @@ const Users = require("../model/user");
  * /users/get_all/{page}:
  *   get:
  *     summary: Get all user's details, limit by page.
- *     description: Get the user's details, such as _id_, _name_, _email_,_password_ and _admin status_. Also return the total number of users, admin users and regular users. Data will be limited by page number, and each page only returns 14 users. Requires administrator's token.
+ *     description: Get the user's details, such as _id_, _name_, _email_,_password_ and _admin status_. Also return the total number of _totalUsers_, _adminUsers_, and _regularUsers_. Each page will show 20 users. Requires administrator's token.
  *     tags:
  *       - Auth
  *     security:
@@ -21,12 +21,13 @@ const Users = require("../model/user");
  *         name: page
  *         schema:
  *           type: integer
+ *         description: The page number. It specifies which 20 users will be shown (e.g. page 1 returns the first 20, page 2 returns the next 20, etc).
  *         required: true
  *     responses:
  *       200:
  *         description: Successful response
  *       403:
- *         description: Unauthorized, require administrator privilege
+ *         description: Unauthorized, requires administrator privilege
  */
 
 router.get("/get_all/:page", authTokenAdmin, async (req, res) => {
@@ -70,7 +71,7 @@ router.get("/get_all/:page", authTokenAdmin, async (req, res) => {
  *     security:
  *       - APIKey: []
  *     requestBody:
- *       description: JSON containing the new values for the fields. Some fields are required, see schema for more details.
+ *       description: JSON containing the _userId_, _newName_, _newEmail_, and _newAdminStatus_ to update the current value of the fields. Some field(s) are required. See schema for more details.
  *       required: true
  *       content:
  *         application/json:

@@ -57,9 +57,117 @@ const checkFile = async (err, req, res, next) => {
 
 // API Routes
 
+// @route   GET products
+// @desc    Get the list of products from MongoDB
+// @acess   public
+
+/**
+ * @swagger
+ * /products:
+ *   get:
+ *     summary: Get the list of available products and it's details.
+ *     description: Get the _id_, _name_, _image_, _price_, _description_, and _soldCount_ of all of the products.
+ *     tags:
+ *       - Products
+ *     responses:
+ *       200:
+ *         description: Successful response
+ */
+router.get("/", async (req, res) => {
+  try {
+    const products = await Products.find({});
+    res.send(products);
+  } catch (err) {
+    console.error(err.message);
+    return res.status(500).json({ msg: "request error" });
+  }
+});
+
+// @route   GET products/:filename
+// @desc    Get the image of the product from filesystem
+// @acess   public
+
+/**
+ * @swagger
+ * /products/{filename}:
+ *   get:
+ *     summary: Get the image of the product.
+ *     description: Get the image of the specified product in the parameter.
+ *     tags:
+ *       - Products
+ *     parameters:
+ *       - in: path
+ *         name: filename
+ *         schema:
+ *           type: string
+ *         description: The filename of the product. This name is also the same as the name of the file in the directory.
+ *         required: true
+ *     responses:
+ *       200:
+ *         description: Successful response
+ *       403:
+ *         description: Unauthorized, reuqires adminitrator privilege
+ */
+router.get("/:filename", async (req, res) => {
+  try {
+    const filename = req.params.filename;
+    const uploadDirectory = path.join(__dirname, "../uploads");
+    res.sendFile(path.join(uploadDirectory, `${filename}`));
+  } catch (err) {
+    console.error(err.message);
+    return res.status(500).json({ msg: "request error" });
+  }
+});
+
 // @route   POST products/upload
 // @desc    Upload item name, images, price, description and sold count
 // @acess   private
+/**
+ * @swagger
+ * /products/upload:
+ *   post:
+ *     summary: Upload a product as an admin.
+ *     description: Upload a product, including its _name_, _image_, _price_, _description_, and _soldCount_.
+ *     tags:
+ *       - Products
+ *     security:
+ *       - APIKey: []
+ *     requestBody:
+ *       description:
+ *         Form data containing the following fields to create a new product.
+ *         All fields are required.
+ *       required: true
+ *       content:
+ *         multipart/form-data:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               name:
+ *                 type: string
+ *                 description: The name of the item (required).
+ *                 example: "sample product"
+ *               image:
+ *                 type: file
+ *                 description:
+ *                   Local path to image. Image will be uploaded to the backend filesystem using _Multer_.
+ *                   Can only accept files less than 1MB (1024x1024px) and must be an image file (required).
+ *                 example: "/C:/Users/Documents/Sample_Directory/Sample_Table.webp"
+ *               price:
+ *                 type: integer
+ *                 description: The price of the item (required).
+ *                 example: 50
+ *               description:
+ *                 type: string
+ *                 description: The description of the item (required).
+ *               soldCount:
+ *                 type: integer
+ *                 description: The current sold count of the item (required).
+ *     responses:
+ *       200:
+ *         description: Successful response
+ *       403:
+ *         description: Unauthorized, reuqires adminitrator privilege
+ */
 
 router.post(
   "/upload",
@@ -92,6 +200,30 @@ router.post(
 // @route   DELETE products/:image
 // @desc    Delete a product image and it's details
 // @acess   private
+
+/**
+ * @swagger
+ * /products/{filename}:
+ *   delete:
+ *     summary: Delete the product
+ *     description: Delete the product by its filename. Requires administrator's privilege.
+ *     tags:
+ *       - Products
+ *     security:
+ *       - APIKey: []
+ *     parameters:
+ *       - in: path
+ *         name: filename
+ *         schema:
+ *           type: string
+ *         description: The filename of the product. This name is also the same as the name of the file in the directory.
+ *         required: true
+ *     responses:
+ *       200:
+ *         description: Successful response
+ *       403:
+ *         description: Unauthorized, reuqires adminitrator privilege
+ */
 
 router.delete("/:image", authTokenAdmin, async (req, res) => {
   try {
@@ -161,21 +293,6 @@ router.put(
   }
 );
 
-// @route   GET products/:filename
-// @desc    Get the image of the product from filesystem
-// @acess   private
-
-router.get("/:filename", async (req, res) => {
-  try {
-    const filename = req.params.filename;
-    const uploadDirectory = path.join(__dirname, "../uploads");
-    res.sendFile(path.join(uploadDirectory, `${filename}`));
-  } catch (err) {
-    console.error(err.message);
-    return res.status(500).json({ msg: "request error" });
-  }
-});
-
 // @route   GET products/details/:filename
 // @desc    Get the product details of a file
 // @acess   private
@@ -185,20 +302,6 @@ router.get("/details/:filename", async (req, res) => {
     const filename = req.params.filename;
     const selectedProduct = await Products.findOne({ image: filename });
     res.json(selectedProduct);
-  } catch (err) {
-    console.error(err.message);
-    return res.status(500).json({ msg: "request error" });
-  }
-});
-
-// @route   GET products
-// @desc    Get the list of products from MongoDB
-// @acess   public
-
-router.get("/", async (req, res) => {
-  try {
-    const products = await Products.find({});
-    res.send(products);
   } catch (err) {
     console.error(err.message);
     return res.status(500).json({ msg: "request error" });
