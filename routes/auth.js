@@ -14,9 +14,40 @@ const User = require("../model/user");
 // Import middleware functions
 const findUser = require("../middleware/findUser");
 
-// @route   POST auth/register
-// @desc    Register user and get token
-// @acess   Public
+/**
+ * @swagger
+ * /auth/register:
+ *   post:
+ *     summary: Register user and get it's token
+ *     description: Register a user with the _name_, _email_, _password_, and _admin status_. This end point will return the authentication token (JWT) link to this account.
+ *     tags:
+ *       - Auth
+ *     requestBody:
+ *       description: JSON containing the _name_, _email_, _password_, and _admin status_ to create a new user. All fields are required.
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               name:
+ *                 type: string
+ *                 example: john doe
+ *               email:
+ *                 type: string
+ *                 example: john_doe12@gmail.com
+ *               password:
+ *                 type: string
+ *                 example: 123456
+ *               admin:
+ *                 type: boolean
+ *                 example: false
+ *     responses:
+ *       200:
+ *         description: Successful response
+ *       400:
+ *         description: See message decription
+ */
 
 router.post(
   "/register",
@@ -79,6 +110,34 @@ router.post(
 // @route   POST auth/login
 // @desc    Login user and get token
 // @acess   Public
+/**
+ * @swagger
+ * /auth/login:
+ *   post:
+ *     summary: Login to an existing acocunt and get it's token.
+ *     description: Login to an account using the _email_ and _password_. It will also return the user's details.
+ *     tags:
+ *       - Auth
+ *     requestBody:
+ *       description: JSON containing _email_ and _password_ to login to an account. All fields are required.
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               email:
+ *                 type: string
+ *                 example: john_doe@gmail.com
+ *               password:
+ *                 type: string
+ *                 example: 123456
+ *     responses:
+ *       200:
+ *         description: Successful response
+ *       400:
+ *         description: See message decription
+ */
 
 router.post(
   "/login",

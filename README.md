@@ -7,11 +7,16 @@ I'm building an Ecommerce app using Mongo, Express, React and Node (MERN) stack.
 1. Watch a video explanation of the web app [here](https://www.loom.com/share/9e074a6cea434832a18eb4518fa9def6?sid=4e9e9e9d-53c4-4da3-85be-8c4a738c9741).
 
 ## Account credential demo
+
 You can access the web app using the following credential:
-1. Regular account: 
+
+1. Regular account:
+
 - Username: first_account@gmail.com
 - Password: 123456
+
 2. Admin account
+
 - Username: john_doe@gmail.com
 - Password: 123456
 
@@ -60,6 +65,8 @@ _Note 3: Feature, user stories and tasks are partially generated with the help o
 - Nodemon (dev only)
 - Multer (for file upload)
 - heroku cli (for deployment)
+- swagger-jsdoc (for generateing docs)
+- swagger-ui-express (to server swagger ui)
 
 ### Packages used for frontend (React):
 
