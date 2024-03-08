@@ -9,9 +9,73 @@ const Cart = require("../model/cart");
 
 // API routes
 
+// @route   GET cart/items
+// @desc    Get the cart items of the logged in user
+// @acess   private
+/**
+ * @swagger
+ * /cart/items:
+ *   get:
+ *     summary: Get cart items.
+ *     description: Get the cart items of the logged in user.
+ *     tags:
+ *       - Cart
+ *     security:
+ *       - APIKey: []
+ *     responses:
+ *       200:
+ *         description: Successful response
+ */
+router.get("/items", authToken, async (req, res) => {
+  try {
+    //Get the user id from JWT payload
+    const userID = req.payload.user.id;
+    // Get the user cart
+    const cartData = await Cart.findOne({ user: userID })
+      .populate("user", ["name", "email"])
+      .populate("items.product");
+
+    res.json(cartData);
+  } catch (err) {
+    console.error(err.message);
+    return res.status(500).json({ msg: "request error" });
+  }
+});
+
 // @route   POST cart/add
 // @desc    Add item to cart
 // @acess   private
+/**
+ * @swagger
+ * /cart/add:
+ *   post:
+ *     summary: Add an item type to cart.
+ *     description: Add an item type to the cart of the logged in user. The item and it's quantity are specified in the request body.
+ *     tags:
+ *       - Cart
+ *     security:
+ *       - APIKey: []
+ *     requestBody:
+ *       description:
+ *         JSON containing the _productId_ and the _quantity_ of the item to add. All fields are required. See schema for more details.
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               productId:
+ *                 type: string
+ *                 description: The id of the item. (required).
+ *                 example: "6555a1f49feeac7dccd9b1ee"
+ *               quantity:
+ *                 type: integer
+ *                 description: The quantity of the item to add (required).
+ *                 example: "40"
+ *     responses:
+ *       200:
+ *         description: Successful response
+ */
 
 router.post("/add", authToken, async (req, res) => {
   try {
@@ -52,52 +116,40 @@ router.post("/add", authToken, async (req, res) => {
   }
 });
 
-// @route   GET cart/items
-// @desc    Get the cart items of the logged in user
-// @acess   private
-
-router.get("/items", authToken, async (req, res) => {
-  try {
-    //Get the user id from JWT payload
-    const userID = req.payload.user.id;
-    // Get the user cart
-    const cartData = await Cart.findOne({ user: userID })
-      .populate("user", ["name", "email"])
-      .populate("items.product");
-
-    res.json(cartData);
-  } catch (err) {
-    console.error(err.message);
-    return res.status(500).json({ msg: "request error" });
-  }
-});
-
-// @route   GET cart/delete
-// @desc    Delete the cart item(s) of the logged in user
-// @acess   private
-router.delete("/delete", authToken, async (req, res) => {
-  try {
-    //Get the user id from JWT payload
-    const userID = req.payload.user.id;
-    //Get the items to delete from the request body
-    const items = req.body.items;
-
-    const cartData = await Cart.findOneAndUpdate(
-      { user: userID },
-      { $pull: { items: { _id: { $in: items } } } },
-      { new: true }
-    );
-    return res.json(cartData);
-  } catch (err) {
-    console.error(err.message);
-    return res.status(500).json({ msg: "request error" });
-  }
-});
-
 // @route   PUT cart/edit
 // @desc    Edit the product quantity by the specified amount
 // @acess   private
-
+/**
+ * @swagger
+ * /cart/edit:
+ *   put:
+ *     summary: Edit the quantity of an item.
+ *     description: Edit the quantity of an item inside the cart of the logged in user. The item and it's quantity are specified in the request body.
+ *     tags:
+ *       - Cart
+ *     security:
+ *       - APIKey: []
+ *     requestBody:
+ *       description:
+ *         JSON containing the _productId_ and the _quantity_ of the item to edit. All fields are required. See schema for more details.
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               productId:
+ *                 type: string
+ *                 description: The id of the item. (required).
+ *                 example: "6555a1f49feeac7dccd9b1ee"
+ *               quantity:
+ *                 type: integer
+ *                 description: The quantity of the item to add (required).
+ *                 example: "40"
+ *     responses:
+ *       200:
+ *         description: Successful response
+ */
 router.put("/edit", authToken, async (req, res) => {
   try {
     //Get the user id from JWT payload
@@ -121,6 +173,55 @@ router.put("/edit", authToken, async (req, res) => {
     }
 
     res.json(updatedCart);
+  } catch (err) {
+    console.error(err.message);
+    return res.status(500).json({ msg: "request error" });
+  }
+});
+
+// @route   GET cart/delete
+// @desc    Delete the cart item(s) of the logged in user
+// @acess   private
+/**
+ * @swagger
+ * /cart/delete:
+ *   delete:
+ *     summary: Delete item(s) inside the cart.
+ *     description: Delete the item(s) inside the cart of the logged in user. The item(s) are specified in the request body.
+ *     tags:
+ *       - Cart
+ *     security:
+ *       - APIKey: []
+ *     requestBody:
+ *       description:
+ *         JSON containing the _items_, which contains an array of the item(s) ID inside the cart to delete.
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               items:
+ *                 type: array
+ *                 description: An array of the item(s) ID inside the cart. Each item inside a cart will have a unique ID. This is different from the item id. (required).
+ *                 example: ["65eabef4d53c0d67eea62c54"]
+ *     responses:
+ *       200:
+ *         description: Successful response
+ */
+router.delete("/delete", authToken, async (req, res) => {
+  try {
+    //Get the user id from JWT payload
+    const userID = req.payload.user.id;
+    //Get the items to delete from the request body
+    const items = req.body.items;
+
+    const cartData = await Cart.findOneAndUpdate(
+      { user: userID },
+      { $pull: { items: { _id: { $in: items } } } },
+      { new: true }
+    );
+    return res.json(cartData);
   } catch (err) {
     console.error(err.message);
     return res.status(500).json({ msg: "request error" });
