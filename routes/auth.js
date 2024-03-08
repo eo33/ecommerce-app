@@ -23,7 +23,7 @@ const findUser = require("../middleware/findUser");
  *     tags:
  *       - Auth
  *     requestBody:
- *       description: JSON containing the _name_, _email_, _password_, and _admin status_ to create a new user. All fields are required.
+ *       description: JSON containing the _name_, _email_, _password_, and _admin status_ to create a new user. See description for more details.
  *       required: true
  *       content:
  *         application/json:

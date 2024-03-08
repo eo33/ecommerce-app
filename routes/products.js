@@ -83,42 +83,6 @@ router.get("/", async (req, res) => {
   }
 });
 
-// @route   GET products/:filename
-// @desc    Get the image of the product from filesystem
-// @acess   public
-
-/**
- * @swagger
- * /products/{filename}:
- *   get:
- *     summary: Get the image of the product.
- *     description: Get the image of the specified product in the parameter.
- *     tags:
- *       - Products
- *     parameters:
- *       - in: path
- *         name: filename
- *         schema:
- *           type: string
- *         description: The filename of the product. This name is also the same as the name of the file in the directory.
- *         required: true
- *     responses:
- *       200:
- *         description: Successful response
- *       403:
- *         description: Unauthorized, reuqires adminitrator privilege
- */
-router.get("/:filename", async (req, res) => {
-  try {
-    const filename = req.params.filename;
-    const uploadDirectory = path.join(__dirname, "../uploads");
-    res.sendFile(path.join(uploadDirectory, `${filename}`));
-  } catch (err) {
-    console.error(err.message);
-    return res.status(500).json({ msg: "request error" });
-  }
-});
-
 // @route   POST products/upload
 // @desc    Upload item name, images, price, description and sold count
 // @acess   private
@@ -134,7 +98,7 @@ router.get("/:filename", async (req, res) => {
  *       - APIKey: []
  *     requestBody:
  *       description:
- *         Form data containing the following fields to create a new product.
+ *         Multipart form data containing the following fields to create a new product.
  *         All fields are required.
  *       required: true
  *       content:
@@ -197,16 +161,52 @@ router.post(
   }
 );
 
-// @route   DELETE products/:image
-// @desc    Delete a product image and it's details
-// @acess   private
+// @route   GET products/:filename
+// @desc    Get the image of the product from filesystem
+// @acess   public
 
 /**
  * @swagger
  * /products/{filename}:
- *   delete:
- *     summary: Delete the product
- *     description: Delete the product by its filename. Requires administrator's privilege.
+ *   get:
+ *     summary: Get the image of the product.
+ *     description: Get the image of the specified product in the parameter.
+ *     tags:
+ *       - Products
+ *     parameters:
+ *       - in: path
+ *         name: filename
+ *         schema:
+ *           type: string
+ *         description: The filename of the product. This name is also the same as the name of the file in the directory.
+ *         required: true
+ *         example: 1700110836527.webp
+ *     responses:
+ *       200:
+ *         description: Successful response
+ *       403:
+ *         description: Unauthorized, reuqires adminitrator privilege
+ */
+router.get("/:filename", async (req, res) => {
+  try {
+    const filename = req.params.filename;
+    const uploadDirectory = path.join(__dirname, "../uploads");
+    res.sendFile(path.join(uploadDirectory, `${filename}`));
+  } catch (err) {
+    console.error(err.message);
+    return res.status(500).json({ msg: "request error" });
+  }
+});
+
+// @route   PUT products/:image
+// @desc    Update a product image and it's details
+// @acess   private
+/**
+ * @swagger
+ * /products/{filename}:
+ *   put:
+ *     summary: Update a product image and it's details.
+ *     description: Edit a product's details, such as the _name_, _image_, _price_, _description_, and _soldCount_. Product is specified in the filename parameter.
  *     tags:
  *       - Products
  *     security:
@@ -218,37 +218,41 @@ router.post(
  *           type: string
  *         description: The filename of the product. This name is also the same as the name of the file in the directory.
  *         required: true
+ *         example: 1700110836527.webp
+ *     requestBody:
+ *       description:
+ *         Multipart form data containing the following fields to create a new product. See description for more details.
+ *       content:
+ *         multipart/form-data:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               name:
+ *                 type: string
+ *                 description: The **new** name of the item.
+ *                 example: "new product"
+ *               image:
+ *                 type: file
+ *                 description:
+ *                   Local path to the **new** image. Image will be uploaded to the backend filesystem using _Multer_.
+ *                   Can only accept files less than 1MB (1024x1024px) and must be an image file.
+ *                 example: "/C:/Users/Documents/Sample_Directory/Sample_Table.webp"
+ *               price:
+ *                 type: integer
+ *                 description: The **new** price of the item.
+ *                 example: 50
+ *               description:
+ *                 type: string
+ *                 description: The **new** description of the item.
+ *               soldCount:
+ *                 type: integer
+ *                 description: The **new** sold count of the item.
  *     responses:
  *       200:
  *         description: Successful response
  *       403:
- *         description: Unauthorized, reuqires adminitrator privilege.
+ *         description: Unauthorized, reuqires adminitrator privilege
  */
-
-router.delete("/:image", authTokenAdmin, async (req, res) => {
-  try {
-    const image = req.params.image;
-    // Delete from MongoDB
-    await Products.findOneAndDelete({ image: image });
-    // Delete from File system
-    const filePath = path.join(__dirname, "..", "uploads", image);
-    fs.unlink(filePath, (err) => {
-      if (err) {
-        console.error(err);
-        return res.status(500).json({ msg: "Error deleting file" });
-      }
-      console.log(`File ${image} deleted`);
-      return res.status(200).json({ msg: "Item deleted" });
-    });
-  } catch (err) {
-    console.error(err.message);
-    return res.status(500).json({ msg: "request error" });
-  }
-});
-
-// @route   PUT products/:image
-// @desc    Update a product image and it's details
-// @acess   private
 
 router.put(
   "/:image",
@@ -293,10 +297,79 @@ router.put(
   }
 );
 
+// @route   DELETE products/:image
+// @desc    Delete a product image and it's details
+// @acess   private
+
+/**
+ * @swagger
+ * /products/{filename}:
+ *   delete:
+ *     summary: Delete the product
+ *     description: Delete the product by its filename. Requires administrator's privilege.
+ *     tags:
+ *       - Products
+ *     security:
+ *       - APIKey: []
+ *     parameters:
+ *       - in: path
+ *         name: filename
+ *         schema:
+ *           type: string
+ *         description: The filename of the product. This name is also the same as the name of the file in the directory.
+ *         required: true
+ *         example: 1701574147387.webp
+ *     responses:
+ *       200:
+ *         description: Successful response
+ *       403:
+ *         description: Unauthorized, reuqires adminitrator privilege.
+ */
+
+router.delete("/:image", authTokenAdmin, async (req, res) => {
+  try {
+    const image = req.params.image;
+    // Delete from MongoDB
+    await Products.findOneAndDelete({ image: image });
+    // Delete from File system
+    const filePath = path.join(__dirname, "..", "uploads", image);
+    fs.unlink(filePath, (err) => {
+      if (err) {
+        console.error(err);
+        return res.status(500).json({ msg: "Error deleting file" });
+      }
+      console.log(`File ${image} deleted`);
+      return res.status(200).json({ msg: "Item deleted" });
+    });
+  } catch (err) {
+    console.error(err.message);
+    return res.status(500).json({ msg: "request error" });
+  }
+});
+
 // @route   GET products/details/:filename
 // @desc    Get the product details of a file
 // @acess   private
-
+/**
+ * @swagger
+ * /products/details/{filename}:
+ *   get:
+ *     summary: Get the details of a product.
+ *     description: Get the details of a product from the filename.
+ *     tags:
+ *       - Products
+ *     parameters:
+ *       - in: path
+ *         name: filename
+ *         schema:
+ *           type: string
+ *         description: The filename of the product. This name is also the same as the name of the file in the directory.
+ *         required: true
+ *         example: 1700110836527.webp
+ *     responses:
+ *       200:
+ *         description: Successful response
+ */
 router.get("/details/:filename", async (req, res) => {
   try {
     const filename = req.params.filename;
@@ -311,7 +384,26 @@ router.get("/details/:filename", async (req, res) => {
 // @route   GET products/random/:count
 // @desc    Get X (count) random number of products
 // @acess   public
-
+/**
+ * @swagger
+ * /products/random/{count}:
+ *   get:
+ *     summary: Get random products
+ *     description: Get _count_ number of random products for display on the landing page.
+ *     tags:
+ *       - Products
+ *     parameters:
+ *       - in: path
+ *         name: count
+ *         schema:
+ *           type: integer
+ *         description: The number of random products.
+ *         required: true
+ *         example: 3
+ *     responses:
+ *       200:
+ *         description: Successful response
+ */
 router.get("/random/:count", async (req, res) => {
   try {
     const count = parseInt(req.params.count, 10);

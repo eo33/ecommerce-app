@@ -8,60 +8,6 @@ const Users = require("../model/user");
 
 /**
  * @swagger
- * /users/get_all/{page}:
- *   get:
- *     summary: Get all user's details, limit by page.
- *     description: Get the user's details, such as _id_, _name_, _email_,_password_ and _admin status_. Also return the total number of _totalUsers_, _adminUsers_, and _regularUsers_. Each page will show 20 users. Requires administrator's token.
- *     tags:
- *       - Auth
- *     security:
- *       - APIKey: []
- *     parameters:
- *       - in: path
- *         name: page
- *         schema:
- *           type: integer
- *         description: The page number. It specifies which 20 users will be shown (e.g. page 1 returns the first 20, page 2 returns the next 20, etc).
- *         required: true
- *     responses:
- *       200:
- *         description: Successful response
- *       403:
- *         description: Unauthorized, requires administrator privilege
- */
-
-router.get("/get_all/:page", authTokenAdmin, async (req, res) => {
-  const page = req.params.page;
-  const pageSize = 20; // Number of users per page
-
-  try {
-    // Skip users based on the page number and limit the results to pageSize
-    const usersOnPage = await Users.find({})
-      .skip((page - 1) * pageSize)
-      .limit(pageSize);
-
-    // Get the total number of users (total, admin, regular)
-    const totalUsers = await Users.countDocuments({});
-    const adminUsers = await Users.countDocuments({ admin: true });
-    const regularUsers = totalUsers - adminUsers;
-
-    // Prepare the response object
-    const response = {
-      totalUsers,
-      adminUsers,
-      regularUsers,
-      users: usersOnPage,
-    };
-
-    res.json(response);
-  } catch (err) {
-    console.error(err.message);
-    return res.status(500).json({ msg: "request error" });
-  }
-});
-
-/**
- * @swagger
  * /users/edit:
  *   post:
  *     summary: Edit user's details by ID.
@@ -115,3 +61,57 @@ router.post("/edit", authTokenAdmin, async (req, res) => {
 });
 
 module.exports = router;
+
+/**
+ * @swagger
+ * /users/get_all/{page}:
+ *   get:
+ *     summary: Get all user's details, limit by page.
+ *     description: Get the user's details, such as _id_, _name_, _email_,_password_ and _admin status_. Also return the total number of _totalUsers_, _adminUsers_, and _regularUsers_. Each page will show 20 users. Requires administrator's privilege.
+ *     tags:
+ *       - Auth
+ *     security:
+ *       - APIKey: []
+ *     parameters:
+ *       - in: path
+ *         name: page
+ *         schema:
+ *           type: integer
+ *         description: The page number. It specifies which 20 users will be shown (e.g. page 1 returns the first 20, page 2 returns the next 20, etc).
+ *         required: true
+ *     responses:
+ *       200:
+ *         description: Successful response
+ *       403:
+ *         description: Unauthorized, requires administrator privilege
+ */
+
+router.get("/get_all/:page", authTokenAdmin, async (req, res) => {
+  const page = req.params.page;
+  const pageSize = 20; // Number of users per page
+
+  try {
+    // Skip users based on the page number and limit the results to pageSize
+    const usersOnPage = await Users.find({})
+      .skip((page - 1) * pageSize)
+      .limit(pageSize);
+
+    // Get the total number of users (total, admin, regular)
+    const totalUsers = await Users.countDocuments({});
+    const adminUsers = await Users.countDocuments({ admin: true });
+    const regularUsers = totalUsers - adminUsers;
+
+    // Prepare the response object
+    const response = {
+      totalUsers,
+      adminUsers,
+      regularUsers,
+      users: usersOnPage,
+    };
+
+    res.json(response);
+  } catch (err) {
+    console.error(err.message);
+    return res.status(500).json({ msg: "request error" });
+  }
+});
