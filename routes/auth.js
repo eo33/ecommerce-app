@@ -47,6 +47,9 @@ const findUser = require("../middleware/findUser");
  *         description: Successful response
  *       400:
  *         description: See message decription
+ *     externalDocs:
+ *       description: Learn more about JSON Web Token (JWT).
+ *       url: https://auth0.com/docs/secure/tokens/json-web-tokens
  */
 
 router.post(
@@ -148,6 +151,9 @@ router.post(
  *         description: Successful response
  *       400:
  *         description: See message decription
+ *     externalDocs:
+ *       description: Learn more about JSON Web Token (JWT).
+ *       url: https://auth0.com/docs/secure/tokens/json-web-tokens
  */
 
 router.post(
