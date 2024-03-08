@@ -76,7 +76,6 @@ router.get("/items", authToken, async (req, res) => {
  *       200:
  *         description: Successful response
  */
-
 router.post("/add", authToken, async (req, res) => {
   try {
     //Get the user id from JWT payload
