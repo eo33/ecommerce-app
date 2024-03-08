@@ -47,6 +47,9 @@ const findUser = require("../middleware/findUser");
  *         description: Successful response
  *       400:
  *         description: See message decription
+ *     externalDocs:
+ *       description: Learn more about JSON Web Token (JWT).
+ *       url: https://auth0.com/docs/secure/tokens/json-web-tokens
  */
 
 router.post(
@@ -131,12 +134,26 @@ router.post(
  *                 example: john_doe@gmail.com
  *               password:
  *                 type: string
- *                 example: 123456
+ *                 example: "123456"
+ *           examples:
+ *             Account 1:
+ *               summary: Account 1 - Admin account
+ *               value:
+ *                 email: john_doe@gmail.com
+ *                 password: "123456"
+ *             Account 2:
+ *               summary: Account 2 - Regular account
+ *               value:
+ *                 email: first_account@gmail.com
+ *                 password: "123456"
  *     responses:
  *       200:
  *         description: Successful response
  *       400:
  *         description: See message decription
+ *     externalDocs:
+ *       description: Learn more about JSON Web Token (JWT).
+ *       url: https://auth0.com/docs/secure/tokens/json-web-tokens
  */
 
 router.post(

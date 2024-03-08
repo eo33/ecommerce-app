@@ -48,7 +48,7 @@ const swaggerOptions = {
       {
         name: "Products",
         description:
-          "APIs related to products. Includes end points in `/products`.",
+          "APIs related to products. Includes end points in `/products`",
       },
       {
         name: "Cart",
@@ -76,6 +76,7 @@ const swaggerOptions = {
           type: "apiKey",
           in: "header",
           name: "Authorization",
+          description: "Enter the JSON Web Token (JWT) ",
         },
       },
     },
