@@ -12,7 +12,22 @@ const Products = require("../model/products");
 // @desc    GET all the dashboard statistics, including order (pending, delivery, complete),
 //          product and user stats
 // @acess   private
-
+/**
+ * @swagger
+ * /stats/dashboard:
+ *   get:
+ *     summary: Get the orders, users and products statistics.
+ *     description: Get the statistics to be displayed on the administrator's dashboard. Requires administrator's privilege.
+ *     tags:
+ *       - Stats
+ *     security:
+ *       - APIKey: []
+ *     responses:
+ *       200:
+ *         description: Successful response
+ *       403:
+ *         description: Unauthorized, requires administrator privilege
+ */
 router.get("/dashboard", authTokenAdmin, async (req, res) => {
   try {
     const pendingOrders = await Orders.count({ status: "pending" });
@@ -63,7 +78,30 @@ router.get("/dashboard", authTokenAdmin, async (req, res) => {
 // @route   GET stats/productTable/:page
 // @desc    GET product details
 // @acess   private
-
+/**
+ * @swagger
+ * /stats/productTable/{page}:
+ *   get:
+ *     summary: Get the product information by page number
+ *     description: Get the product information to be displayed on the product table section of the administrator's page. The product is paginated. Each page will dispaly 7 products. Requires administrator's privilege.
+ *     tags:
+ *       - Stats
+ *     security:
+ *       - APIKey: []
+ *     parameters:
+ *       - in: path
+ *         name: page
+ *         schema:
+ *           type: integer
+ *         description: The page number. It specifies which 7 products to show (e.g. page 1 returns the first 7, page 2 returns the next 7, etc).
+ *         required: true
+ *         example: 1
+ *     responses:
+ *       200:
+ *         description: Successful response
+ *       403:
+ *         description: Unauthorized, requires administrator privilege
+ */
 router.get("/productTable/:page", authTokenAdmin, async (req, res) => {
   try {
     // Get 7 orders per page, and then collect productIds
@@ -146,9 +184,40 @@ router.get("/productTable/:page", authTokenAdmin, async (req, res) => {
   }
 });
 
-// @route   GET stats/orders/:page
+// @route   GET stats/orders/:status/:page
 // @desc    GET product details
 // @acess   private
+/**
+ * @swagger
+ * /stats/orders/{status}/{page}:
+ *   get:
+ *     summary: Get the product information by page number
+ *     description: Get the product information to be displayed on the product table section of the administrator's page. The product is paginated. Each page will dispaly 7 products. Requires administrator's privilege.
+ *     tags:
+ *       - Stats
+ *     security:
+ *       - APIKey: []
+ *     parameters:
+ *       - in: path
+ *         name: status
+ *         schema:
+ *           type: string
+ *         description: Can either be `all`, `pending`, `delivery` or `completed`.
+ *         required: true
+ *         example: pending
+ *       - in: path
+ *         name: page
+ *         schema:
+ *           type: integer
+ *         description: The page number. It specifies which 7 products to show (e.g. page 1 returns the first 7, page 2 returns the next 7, etc).
+ *         required: true
+ *         example: 1
+ *     responses:
+ *       200:
+ *         description: Successful response
+ *       403:
+ *         description: Unauthorized, requires administrator privilege
+ */
 router.get(
   "/orders/:orderStatus/:pageNumber",
   authTokenAdmin,
