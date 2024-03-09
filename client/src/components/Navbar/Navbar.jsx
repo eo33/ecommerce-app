@@ -74,6 +74,11 @@ function Navbar({ isAdmin }) {
               )}
             </li>
             <li class="nav-item">
+              <Link class="nav-link" to="/api-docs">
+                Docs
+              </Link>
+            </li>
+            <li class="nav-item">
               {authenticated ? (
                 <button
                   class="nav-link"
