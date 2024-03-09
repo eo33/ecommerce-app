@@ -75,7 +75,7 @@ router.get("/get_all", authToken, async (req, res) => {
  * @swagger
  * /orders/add:
  *   post:
- *     summary: Add an order.
+ *     summary: Add an order
  *     description: Add an order made by the logged in user.
  *     tags:
  *       - Orders
@@ -91,12 +91,21 @@ router.get("/get_all", authToken, async (req, res) => {
  *             properties:
  *               items:
  *                 type: array
- *                 description: The list of item(s) to add (required).
- *                 example:
- *                   - product: "6555a2269feeac7dccd9b1f2"
- *                     quantity: 2
- *                   - product: "6555a2779feeac7dccd9b201"
- *                     quantity: 3
+ *                 description: An array containing orders to add (required).
+ *                 items:
+ *                   type: object
+ *                   properties:
+ *                     product:
+ *                       type: string
+ *                       example: 6555a2269feeac7dccd9b1f2
+ *                     quantity:
+ *                       type: integer
+ *                       example: 2
+ *                   example:
+ *                     - product: 6555a2269feeac7dccd9b1f2
+ *                       quantity: 2
+ *                     - product: 6555a2779feeac7dccd9b201
+ *                       quantity: 3
  *     responses:
  *       200:
  *         description: Successful response
@@ -129,8 +138,8 @@ router.post("/add", authToken, async (req, res) => {
  * @swagger
  * /orders/change-status:
  *   post:
- *     summary: Change the status the order(s).
- *     description: Change the status of the order(s) of the logged in user.
+ *     summary: Change the order(s) status.
+ *     description: Change the order(s) status of the logged in user.
  *     tags:
  *       - Orders
  *     security:
@@ -145,12 +154,21 @@ router.post("/add", authToken, async (req, res) => {
  *             properties:
  *               items:
  *                 type: array
- *                 description: The list of order(s) status to update (required).
- *                 example:
- *                   - orderId: "6555a2269feeac7dccd9b1f2"
- *                     status: delivery
- *                   - orderId: "6555a2779feeac7dccd9b201"
- *                     status: completed
+ *                 description: An array containing orders to edit (required).
+ *                 items:
+ *                   type: object
+ *                   properties:
+ *                     orderId:
+ *                       type: string
+ *                       example: 6555a2269feeac7dccd9b1f2
+ *                     status:
+ *                       type: string
+ *                       example: delivery
+ *                   example:
+ *                     - orderId: 6555a2269feeac7dccd9b1f2
+ *                       status: delivery
+ *                     - orderId: 6555a2779feeac7dccd9b201
+ *                       status: completed
  *     responses:
  *       200:
  *         description: Successful response
@@ -189,28 +207,27 @@ router.post("/change-status", authTokenAdmin, async (req, res) => {
  * @swagger
  * /orders/delete:
  *   post:
- *     summary: Delete the order(s) status. This includes all the items in the order.
- *     description: Change the status of the order(s) of the logged in user.
+ *     summary: Delete the order(s).
+ *     description: Delete the order(s) of a user. This includes all the items in the order. Requires administrator's privilege.
  *     tags:
  *       - Orders
  *     security:
  *       - APIKey: []
  *     requestBody:
- *       description: JSON containing the _items_ to add to the order. Each item contains the _orderId_ and the _status_. See schema for more details.
+ *       description: JSON containing the _orderId_ to delete. The _orderId_ is an array containing the order(s), made by users, to delete.
  *       required: true
  *       content:
  *         application/json:
  *           schema:
  *             type: object
  *             properties:
- *               items:
+ *               orderId:
  *                 type: array
- *                 description: The list of order(s) status to update (required).
- *                 example:
- *                   - orderId: "6555a2269feeac7dccd9b1f2"
- *                     status: delivery
- *                   - orderId: "6555a2779feeac7dccd9b201"
- *                     status: completed
+ *                 description: An array containing orders to delete (required).
+ *                 items:
+ *                   type: string
+ *                   example: "655eff7ad061c5dbc449aee8"
+ *                   description: the ID of the order
  *     responses:
  *       200:
  *         description: Successful response

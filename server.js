@@ -36,8 +36,10 @@ const swaggerOptions = {
   definition: {
     openapi: "3.0.0",
     info: {
-      title: "The Furniture Bro's API documentation",
+      title: "API docs",
       version: "1.0.0",
+      description:
+        "This is the documentation for the Furniture Bro's API. It follows the OpenAPI 3.0 specification.",
     },
     tags: [
       {
