@@ -2,9 +2,10 @@ curl -X 'POST' \
   'http://thefurniturebros.com/auth/register' \
   -H 'accept: */*' \
   -H 'Content-Type: application/json' \
+  -H 'Origin: http://sample.com' \
   -d '{
-  "name": "samplz",
-  "email": "tesz12@gmail.com",
+  "name": "teszz12342",
+  "email": "tesz113242@gmail.com",
   "password": "123456",
   "admin": false
 }'

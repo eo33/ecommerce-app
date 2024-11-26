@@ -105,7 +105,7 @@ router.post(
       );
     } catch (err) {
       console.error(err.message);
-      return res.status("500").json({ msg: "request error" });
+      return res.status(500).json({ msg: "request error" });
     }
   }
 );

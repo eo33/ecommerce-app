@@ -2,6 +2,9 @@
 const express = require("express");
 const app = express();
 
+// Allow CORS origins
+const cors = require("cors");
+
 // Using mongoose to connect with MongoDB
 const mongoose = require("mongoose");
 const config = require("config");
@@ -20,6 +23,13 @@ const address = require("./routes/address");
 const orders = require("./routes/orders");
 const stats = require("./routes/stats");
 const users = require("./routes/users");
+
+// Enable CORS
+const corsOptions = {
+  origin: true,
+  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+  allowedHeaders: ["Authorization", "Content-Type"],
+};
 
 // Connect to MongoDB atlas cluster using mongoose
 mongoose
@@ -91,6 +101,7 @@ const swaggerSpec = swaggerJsdoc(swaggerOptions);
 // Init middleware (to parse body in JSON format)
 app.use(express.json());
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+app.use(cors(corsOptions));
 
 // Setup routes
 app.use("/auth", auth);
