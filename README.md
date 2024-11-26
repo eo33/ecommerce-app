@@ -347,6 +347,28 @@ _Note 3: Feature, user stories and tasks are partially generated with the help o
 - 1 Dec 2023 - Finished the FE design, and implement it. Also made API to retrieve random product data.
 - 4 Dec 2023 - Finished the deployment to heroku. Uninstalled some dependencies for deployment to work.
 
+## Feature 9: Enhance the Docs
+
+1. Setup GitBook for the documentation.
+2. Setup the repository for the OAS file.
+3. Add Postman collection to the GitBook.
+
+### User stories
+
+1. As a user, I want to be able to view the documentation.
+2. As a developer, I want to view and modify the OAS 3.0 file
+3. As a user, I want to be able to download the Postman collection.
+
+#### Tasks
+
+1. Setup a Gitbook instance and configure it to host the documentation
+2. Create and configure a repository for storing the OAS file, ensuring proper version control and access management.
+3. Upload and embed the Postman collection into GitBook, providing clear instructions for users on how to use the collection to test API endpoints.
+
+#### Work progress
+
+- 26 Nov 2024 - Setup the GitBook instance for the Furnitures bros API docs. Made the structure for the GitBook. Added various pages for the docs: _Introduction_, _Auhtentication_, _Tokens_, _Pagination_, _Errors_, and _Release Notes_. I also added the API endpoints section following the structure in Postman.
+
 ## Reference
 
 1. Postman requests for testing API: [here](./Ecommerce.postman_collection.json)
