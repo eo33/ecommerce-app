@@ -32,7 +32,7 @@ paths:
                   example: john_doe12@gmail.com
                 password:
                   type: string
-                  example: 123456
+                  example: "123456"
                 admin:
                   type: boolean
                   example: false

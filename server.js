@@ -24,9 +24,9 @@ const orders = require("./routes/orders");
 const stats = require("./routes/stats");
 const users = require("./routes/users");
 
-// Enable CORS
+// Enable all CORS origin
 const corsOptions = {
-  origin: true,
+  origin: "*",
   methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
   allowedHeaders: ["Authorization", "Content-Type"],
 };
