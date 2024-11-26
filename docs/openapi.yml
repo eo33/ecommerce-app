@@ -3,6 +3,11 @@ info:
   description: This file contains the OpenAPI specifications for The Furniture Bros API
   title: TheFurnitureBrosOpenAPI
   version: 1.0.0
+servers:
+  - url: http://thefurniturebros.com
+    description: Production server
+  - url: http://localhost:5000
+    description: Local server
 paths:
   /auth/register:
     post:
@@ -11,7 +16,8 @@ paths:
       tags:
         - Auth
       requestBody:
-        description: JSON containing the _name_, _email_, _password_, and _admin status_ to create a new user. See description for more details.
+        description: |
+          JSON containing the name, email, password, and admin status to create a new user.
         required: true
         content:
           application/json:
@@ -32,9 +38,11 @@ paths:
                   example: false
       responses:
         200:
-          description: Successful response
+          description: Successful response.
         400:
-          description: See message decription
+          description: See message decription.
+        500:
+          description: see message description.
       externalDocs:
         description: Learn more about JSON Web Token (JWT).
         url: https://auth0.com/docs/secure/tokens/json-web-tokens
