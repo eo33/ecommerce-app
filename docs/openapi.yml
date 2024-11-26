@@ -1,0 +1,40 @@
+openapi: 3.0.0
+info:
+  description: This file contains the OpenAPI specifications for The Furniture Bros API
+  title: TheFurnitureBrosOpenAPI
+  version: 1.0.0
+paths:
+  /auth/register:
+    post:
+      summary: Register a user
+      description: This endpoint allows you to register a user. Once registered, it will return a authentication token.
+      tags:
+        - Auth
+      requestBody:
+        description: JSON containing the _name_, _email_, _password_, and _admin status_ to create a new user. See description for more details.
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  example: john doe
+                email:
+                  type: string
+                  example: john_doe12@gmail.com
+                password:
+                  type: string
+                  example: 123456
+                admin:
+                  type: boolean
+                  example: false
+      responses:
+        200:
+          description: Successful response
+        400:
+          description: See message decription
+      externalDocs:
+        description: Learn more about JSON Web Token (JWT).
+        url: https://auth0.com/docs/secure/tokens/json-web-tokens

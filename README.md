@@ -367,9 +367,10 @@ _Note 3: Feature, user stories and tasks are partially generated with the help o
 
 #### Work progress
 
-- 26 Nov 2024 - Setup the GitBook instance for the Furnitures bros API docs. Made the structure for the GitBook. Added various pages for the docs: _Introduction_, _Auhtentication_, _Tokens_, _Pagination_, _Errors_, and _Release Notes_. I also added the API endpoints section following the structure in Postman.
+- 26 Nov 2024 - Setup the GitBook instance for the Furnitures bros API docs. Made the structure for the GitBook. Added various pages for the docs: _Introduction_, _Auhtentication_, _Tokens_, _Pagination_, _Errors_, and _Release Notes_. I also added the API endpoints section following the structure in Postman. View docs: https://edwards-organization-17.gitbook.io/the-furniture-bros-api-docs
 
 ## Reference
 
 1. Postman requests for testing API: [here](./Ecommerce.postman_collection.json)
-1. ChatGPT link: https://chat.openai.com/c/a89c0192-59a3-4f8b-96ab-f0c0e0000752
+1. ChatGPT link for features: https://chat.openai.com/c/a89c0192-59a3-4f8b-96ab-f0c0e0000752
+1. ChatGPT link for docs: https://chatgpt.com/c/6745e157-ef50-8011-817f-90fb5a06700a
