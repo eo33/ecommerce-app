@@ -358,6 +358,7 @@ _Note 3: Feature, user stories and tasks are partially generated with the help o
 1. As a user, I want to be able to view the documentation.
 2. As a developer, I want to view and modify the OAS 3.0 file
 3. As a user, I want to be able to download the Postman collection.
+4. As a user, I want to make sure that the code snippets in the docs are working.
 
 #### Tasks
 
