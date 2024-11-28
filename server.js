@@ -29,6 +29,7 @@ const corsOptions = {
   origin: "*",
   methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
   allowedHeaders: ["Authorization", "Content-Type"],
+  preflightContinue: false,
 };
 
 // Connect to MongoDB atlas cluster using mongoose

@@ -10,39 +10,4 @@ servers:
     description: Local server
 paths:
   /auth/register:
-    post:
-      summary: Register an Account
-      description: This endpoint allows you to register a user. Once registered, it will return a authentication token.
-      tags:
-        - Auth
-      requestBody:
-        description: |
-          JSON containing the name, email, password, and admin status to create a new user.
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                name:
-                  type: string
-                  example: john doe
-                email:
-                  type: string
-                  example: john_doe12@gmail.com
-                password:
-                  type: string
-                  example: "123456"
-                admin:
-                  type: boolean
-                  example: false
-      responses:
-        200:
-          description: Successful response.
-        400:
-          description: See message decription.
-        500:
-          description: see message description.
-      externalDocs:
-        description: Learn more about JSON Web Token (JWT).
-        url: https://auth0.com/docs/secure/tokens/json-web-tokens
+    $ref: paths/auth/register.yml

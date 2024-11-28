@@ -1,0 +1,61 @@
+post:
+  summary: Register an Account
+  description: This endpoint allows you to register a user. Once registered, it will return an API key.
+  tags:
+    - Auth
+  requestBody:
+    description: |
+      An object containing the parameters to create and register an account.
+    required: true
+    content:
+      application/json:
+        schema:
+          type: object
+          required:
+            - name
+            - email
+            - password
+          properties:
+            name:
+              type: string
+              description: |
+                The name of the user.
+            email:
+              type: string
+              format: email
+              description: |
+                The email address of the user.
+            password:
+              type: string
+              description: |
+                The password for the account.
+            admin:
+              type: boolean
+              default: false
+              description: |
+                Specifies whether the user has administrative privileges.
+          example:
+            name: "john doe"
+            email: "john_doe12@gmail.com"
+            password: "123456"
+  responses:
+    "200":
+      description: Successful response.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              token:
+                type: string
+                description: |
+                  The API key used to authenticate the account.
+            example:
+              token: "eyJhbGciOiJIUzI1NiIsInR5cBGlR1fkzXQKgxLshzVL2lcajQNXEUTH09N-csr98"
+    "400":
+      description: See message decription.
+    "500":
+      description: see message description.
+  externalDocs:
+    description: Learn more about JSON Web Token (JWT).
+    url: https://auth0.com/docs/secure/tokens/json-web-tokens
