@@ -372,6 +372,7 @@ _Note 3: Feature, user stories and tasks are partially generated with the help o
 - 26 Nov 2024 - Setup the GitBook instance for the Furnitures bros API docs. Made the structure for the GitBook. Added various pages for the docs: _Introduction_, _Auhtentication_, _Tokens_, _Pagination_, _Errors_, and _Release Notes_. I also added the API endpoints section following the structure in Postman. View docs: https://edwards-organization-17.gitbook.io/the-furniture-bros-api-docs
 - 27 Nov 2024 - Explored GitBook, the documentation site, and Scalar, the tool that powers the OAS 3.0 rendering for GitBook. Also enabled the CORS for the server to make the API publicly available. Now you can make requests from other sources.
 - 28 Nov 2024 - Finished the documentation for the "account" category. Sync the endpoints available in Postman and OAS. Tested the docs in OAS and made sure it works properly.
+- 29 Nov 2024 - Worked on the docs for "products" category. Also added helpful desc to the "200" response section of the endpoints.
 
 ## Reference
 

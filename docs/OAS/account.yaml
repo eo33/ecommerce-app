@@ -60,7 +60,7 @@ paths:
                 password: "123456"
       responses:
         "200":
-          description: Successful response.
+          description: Successful response. Returns an object containing the API key.
           content:
             application/json:
               schema:
@@ -73,7 +73,7 @@ paths:
                 example:
                   token: "eyJhbGciOiJIUzI1NiIsInR5cBGlR1fkzXQKgxLshzVL2lcajQNXEUTH09N-csr98"
         "400":
-          description: See message decription.
+          description: See message description.
         "500":
           description: see message description.
       externalDocs:
@@ -112,7 +112,7 @@ paths:
                 password: "123456"
       responses:
         "200":
-          description: Successful response.
+          description: Successful response. Returns an object containing the API key and the information about the user.
           content:
             application/json:
               schema:
@@ -164,7 +164,7 @@ paths:
                     __v: 0
 
         "400":
-          description: See message decription.
+          description: See message description.
         "500":
           description: see message description.
   /auth/validate:
@@ -177,7 +177,7 @@ paths:
         - APIKey: []
       responses:
         "200":
-          description: Successful response.
+          description: Successful response. Returns an object containing information related to the user's access privilege.
           content:
             application/json:
               schema:
@@ -199,7 +199,7 @@ paths:
                   authenticate: true
                   admin: false
         "400":
-          description: See message decription.
+          description: See message description.
         "500":
           description: see message description.
   /users/get_all/{page}:
@@ -220,7 +220,7 @@ paths:
         - APIKey: [admin]
       responses:
         "200":
-          description: Successful response.
+          description: Successful response. Returns an object with users statistics in the application.
           content:
             application/json:
               schema:
@@ -278,7 +278,7 @@ paths:
                       admin: false
                       __v: 0
         "400":
-          description: See message decription.
+          description: See message description.
         "500":
           description: see message description.
   /users/edit:
@@ -326,7 +326,7 @@ paths:
                 newAdminStatus: true
       responses:
         "200":
-          description: Successful response.
+          description: Successful response. Returns an object containing user information.
           content:
             application/json:
               schema:
@@ -372,6 +372,6 @@ paths:
                     __v: 0
 
         "400":
-          description: See message decription.
+          description: See message description.
         "500":
           description: see message description.

@@ -17,154 +17,80 @@ components:
       description: |
         Provide your API key.
 paths:
-  /auth/register:
-    post:
-      summary: Register an Account
-      description: This endpoint allows you to register a user. Once registered, it will return an API key.
+  /products:
+    get:
+      summary: Get Product list
+      description: This endpoint allows you get the list of available products. It shows all available product.
       tags:
-        - Auth
-      requestBody:
-        description: |
-          An object containing the parameters to create and register an account.
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              required:
-                - name
-                - email
-                - password
-              properties:
-                name:
-                  type: string
-                  description: |
-                    The name of the user.
-                email:
-                  type: string
-                  format: email
-                  description: |
-                    The email address of the user.
-                password:
-                  type: string
-                  description: |
-                    The password for the account.
-                admin:
-                  type: boolean
-                  default: false
-                  description: |
-                    Specifies whether the user has administrative privileges.
-              example:
-                name: "john doe"
-                email: "john_doe12@gmail.com"
-                password: "123456"
+        - Product
       responses:
         "200":
-          description: Successful response.
+          description: Successful response. Returns a list of product.
           content:
             application/json:
               schema:
-                type: object
+                type: array
+                items:
+                  type: object
                 properties:
-                  token:
+                  _id:
                     type: string
-                    description: |
-                      The API key used to authenticate and authorize the account.
+                    description: The unique identifier for the product.
+                  name:
+                    type: string
+                    description: The name of the product.
+                  image:
+                    type: string
+                    description: The filename of the product's image.
+                  price:
+                    type: number
+                    format: float
+                    description: The price of the product.
+                  description:
+                    type: string
+                    description: The description of the product.
+                  soldCount:
+                    type: integer
+                    description: The total number of units sold.
+                  __v:
+                    type: integer
+                    description: The version of the product. The version increases whenever the product is modified.
                 example:
-                  token: "eyJhbGciOiJIUzI1NiIsInR5cBGlR1fkzXQKgxLshzVL2lcajQNXEUTH09N-csr98"
+                  _id: 6555a1f49feeac7dccd9b1ee
+                  name: brown tablede
+                  image: 1700110836527.webp
+                  price: 30
+                  description: this is a brown table
+                  soldCount: 90
+                  __v: 0
         "400":
-          description: See message decription.
+          description: See message description.
         "500":
           description: see message description.
-      externalDocs:
-        description: The API key uses JSON Web Token (JWT) to authenticate. Learn more about it here.
-        url: https://auth0.com/docs/secure/tokens/json-web-tokens
-  /auth/login:
-    post:
-      summary: Get an API key
-      description: This endpoint allows you to login to an account and retrieve an API key.
-      tags:
-        - Auth
-        - Users
-      requestBody:
-        description: |
-          An object containing the login details.
+  /products/{image}:
+    parameters:
+      - name: image
+        in: path
         required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              required:
-                - email
-                - password
-              properties:
-                email:
-                  type: string
-                  format: email
-                  description: |
-                    The email address of the user.
-                password:
-                  type: string
-                  description: |
-                    The password of the account.
-              example:
-                email: "john_doe12@gmail.com"
-                password: "123456"
+        schema:
+          type: string
+          minimum: 1
+        description: The filename of the image to retrieve. Use the `GET Product list` endpoint to view all available products.
+    get:
+      summary: Get a Product Image
+      description: This endpoint allows you get the image of the product. The image is in the .webp format.
+      tags:
+        - Product
       responses:
         "200":
-          description: Successful response.
+          description: Successful response. Returns the image of the product
           content:
-            application/json:
+            image/webp:
               schema:
-                type: object
-                properties:
-                  token:
-                    type: string
-                    description: |
-                      The API key used to authenticate and authorize the account. 
-                      Use this API key to access the different endpoints.
-                  user:
-                    type: object
-                    description: |
-                      The parameters related to the user. This gives information about the user.
-                    properties:
-                      _id:
-                        type: string
-                        description: |
-                          The ID of the user.
-                      name:
-                        type: string
-                        description: |
-                          The name of the user.
-                      email:
-                        type: string
-                        format: email
-                        description: |
-                          The email address of the user.
-                      password:
-                        type: string
-                        description: |
-                          The encrypted password of the user.
-                      admin:
-                        type: boolean
-                        description: |
-                          The administrtive privilege of the user.
-                      __v:
-                        type: integer
-                        description: |
-                          The version of the user. The version increases whenever the account is modified.
-                example:
-                  token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjc0ODhjYWE4ZGQxZmYzZDNlYjk0NTQxIiwiYWRtaW4iOnRydWV9LCJpYXQiOjE3MzI4MDc4ODEsImV4cCI6MTczMjg0Mzg4MX0.aFBDj34nuuNkt95G71QbL7KJTotLyNE0Lu9BKe4Zv0s
-                  user:
-                    _id: 67488caa8dd1ff3d3eb94541
-                    name: test name
-                    email: name_test_admin@gmail.com
-                    password: "$2a$10$767ZSzTiC0Jm.8p/Jmyx1eqnciqWn7GCUDA/I7AbiTgmqHfJc/mfC"
-                    admin: true
-                    __v: 0
-
+                type: string
+                format: binary
         "400":
-          description: See message decription.
+          description: See message description.
         "500":
           description: see message description.
   /auth/validate:
