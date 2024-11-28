@@ -1,0 +1,377 @@
+openapi: 3.0.0
+info:
+  description: This file contains the OpenAPI specifications for the Acocunt APIs of **The Furniture Bros**.
+  title: The Furniture Bros Account OpenAPI Specifications
+  version: 1.0.0
+servers:
+  - url: http://thefurniturebros.com
+    description: Production server
+  - url: http://localhost:5000
+    description: Local server
+components:
+  securitySchemes:
+    APIKey:
+      type: apiKey
+      in: header
+      name: "Authorization"
+      description: |
+        Provide your API key.
+paths:
+  /auth/register:
+    post:
+      summary: Register an Account
+      description: This endpoint allows you to register a user. Once registered, it will return an API key.
+      tags:
+        - Auth
+      requestBody:
+        description: |
+          An object containing the parameters to create and register an account.
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - name
+                - email
+                - password
+              properties:
+                name:
+                  type: string
+                  description: |
+                    The name of the user.
+                email:
+                  type: string
+                  format: email
+                  description: |
+                    The email address of the user.
+                password:
+                  type: string
+                  description: |
+                    The password for the account.
+                admin:
+                  type: boolean
+                  default: false
+                  description: |
+                    Specifies whether the user has administrative privileges.
+              example:
+                name: "john doe"
+                email: "john_doe12@gmail.com"
+                password: "123456"
+      responses:
+        "200":
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  token:
+                    type: string
+                    description: |
+                      The API key used to authenticate and authorize the account.
+                example:
+                  token: "eyJhbGciOiJIUzI1NiIsInR5cBGlR1fkzXQKgxLshzVL2lcajQNXEUTH09N-csr98"
+        "400":
+          description: See message decription.
+        "500":
+          description: see message description.
+      externalDocs:
+        description: The API key uses JSON Web Token (JWT) to authenticate. Learn more about it here.
+        url: https://auth0.com/docs/secure/tokens/json-web-tokens
+  /auth/login:
+    post:
+      summary: Get an API key
+      description: This endpoint allows you to login to an account and retrieve an API key.
+      tags:
+        - Auth
+        - Users
+      requestBody:
+        description: |
+          An object containing the login details.
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - email
+                - password
+              properties:
+                email:
+                  type: string
+                  format: email
+                  description: |
+                    The email address of the user.
+                password:
+                  type: string
+                  description: |
+                    The password of the account.
+              example:
+                email: "john_doe12@gmail.com"
+                password: "123456"
+      responses:
+        "200":
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  token:
+                    type: string
+                    description: |
+                      The API key used to authenticate and authorize the account. 
+                      Use this API key to access the different endpoints.
+                  user:
+                    type: object
+                    description: |
+                      The parameters related to the user. This gives information about the user.
+                    properties:
+                      _id:
+                        type: string
+                        description: |
+                          The ID of the user.
+                      name:
+                        type: string
+                        description: |
+                          The name of the user.
+                      email:
+                        type: string
+                        format: email
+                        description: |
+                          The email address of the user.
+                      password:
+                        type: string
+                        description: |
+                          The encrypted password of the user.
+                      admin:
+                        type: boolean
+                        description: |
+                          The administrtive privilege of the user.
+                      __v:
+                        type: integer
+                        description: |
+                          The version of the user. The version increases whenever the account is modified.
+                example:
+                  token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjc0ODhjYWE4ZGQxZmYzZDNlYjk0NTQxIiwiYWRtaW4iOnRydWV9LCJpYXQiOjE3MzI4MDc4ODEsImV4cCI6MTczMjg0Mzg4MX0.aFBDj34nuuNkt95G71QbL7KJTotLyNE0Lu9BKe4Zv0s
+                  user:
+                    _id: 67488caa8dd1ff3d3eb94541
+                    name: test name
+                    email: name_test_admin@gmail.com
+                    password: "$2a$10$767ZSzTiC0Jm.8p/Jmyx1eqnciqWn7GCUDA/I7AbiTgmqHfJc/mfC"
+                    admin: true
+                    __v: 0
+
+        "400":
+          description: See message decription.
+        "500":
+          description: see message description.
+  /auth/validate:
+    get:
+      summary: Validate API key
+      description: This endpoint allows you to validate your API key.
+      tags:
+        - Auth
+      security:
+        - APIKey: []
+      responses:
+        "200":
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  authenticate:
+                    type: boolean
+                    description: |
+                      Indicates whether the user is authenticated.varios endpoints.
+                      - `ture`: The user is authenticated.
+                      - `false`: The user is not authenticated.
+                  admin:
+                    type: boolean
+                    description: |
+                      Specifies if the authenticated user has administrative privileges. If you have admin privileges, you can make requests to admin-only endpoints.
+                      - `true`: The user has admin privileges.
+                      - `false`: The user does not have admin previleges.
+                example:
+                  authenticate: true
+                  admin: false
+        "400":
+          description: See message decription.
+        "500":
+          description: see message description.
+  /users/get_all/{page}:
+    get:
+      summary: Get Users
+      description: This endpoint allows you to get the info about the users in the application.
+      tags:
+        - Auth
+      parameters:
+        - name: page
+          in: path
+          required: true
+          schema:
+            type: integer
+            minimum: 1
+          description: The page number to retrieve (1-based index). Each page returns 20 users.
+      security:
+        - APIKey: [admin]
+      responses:
+        "200":
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  totalUsers:
+                    type: integer
+                    description: |
+                      The total number of users in the application.
+                  adminUsers:
+                    type: integer
+                    description: |
+                      The total number of admin users in the application.
+                  regularUsers:
+                    type: integer
+                    description: |
+                      The total number of regular users in the application.
+                  users:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        _id:
+                          type: string
+                          description: The ID of the user.
+                        name:
+                          type: string
+                          description: The name of the user.
+                        email:
+                          type: string
+                          format: email
+                          description: The email address of the user.
+                        password:
+                          type: string
+                          description: The encrypted password of the user.
+                        admin:
+                          type: boolean
+                          description: |
+                            The administrtive privilege of the user.
+                            - `true`: The user has admin privileges.
+                            - `false`: The user does not have admin previleges.
+                        __v:
+                          type: integer
+                          description: The version of the user. The version increases whenever the account is modified.
+                    description: A list of users, including their details.
+                example:
+                  totalUsers: 51
+                  adminUsers: 11
+                  regularUsers: 40
+                  users:
+                    - _id: 6555a0f89feeac7dccd9b1dd
+                      name: first account
+                      email: first_account@gmail.com
+                      password: "$2a$10$jK1bvjH7D/pdjI6mVb9uSuXMeWwcFwhlBYIh7Wqf0CLsey9I3Epx2"
+                      admin: false
+                      __v: 0
+        "400":
+          description: See message decription.
+        "500":
+          description: see message description.
+  /users/edit:
+    post:
+      summary: Edit User Details
+      description: This endpoint allows you to edit a user's details. This requires admin privileges.
+      tags:
+        - Auth
+        - Users
+      security:
+        - APIKey: [admin]
+      requestBody:
+        description: |
+          An object containing the new details.
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                userId:
+                  type: string
+                  description: |
+                    The user ID of the account to modify. 
+                    You can get the list of user ID by using the `POST /users/get_all/{page}` endpoint.
+                newName:
+                  type: string
+                  description: |
+                    The new name for the user.
+                newEmail:
+                  type: string
+                  format: email
+                  description: |
+                    The new email for the user.
+                newAdminStatus:
+                  type: boolean
+                  description: |
+                    The new admin status for the user. 
+                    - `true`: The user has admin privileges.
+                    - `false`: The user does not have admin previleges.
+              example:
+                userId: "674605a2a18c2f38f2148601"
+                newName: "Jane Doe"
+                newEmail: "jane_example@gmail.com"
+                newAdminStatus: true
+      responses:
+        "200":
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  user:
+                    type: object
+                    description: |
+                      The parameters related to the user. This gives information about the user.
+                    properties:
+                      _id:
+                        type: string
+                        description: |
+                          The ID of the user.
+                      name:
+                        type: string
+                        description: |
+                          The name of the user.
+                      email:
+                        type: string
+                        format: email
+                        description: |
+                          The email address of the user.
+                      password:
+                        type: string
+                        description: |
+                          The encrypted password of the user.
+                      admin:
+                        type: boolean
+                        description: |
+                          The administrtive privilege of the user.
+                      __v:
+                        type: integer
+                        description: |
+                          The version of the user. The version increases whenever the account is modified.
+                example:
+                  user:
+                    _id: 674605a2a18c2f38f2148601
+                    name: Jane Doe
+                    email: jane_example@gmail.com
+                    password: "$2a$10$eaixU5.H3PFYW.9V6NM8A.A.CPnFHtbcWPWsp/I1NWsfxqIG6s87K"
+                    admin: false
+                    __v: 0
+
+        "400":
+          description: See message decription.
+        "500":
+          description: see message description.
