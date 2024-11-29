@@ -4,7 +4,7 @@ info:
   title: The Furniture Bros Product OpenAPI Specifications
   version: 1.0.0
 servers:
-  - url: http://thefurniturebros.com
+  - url: https://thefurniturebros.com
     description: Production server
   - url: http://localhost:5000
     description: Local server
@@ -67,15 +67,15 @@ paths:
           description: See message description.
         "500":
           description: see message description.
-  /products/{image}:
+  /products/{filename}:
     parameters:
-      - name: image
+      - name: filename
         in: path
         required: true
         schema:
           type: string
           minimum: 1
-        description: The filename of the image to retrieve. Use the `GET Product list` endpoint to view all available products.
+        description: The product image filename to use. Use the `GET Product list` endpoint to view all products and their image filenames.
     get:
       summary: Get a Product Image
       description: This endpoint allows you get the image of the product. The image is in the .webp format.
@@ -83,7 +83,7 @@ paths:
         - Product
       responses:
         "200":
-          description: Successful response. Returns the image of the product
+          description: Successful response. Returns the image of the product.
           content:
             image/webp:
               schema:
@@ -93,211 +93,210 @@ paths:
           description: See message description.
         "500":
           description: see message description.
-  /auth/validate:
-    get:
-      summary: Validate API key
-      description: This endpoint allows you to validate your API key.
+    put:
+      summary: Edit a Product
+      description: This endpoint allows you to edit a product.
       tags:
-        - Auth
-      security:
-        - APIKey: []
-      responses:
-        "200":
-          description: Successful response.
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  authenticate:
-                    type: boolean
-                    description: |
-                      Indicates whether the user is authenticated.varios endpoints.
-                      - `ture`: The user is authenticated.
-                      - `false`: The user is not authenticated.
-                  admin:
-                    type: boolean
-                    description: |
-                      Specifies if the authenticated user has administrative privileges. If you have admin privileges, you can make requests to admin-only endpoints.
-                      - `true`: The user has admin privileges.
-                      - `false`: The user does not have admin previleges.
-                example:
-                  authenticate: true
-                  admin: false
-        "400":
-          description: See message decription.
-        "500":
-          description: see message description.
-  /users/get_all/{page}:
-    get:
-      summary: Get Users
-      description: This endpoint allows you to get the info about the users in the application.
-      tags:
-        - Auth
-      parameters:
-        - name: page
-          in: path
-          required: true
-          schema:
-            type: integer
-            minimum: 1
-          description: The page number to retrieve (1-based index). Each page returns 20 users.
-      security:
-        - APIKey: [admin]
-      responses:
-        "200":
-          description: Successful response.
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  totalUsers:
-                    type: integer
-                    description: |
-                      The total number of users in the application.
-                  adminUsers:
-                    type: integer
-                    description: |
-                      The total number of admin users in the application.
-                  regularUsers:
-                    type: integer
-                    description: |
-                      The total number of regular users in the application.
-                  users:
-                    type: array
-                    items:
-                      type: object
-                      properties:
-                        _id:
-                          type: string
-                          description: The ID of the user.
-                        name:
-                          type: string
-                          description: The name of the user.
-                        email:
-                          type: string
-                          format: email
-                          description: The email address of the user.
-                        password:
-                          type: string
-                          description: The encrypted password of the user.
-                        admin:
-                          type: boolean
-                          description: |
-                            The administrtive privilege of the user.
-                            - `true`: The user has admin privileges.
-                            - `false`: The user does not have admin previleges.
-                        __v:
-                          type: integer
-                          description: The version of the user. The version increases whenever the account is modified.
-                    description: A list of users, including their details.
-                example:
-                  totalUsers: 51
-                  adminUsers: 11
-                  regularUsers: 40
-                  users:
-                    - _id: 6555a0f89feeac7dccd9b1dd
-                      name: first account
-                      email: first_account@gmail.com
-                      password: "$2a$10$jK1bvjH7D/pdjI6mVb9uSuXMeWwcFwhlBYIh7Wqf0CLsey9I3Epx2"
-                      admin: false
-                      __v: 0
-        "400":
-          description: See message decription.
-        "500":
-          description: see message description.
-  /users/edit:
-    post:
-      summary: Edit User Details
-      description: This endpoint allows you to edit a user's details. This requires admin privileges.
-      tags:
-        - Auth
-        - Users
+        - Product
       security:
         - APIKey: [admin]
       requestBody:
         description: |
-          An object containing the new details.
-        required: true
+          An form-data containing the new details.
         content:
-          application/json:
+          multipart/form-data:
             schema:
               type: object
               properties:
-                userId:
+                name:
                   type: string
-                  description: |
-                    The user ID of the account to modify. 
-                    You can get the list of user ID by using the `POST /users/get_all/{page}` endpoint.
-                newName:
+                  description: The new name of the product.
+                image:
                   type: string
-                  description: |
-                    The new name for the user.
-                newEmail:
+                  format: binary
+                  description: The new filename of the product's image.
+                price:
+                  type: number
+                  format: float
+                  description: The new price of the product.
+                description:
                   type: string
-                  format: email
-                  description: |
-                    The new email for the user.
-                newAdminStatus:
-                  type: boolean
-                  description: |
-                    The new admin status for the user. 
-                    - `true`: The user has admin privileges.
-                    - `false`: The user does not have admin previleges.
+                  description: The new description of the product.
+                soldCount:
+                  type: integer
+                  description: The new total number of units sold.
               example:
-                userId: "674605a2a18c2f38f2148601"
-                newName: "Jane Doe"
-                newEmail: "jane_example@gmail.com"
-                newAdminStatus: true
+                name: "sample_item"
+                image: "/C:/Users/asus/Downloads/furniture pics/1016430_PE830391_S3.webp"
+                price: 50
+                description: "sample_description"
+                soldCount: 35
       responses:
         "200":
-          description: Successful response.
+          description: Successful response. Returns the new information of the product.
           content:
             application/json:
               schema:
                 type: object
                 properties:
-                  user:
-                    type: object
+                  msg:
+                    type: string
                     description: |
-                      The parameters related to the user. This gives information about the user.
+                      The status of the operation.
+                  updatedProduct:
+                    type: object
                     properties:
                       _id:
                         type: string
-                        description: |
-                          The ID of the user.
+                        description: The unique identifier for the product.
                       name:
                         type: string
-                        description: |
-                          The name of the user.
-                      email:
+                        description: The name of the product.
+                      image:
                         type: string
-                        format: email
-                        description: |
-                          The email address of the user.
-                      password:
+                        description: The filename of the product's image.
+                      price:
+                        type: number
+                        format: float
+                        description: The price of the product.
+                      description:
                         type: string
-                        description: |
-                          The encrypted password of the user.
-                      admin:
-                        type: boolean
-                        description: |
-                          The administrtive privilege of the user.
+                        description: The description of the product.
+                      soldCount:
+                        type: integer
+                        description: The total number of units sold.
                       __v:
                         type: integer
-                        description: |
-                          The version of the user. The version increases whenever the account is modified.
+                        description: The version of the product. The version increases whenever the product is modified.
                 example:
-                  user:
-                    _id: 674605a2a18c2f38f2148601
-                    name: Jane Doe
-                    email: jane_example@gmail.com
-                    password: "$2a$10$eaixU5.H3PFYW.9V6NM8A.A.CPnFHtbcWPWsp/I1NWsfxqIG6s87K"
-                    admin: false
+                  msg: Product updated successfully
+                  updatedProduct:
+                    _id: 6555a1f49feeac7dccd9b1ee
+                    name: brown tablede
+                    image: 1700110836527.webp
+                    price: 30
+                    description: this is a brown table
+                    soldCount: 90
                     __v: 0
-
         "400":
-          description: See message decription.
+          description: See message description.
         "500":
           description: see message description.
+    delete:
+      summary: Delete a Product
+      description: This endpoint allows you get delete a product.
+      tags:
+        - Product
+      responses:
+        "200":
+          description: Successful response. Returns the status of the operation.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                    description: The status of the operation.
+        "400":
+          description: See message description.
+        "500":
+          description: see message description.
+  /products/details/{filename}:
+    get:
+      summary: Get Product Details
+      description: This endpoint allows you get the details of a product.
+      tags:
+        - Product
+      responses:
+        "200":
+          description: Successful response. Returns the information of the product
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  _id:
+                    type: string
+                    description: The unique identifier for the product.
+                  name:
+                    type: string
+                    description: The name of the product.
+                  image:
+                    type: string
+                    description: The filename of the product's image.
+                  price:
+                    type: number
+                    format: float
+                    description: The price of the product.
+                  description:
+                    type: string
+                    description: The description of the product.
+                  soldCount:
+                    type: integer
+                    description: The total number of units sold.
+                  __v:
+                    type: integer
+                    description: The version of the product. The version increases whenever the product is modified.
+                example:
+                  _id: 6555a1f49feeac7dccd9b1ee
+                  name: brown tablede
+                  image: 1700110836527.webp
+                  price: 30
+                  description: this is a brown table
+                  soldCount: 90
+                  __v: 0
+        "400":
+          description: See message description.
+        "500":
+          description: see message description.
+  /products/upload:
+    post:
+      summary: Upload a Product
+      description: This endpoint allows you to upload a product.
+      tags:
+        - Product
+      security:
+        - APIKey: []
+      requestBody:
+        description: |
+          An form-data containing the new details.
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: The name of the product.
+                image:
+                  type: string
+                  format: binary
+                  description: The filename of the product's image.
+                price:
+                  type: number
+                  format: float
+                  description: The price of the product.
+                description:
+                  type: string
+                  description: The description of the product.
+                soldCount:
+                  type: integer
+                  description: The total number of units sold.
+              example:
+                name: "sample_item"
+                image: "/C:/Users/asus/Downloads/furniture pics/1016430_PE830391_S3.webp"
+                price: 50
+                description: "sample_description"
+                soldCount: 35
+      responses:
+        "200":
+          description: Successful response. Returns the status of the operation.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                    description: The status of the operation.
