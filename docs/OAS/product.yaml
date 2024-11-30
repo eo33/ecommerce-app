@@ -111,6 +111,7 @@ paths:
                 name:
                   type: string
                   description: The new name of the product.
+                  example: "sample_item"
                 image:
                   type: string
                   format: binary
@@ -119,18 +120,15 @@ paths:
                   type: number
                   format: float
                   description: The new price of the product.
+                  example: 50
                 description:
                   type: string
                   description: The new description of the product.
+                  example: "sample description"
                 soldCount:
                   type: integer
                   description: The new total number of units sold.
-              example:
-                name: "sample_item"
-                image: "/C:/Users/asus/Downloads/furniture pics/1016430_PE830391_S3.webp"
-                price: 50
-                description: "sample_description"
-                soldCount: 35
+                  example: 35
       responses:
         "200":
           description: Successful response. Returns the new information of the product.
@@ -185,6 +183,8 @@ paths:
     delete:
       summary: Delete a Product
       description: This endpoint allows you get delete a product.
+      security:
+        - APIKey: [admin]
       tags:
         - Product
       responses:
@@ -198,11 +198,21 @@ paths:
                   msg:
                     type: string
                     description: The status of the operation.
+                example:
+                  msg: "Item deleted"
         "400":
           description: See message description.
         "500":
           description: see message description.
   /products/details/{filename}:
+    parameters:
+      - name: filename
+        in: path
+        required: true
+        schema:
+          type: string
+          minimum: 1
+        description: The product image filename to use. Use the `GET Product list` endpoint to view all products and their image filenames.
     get:
       summary: Get Product Details
       description: This endpoint allows you get the details of a product.
@@ -257,7 +267,7 @@ paths:
       tags:
         - Product
       security:
-        - APIKey: []
+        - APIKey: [admin]
       requestBody:
         description: |
           An form-data containing the new details.
@@ -269,6 +279,7 @@ paths:
                 name:
                   type: string
                   description: The name of the product.
+                  example: "sample item"
                 image:
                   type: string
                   format: binary
@@ -277,18 +288,15 @@ paths:
                   type: number
                   format: float
                   description: The price of the product.
+                  example: 50
                 description:
                   type: string
                   description: The description of the product.
+                  example: "sample description"
                 soldCount:
                   type: integer
                   description: The total number of units sold.
-              example:
-                name: "sample_item"
-                image: "/C:/Users/asus/Downloads/furniture pics/1016430_PE830391_S3.webp"
-                price: 50
-                description: "sample_description"
-                soldCount: 35
+                  example: 35
       responses:
         "200":
           description: Successful response. Returns the status of the operation.
@@ -300,3 +308,5 @@ paths:
                   msg:
                     type: string
                     description: The status of the operation.
+                example:
+                  msg: "product saved succesfully"

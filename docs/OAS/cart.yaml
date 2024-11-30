@@ -1,0 +1,317 @@
+openapi: 3.0.0
+info:
+  description: This file contains the OpenAPI specifications for the Cart APIs of **The Furniture Bros**.
+  title: The Furniture Bros Cart OpenAPI Specifications
+  version: 1.0.0
+servers:
+  - url: http://thefurniturebros.com
+    description: Production server
+  - url: http://localhost:5000
+    description: Local server
+components:
+  securitySchemes:
+    APIKey:
+      type: apiKey
+      in: header
+      name: "Authorization"
+      description: |
+        Provide your API key.
+paths:
+  /cart/add:
+    post:
+      summary: Add Items to Cart
+      description: |
+        This endpoint allows you add items to your cart.
+        <div class="info-box">
+          <h4><i class="fas fa-info-circle"></i> Note:</h4>
+          <p>You can only add items to your cart if you are a regular user. Users with admin privilege can't add items to cart.</p>
+        </div>
+      tags:
+        - Cart
+      security:
+        - APIKey: []
+      requestBody:
+        description: |
+          An object containing the parameters to add items.
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - productId
+                - quantity
+              properties:
+                productId:
+                  type: string
+                  description: |
+                    The ID of the product. You can use the `GET Product list` endpoint to view available products and it's ID.
+                quantity:
+                  type: integer
+                  description: |
+                    The quantity of items to add.
+              example:
+                productId: "6555a2269feeac7dccd9b1f2"
+                quantity: 20
+      responses:
+        "200":
+          description: Successful response. Returns the result of the operation.
+          content:
+            text/plain:
+              schema:
+                type: string
+                description: Successful operation.
+                example: "POST REQUEST SUCCESS"
+        "400":
+          description: See message description.
+        "500":
+          description: see message description.
+  /cart/items:
+    get:
+      summary: Get Cart Items
+      description: |
+        This endpoint allows you get the current items in your cart.
+      tags:
+        - Cart
+      security:
+        - APIKey: []
+      responses:
+        "200":
+          description: Successful response. Returns the list of items in your cart.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  _id:
+                    type: string
+                    description: Unique identifier for the order
+                  user:
+                    type: object
+                    description: Information about the user who placed the order
+                    properties:
+                      _id:
+                        type: string
+                        description: Unique identifier for the user
+                      name:
+                        type: string
+                        description: Name of the user
+                      email:
+                        type: string
+                        description: Email address of the user
+                  items:
+                    type: array
+                    description: List of items in the order
+                    items:
+                      type: object
+                      properties:
+                        product:
+                          type: object
+                          description: Details about the product.
+                          properties:
+                            _id:
+                              type: string
+                              description: Unique identifier for the product.
+                            name:
+                              type: string
+                              description: Name of the product.
+                            image:
+                              type: string
+                              description: Image filename of the product.
+                            price:
+                              type: number
+                              description: Price of the product.
+                            description:
+                              type: string
+                              description: Description of the product.
+                            soldCount:
+                              type: integer
+                              description: Number of units sold.
+                            __v:
+                              type: integer
+                              description: The version of the product. The version increases whenever the product is modified.
+                        quantity:
+                          type: integer
+                          description: Quantity of the product ordered.
+                        _id:
+                          type: string
+                          description: Unique identifier for the item in the order.
+                  __v:
+                    type: integer
+                    description: The version of the cart. The version increases whenever the cart is modified.
+                example:
+                  _id: "6556aed27e6cd0b318dbb08d"
+                  user:
+                    _id: "6555a0f89feeac7dccd9b1dd"
+                    name: "first account"
+                    email: "first_account@gmail.com"
+                  items:
+                    - product:
+                        _id: "6555a2269feeac7dccd9b1f2"
+                        name: "White desk"
+                        image: "1700110886749.webp"
+                        price: 60
+                        description: "Maecenas at justo eu eros ultrices vulputate vitae at augue."
+                        soldCount: 99
+                        __v: 0
+                      quantity: 20
+                      _id: "67498e75990ee7506c8ee954"
+                    - product:
+                        _id: "655fefee60b5a0bcc0a9313c"
+                        name: "stool"
+                        image: "1700786158091.webp"
+                        price: 60
+                        description: "Umde"
+                        soldCount: 1
+                        __v: 0
+                      quantity: 25
+                      _id: "67498e82990ee7506c8ee958"
+                  __v: 100
+
+        "400":
+          description: See message description.
+        "500":
+          description: see message description.
+  /cart/edit:
+    put:
+      summary: Edit Cart Items
+      description: This endpoint allows you to update the quantity of a product in the cart.
+      tags:
+        - Cart
+      security:
+        - APIKey: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - productId
+                - quantity
+              properties:
+                productId:
+                  type: string
+                  description: Unique identifier of the product to update.
+                quantity:
+                  type: integer
+                  description: New quantity of the product.
+              example:
+                productId: "655fefee60b5a0bcc0a9313c"
+                quantity: 40
+      responses:
+        "200":
+          description: Successful response. Returns the items in the cart.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  _id:
+                    type: string
+                    description: Unique identifier for the cart.
+                  user:
+                    type: string
+                    description: Unique identifier for the user who owns the cart.
+                  items:
+                    type: array
+                    description: List of items in the cart.
+                    items:
+                      type: object
+                      properties:
+                        product:
+                          type: string
+                          description: Unique identifier for the product.
+                        quantity:
+                          type: integer
+                          description: Quantity of the product in the cart.
+                        _id:
+                          type: string
+                          description: Unique identifier for the item in the cart.
+                  __v:
+                    type: integer
+                    description: The version of the cart. The version increases whenever the cart is modified.
+                example:
+                  _id: "6556aed27e6cd0b318dbb08d"
+                  user: "6555a0f89feeac7dccd9b1dd"
+                  items:
+                    - product: "6555a2269feeac7dccd9b1f2"
+                      quantity: 30
+                      _id: "67498e75990ee7506c8ee954"
+                    - product: "655fefee60b5a0bcc0a9313c"
+                      quantity: 40
+                      _id: "67498e82990ee7506c8ee958"
+                  __v: 100
+        "400":
+          description: See message description.
+        "500":
+          description: see message description.
+  /cart/delete:
+    delete:
+      summary: Remove Items from Cart
+      description: This endpoint allows you to delete specified items from the user's cart.
+      tags:
+        - Cart
+      security:
+        - APIKey: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                items:
+                  type: array
+                  description: List of product IDs to remove from the cart.
+                  items:
+                    type: string
+                  example:
+                    - "67498e75990ee7506c8ee954"
+      responses:
+        "200":
+          description: Successful response. Returns the updated cart after deletion.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  _id:
+                    type: string
+                    description: Unique identifier for the cart.
+                  user:
+                    type: string
+                    description: Unique identifier for the user who owns the cart.
+                  items:
+                    type: array
+                    description: List of remaining items in the cart.
+                    items:
+                      type: object
+                      properties:
+                        product:
+                          type: string
+                          description: Unique identifier for the product.
+                        quantity:
+                          type: integer
+                          description: Quantity of the product in the cart.
+                        _id:
+                          type: string
+                          description: Unique identifier for the item in the cart.
+                  __v:
+                    type: integer
+                    description: The version of the cart. The version increases whenever the cart is modified.
+                example:
+                  _id: "6556aed27e6cd0b318dbb08d"
+                  user: "6555a0f89feeac7dccd9b1dd"
+                  items:
+                    - product: "655fefee60b5a0bcc0a9313c"
+                      quantity: 40
+                      _id: "67498e82990ee7506c8ee958"
+                    - product: "65653baad868691c42306f7f"
+                      quantity: 41
+                      _id: "6749904c990ee7506c8ee97d"
+                  __v: 101
+        "400":
+          description: See message description.
+        "500":
+          description: see message description.
