@@ -1,0 +1,287 @@
+openapi: 3.0.0
+info:
+  description: This file contains the OpenAPI specifications for the Statistics APIs of **The Furniture Bros**.
+  title: The Furniture Bros Statistics OpenAPI Specifications
+  version: 1.0.0
+servers:
+  - url: http://thefurniturebros.com
+    description: Production server
+  - url: http://localhost:5000
+    description: Local server
+components:
+  securitySchemes:
+    APIKey:
+      type: apiKey
+      in: header
+      name: "Authorization"
+      description: |
+        Provide your API key.
+paths:
+  /stats/dashboard:
+    get:
+      summary: Retrieve Dashboard Statistics
+      description: |
+        This endpoint provides a summary of key metrics for the dashboard, including:
+        - Total orders and their statuses (pending, delivery, and completed).
+        - Total users and total products.
+        Each metric includes a text label, count, and a link for further details.
+      tags:
+        - Statistics
+      security:
+        - APIKey: [admin]
+      responses:
+        "200":
+          description: Successful response. Returns a summary of dashboard statistics.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    text:
+                      type: string
+                      description: A descriptive label for the statistic.
+                    count:
+                      type: integer
+                      description: The numeric value of the statistic.
+                    link:
+                      type: string
+                      description: A relative URL for detailed information about the statistic.
+                  required:
+                    - text
+                    - count
+                    - link
+              example:
+                - text: "All orders"
+                  count: 49
+                  link: "orders"
+                - text: "Pending orders"
+                  count: 22
+                  link: "orders/pending"
+                - text: "Delivered orders"
+                  count: 12
+                  link: "orders/delivery"
+                - text: "Completed orders"
+                  count: 15
+                  link: "orders/completed"
+                - text: "Total users"
+                  count: 58
+                  link: "users"
+                - text: "Total products"
+                  count: 8
+                  link: "products"
+        "400":
+          description: See message description.
+        "500":
+          description: see message description.
+  /stats/productTable/{page}:
+    get:
+      summary: Get Product Statistics
+      description: |
+        This endpoint retrieves product statistics for the specified page, including:
+        - Total products sold (`soldCount`).
+        - Breakdown of product orders by status (`pending`, `delivery`, `completed`) with counts and total quantities.
+      tags:
+        - Statistics
+      security:
+        - APIKey: [admin]
+      parameters:
+        - name: page
+          in: path
+          required: true
+          description: The page number for paginated product statistics.
+          schema:
+            type: integer
+            minimum: 1
+      responses:
+        "200":
+          description: Successful response. Returns a paginated list of product statistics.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    product:
+                      type: string
+                      description: Unique identifier for the product.
+                    name:
+                      type: string
+                      description: Name of the product.
+                    soldCount:
+                      type: integer
+                      description: Total number of units sold.
+                    counts:
+                      type: object
+                      description: Breakdown of orders by status.
+                      properties:
+                        pending:
+                          type: object
+                          properties:
+                            count:
+                              type: integer
+                              description: Number of pending orders.
+                            totalQuantity:
+                              type: integer
+                              description: Total quantity of products in pending orders.
+                        delivery:
+                          type: object
+                          properties:
+                            count:
+                              type: integer
+                              description: Number of delivery orders.
+                            totalQuantity:
+                              type: integer
+                              description: Total quantity of products in delivery orders.
+                        completed:
+                          type: object
+                          properties:
+                            count:
+                              type: integer
+                              description: Number of completed orders.
+                            totalQuantity:
+                              type: integer
+                              description: Total quantity of products in completed orders.
+                  required:
+                    - product
+                    - name
+                    - soldCount
+                    - counts
+              example:
+                - product: "6555a1f49feeac7dccd9b1ee"
+                  name: "brown tablede"
+                  soldCount: 90
+                  counts:
+                    delivery:
+                      count: 6
+                      totalQuantity: 12
+                    completed:
+                      count: 7
+                      totalQuantity: 30
+                    pending:
+                      count: 13
+                      totalQuantity: 74
+                - product: "655ff05e60b5a0bcc0a9314e"
+                  name: "Regular table"
+                  soldCount: 31
+                  counts:
+                    delivery:
+                      count: 1
+                      totalQuantity: 1
+                    completed:
+                      count: 2
+                      totalQuantity: 2
+                    pending:
+                      count: 4
+                      totalQuantity: 11
+        "400":
+          description: See message description.
+        "500":
+          description: see message description.
+  /stats/orders/all/{page}:
+    get:
+      summary: Get All Orders
+      description: |
+        This endpoint retrieves order statistics for the specified page.
+      tags:
+        - Statistics
+      security:
+        - APIKey: [admin]
+      parameters:
+        - name: page
+          in: path
+          required: true
+          description: The page number for pagination.
+          schema:
+            type: integer
+            example: 1
+      responses:
+        "200":
+          description: A list of orders.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  totalOrders:
+                    type: integer
+                    description: Total number of orders.
+                    example: 49
+                  orders:
+                    type: array
+                    description: List of all orders.
+                    items:
+                      type: object
+                      properties:
+                        _id:
+                          type: string
+                          description: Unique identifier for the order.
+                          example: "674b37b8dc3d9360b4c32e72"
+                        user:
+                          type: object
+                          description: User who placed the order.
+                          properties:
+                            _id:
+                              type: string
+                              description: Unique identifier for the user.
+                              example: "672050a27def4d23ffcb5166"
+                            email:
+                              type: string
+                              description: Email address of the user.
+                              example: "first123_29@gmail.com"
+                        items:
+                          type: array
+                          description: List of items in the order.
+                          items:
+                            type: object
+                            properties:
+                              product:
+                                type: object
+                                description: Product details.
+                                properties:
+                                  _id:
+                                    type: string
+                                    description: Unique identifier for the product.
+                                    example: "6555a1f49feeac7dccd9b1ee"
+                                  name:
+                                    type: string
+                                    description: Name of the product.
+                                    example: "brown tablede"
+                                  price:
+                                    type: number
+                                    description: Price of the product.
+                                    example: 30
+                              quantity:
+                                type: integer
+                                description: Quantity of the product ordered.
+                                example: 4
+                              shipping:
+                                type: string
+                                description: Shipping method selected for the item.
+                                example: "Regular"
+                              _id:
+                                type: string
+                                description: Unique identifier for the item in the order.
+                                example: "674b37b8dc3d9360b4c32e73"
+                        status:
+                          type: string
+                          description: Current status of the order.
+                          example: "pending"
+                        address:
+                          type: string
+                          description: Shipping address for the order.
+                          example: "Tester Dr, Blackwood SA 5051, Australia"
+                        createdAt:
+                          type: string
+                          description: Date when the order was created.
+                          example: "30 Nov 2024"
+                        __v:
+                          type: integer
+                          description: Version key for the order document.
+                          example: 0
+        "400":
+          description: See message description.
+        "500":
+          description: see message description.
