@@ -1,7 +1,7 @@
 openapi: 3.0.0
 info:
-  description: This file contains the OpenAPI specifications for the Cart APIs of **The Furniture Bros**.
-  title: The Furniture Bros Cart OpenAPI Specifications
+  description: This file contains the OpenAPI specifications for the Checkout APIs of **The Furniture Bros**.
+  title: The Furniture Bros Checkout OpenAPI Specifications
   version: 1.0.0
 servers:
   - url: http://thefurniturebros.com
@@ -84,7 +84,7 @@ paths:
           description: see message description.
   /address/api_key:
     get:
-      summary: Get API key
+      summary: Get Google Places Key
       description: This endpoint allows you to get the API key for Google Places API. Learn more [here](https://developers.google.com/maps/documentation/places/web-service).
       tags:
         - Checkout
@@ -105,7 +105,7 @@ paths:
           description: see message description.
   /address/add:
     post:
-      summary: Add address
+      summary: Add an Address
       description: This endpoint allows you to add an address for the user.
       tags:
         - Checkout
@@ -140,7 +140,7 @@ paths:
           description: see message description.
   /address/select:
     post:
-      summary: Select address
+      summary: Select Main Address
       description: This endpoint allows you to select the main address of the user.
       tags:
         - Checkout
@@ -211,7 +211,7 @@ paths:
           description: see message description.
   /address/delete:
     delete:
-      summary: Delete address
+      summary: Delete an Address
       description: This endpoint allows you to delete an address.
       tags:
         - Checkout

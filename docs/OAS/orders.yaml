@@ -1,0 +1,322 @@
+openapi: 3.0.0
+info:
+  description: This file contains the OpenAPI specifications for the Orders APIs of **The Furniture Bros**.
+  title: The Furniture Bros Orders OpenAPI Specifications
+  version: 1.0.0
+servers:
+  - url: http://thefurniturebros.com
+    description: Production server
+  - url: http://localhost:5000
+    description: Local server
+components:
+  securitySchemes:
+    APIKey:
+      type: apiKey
+      in: header
+      name: "Authorization"
+      description: |
+        Provide your API key.
+paths:
+  /orders/get_all:
+    get:
+      summary: Get all Orders
+      description: |
+        This endpoint allows you to get the orders of the user. Order can either be:
+        - `pending`: Order is in the `pending` state. It has not been delivered. 
+        - `delivery`: Order is in the `delivery` state. It is still in shipment and not completed.
+        - `completed`: Order is completed an finalized. 
+
+        To change the status of an order, use the **POST Edit Orders** endpoint.
+      tags:
+        - Orders
+      security:
+        - APIKey: []
+      responses:
+        "200":
+          description: Successful response. Returns all of the user's orders.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    orderId:
+                      type: string
+                      description: Unique identifier for the order.
+                    productId:
+                      type: string
+                      description: Unique identifier for the product in the order.
+                    image:
+                      type: string
+                      description: File name of the product's image.
+                    name:
+                      type: string
+                      description: Name of the product.
+                    price:
+                      type: number
+                      description: Price of the product (in dollars).
+                    quantity:
+                      type: integer
+                      description: Quantity of the product in the order.
+                    shipping:
+                      type: string
+                      description: Shipping type (e.g., "Regular").
+                    status:
+                      type: string
+                      description: Current status of the order (e.g., "pending").
+                    createdAt:
+                      type: string
+                      description: Date the order was created.
+                    orderNum:
+                      type: integer
+                      description: Order number associated with the transaction.
+              example:
+                - orderId: 674b37b8dc3d9360b4c32e72
+                  productId: 6555a1f49feeac7dccd9b1ee
+                  image: 1700110836527.webp
+                  name: brown tablede
+                  price: 30
+                  quantity: 4
+                  shipping: Regular
+                  status: pending
+                  createdAt: November 30, 2024
+                  orderNum: 1
+                - orderId: 674b37b8dc3d9360b4c32e72
+                  productId: 655ff05e60b5a0bcc0a9314e
+                  image: 1700786270864.webp
+                  name: Regular table
+                  price: 100
+                  quantity: 4
+                  shipping: Regular
+                  status: pending
+                  createdAt: November 30, 2024
+                  orderNum: 1
+        "400":
+          description: See message description.
+        "500":
+          description: see message description.
+  /orders/add:
+    post:
+      summary: Add New Order
+      description: |
+        This endpoint allows users to create a new order by providing the list of items they want to purchase along with the shipping address. 
+        - Each item must include the product ID, quantity, and shipping type.
+        - The address field specifies the delivery address for the order.
+      tags:
+        - Orders
+      security:
+        - APIKey: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                items:
+                  type: array
+                  description: A list of items to include in the order.
+                  items:
+                    type: object
+                    properties:
+                      product:
+                        type: string
+                        description: Unique identifier of the product.
+                      quantity:
+                        type: integer
+                        description: Number of units of the product.
+                      shipping:
+                        type: string
+                        description: Type of shipping for the product (e.g., "Regular").
+                    required:
+                      - product
+                      - quantity
+                      - shipping
+                  example:
+                    - product: "655ff05e60b5a0bcc0a9314e"
+                      quantity: 15
+                      shipping: "Regular"
+                    - product: "656427ab575db1ee43d46b57"
+                      quantity: 10
+                      shipping: "Regular"
+                address:
+                  type: string
+                  description: Delivery address for the order.
+                  example: Post Office Pl, Carlton VIC 3053, Australia
+              required:
+                - items
+                - address
+      responses:
+        "200":
+          description: Successful response. The order has been created successfully.
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: ORDER SUCCESS
+        "400":
+          description: See message description.
+        "500":
+          description: see message description.
+  /orders/change-status:
+    post:
+      summary: Change Order Status
+      description: |
+        This endpoint allows users to update the status of one or more orders. Valid status values include:
+          - `pending`: The order has not been delivered.
+          - `delivery`: The order is in shipment.
+          - `completed`: The order is finalized and delivered.
+
+        Users must provide the `orderId` and the new `status` for each order.
+      tags:
+        - Orders
+      security:
+        - APIKey: [admin]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                items:
+                  type: array
+                  description: A list of orders with their new statuses.
+                  items:
+                    type: object
+                    properties:
+                      orderId:
+                        type: string
+                        description: Unique identifier for the order.
+                      status:
+                        type: string
+                        description: The new status for the order.
+                        enum:
+                          - pending
+                          - delivery
+                          - completed
+                    required:
+                      - orderId
+                      - status
+                  example:
+                    - orderId: "674b46f1dc3d9360b4c32ee2"
+                      status: "delivery"
+                    - orderId: "674b46a8dc3d9360b4c32ede"
+                      status: "completed"
+              required:
+                - items
+      responses:
+        "200":
+          description: Successful response. Returns the updated orders with their details.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    _id:
+                      type: string
+                      description: Unique identifier for the order.
+                    user:
+                      type: string
+                      description: Unique identifier for the user who placed the order.
+                    items:
+                      type: array
+                      description: A list of items in the order.
+                      items:
+                        type: object
+                        properties:
+                          product:
+                            type: string
+                            description: Unique identifier for the product in the order.
+                          quantity:
+                            type: integer
+                            description: Number of units of the product.
+                          shipping:
+                            type: string
+                            description: Shipping type (e.g., "Regular").
+                          _id:
+                            type: string
+                            description: Unique identifier for the item in the order.
+                    status:
+                      type: string
+                      description: Current status of the order.
+                    address:
+                      type: string
+                      description: Delivery address for the order.
+                    createdAt:
+                      type: string
+                      format: date-time
+                      description: Timestamp when the order was created.
+                    __v:
+                      type: integer
+                      description: Internal versioning field.
+              example:
+                - _id: "674b46a8dc3d9360b4c32ede"
+                  user: "672050a27def4d23ffcb5166"
+                  items:
+                    - product: "6555a1f49feeac7dccd9b1ee"
+                      quantity: 4
+                      shipping: "Regular"
+                      _id: "674b46a8dc3d9360b4c32edf"
+                    - product: "6555a2779feeac7dccd9b201"
+                      quantity: 3
+                      shipping: "Regular"
+                      _id: "674b46a8dc3d9360b4c32ee0"
+                  status: "completed"
+        "400":
+          description: See message description.
+        "500":
+          description: see message description.
+  /orders/delete:
+    post:
+      summary: Delete Orders
+      description: |
+        This endpoint allows users to delete one or more orders. 
+        - Users must provide the `orderId` of each order to be deleted.
+        - The response confirms whether the operation was successful and the number of orders deleted.
+      tags:
+        - Orders
+      security:
+        - APIKey: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                orderId:
+                  type: array
+                  description: List of order IDs to be deleted.
+                  items:
+                    type: string
+                    description: Unique identifier for an order.
+                  example:
+                    - "674b46f1dc3d9360b4c32ee2"
+                    - "674b46a8dc3d9360b4c32ede"
+              required:
+                - orderId
+      responses:
+        "200":
+          description: Successful response. Confirms the number of deleted orders.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  acknowledged:
+                    type: boolean
+                    description: Indicates whether the deletion request was acknowledged.
+                  deletedCount:
+                    type: integer
+                    description: The number of orders successfully deleted.
+                example:
+                  acknowledged: true
+                  deletedCount: 2
+        "400":
+          description: See message description.
+        "500":
+          description: see message description.
