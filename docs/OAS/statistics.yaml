@@ -19,7 +19,7 @@ components:
 paths:
   /stats/dashboard:
     get:
-      summary: Retrieve User Statistics
+      summary: Get User Stats
       description: |
         This endpoint provides a summary of key metrics for the users shown in the admin dashboard, including:
         - Total orders and their statuses (pending, delivery, and completed).
@@ -77,7 +77,7 @@ paths:
           description: see message description.
   /stats/productTable/{page}:
     get:
-      summary: Get Product Statistics
+      summary: Get Product Stats
       description: |
         This endpoint retrieves product statistics for the specified page, including:
         - Total products sold (`soldCount`).
@@ -182,7 +182,7 @@ paths:
           description: see message description.
   /stats/orders/all/{page}:
     get:
-      summary: Get All Orders
+      summary: Get Order Stats
       description: |
         This endpoint retrieves order statistics for the specified page.
       tags:
