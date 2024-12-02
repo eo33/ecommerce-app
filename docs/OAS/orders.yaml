@@ -133,20 +133,21 @@ paths:
                       - product
                       - quantity
                       - shipping
-                  example:
-                    - product: "655ff05e60b5a0bcc0a9314e"
-                      quantity: 15
-                      shipping: "Regular"
-                    - product: "656427ab575db1ee43d46b57"
-                      quantity: 10
-                      shipping: "Regular"
                 address:
                   type: string
                   description: Delivery address for the order.
-                  example: Post Office Pl, Carlton VIC 3053, Australia
               required:
                 - items
                 - address
+              example:
+                items:
+                  - product: "655ff05e60b5a0bcc0a9314e"
+                    quantity: 15
+                    shipping: "Regular"
+                  - product: "656427ab575db1ee43d46b57"
+                    quantity: 10
+                    shipping: "Regular"
+                address: "Post Office Pl, Carlton VIC 3053, Australia"
       responses:
         "200":
           description: Successful response. The order has been created successfully.
@@ -199,13 +200,14 @@ paths:
                     required:
                       - orderId
                       - status
-                  example:
-                    - orderId: "674b46f1dc3d9360b4c32ee2"
-                      status: "delivery"
-                    - orderId: "674b46a8dc3d9360b4c32ede"
-                      status: "completed"
               required:
                 - items
+              example:
+                items:
+                  - orderId: "674b46f1dc3d9360b4c32ee2"
+                    status: "delivery"
+                  - orderId: "674b46a8dc3d9360b4c32ede"
+                    status: "completed"
       responses:
         "200":
           description: Successful response. Returns the updated orders with their details.
@@ -294,11 +296,12 @@ paths:
                   items:
                     type: string
                     description: Unique identifier for an order.
-                  example:
-                    - "674b46f1dc3d9360b4c32ee2"
-                    - "674b46a8dc3d9360b4c32ede"
               required:
                 - orderId
+              example:
+                orderId:
+                  - "674b46f1dc3d9360b4c32ee2"
+                  - "674b46a8dc3d9360b4c32ede"
       responses:
         "200":
           description: Successful response. Confirms the number of deleted orders.

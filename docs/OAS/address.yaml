@@ -92,13 +92,13 @@ paths:
         - APIKey: []
       responses:
         "200":
-          description: Successful response. Returns the items in the cart.
+          description: Successful response. The order has been created successfully.
           content:
             text/plain:
               schema:
                 type: string
                 description: The API key for Google Places.
-              example: "AIzaSyC6ASDCKAAS3G1E2EjRKlzk8TvHziasds"
+                example: AIzaSyC6ASDCKAAS3G1E2EjRKlzk8TvHziasds"
         "400":
           description: See message description.
         "500":
@@ -127,19 +127,18 @@ paths:
               address: "383 Kent St, Sydney NSW 2000, Australia"
       responses:
         "200":
-          description: Successful response.
+          description: Successful response. The order has been created successfully.
           content:
             text/plain:
               schema:
                 type: string
-                description: The status operation
-              example: "success"
+                example: success
         "400":
           description: See message description.
         "500":
           description: see message description.
   /address/select:
-    post:
+    put:
       summary: Select Main Address
       description: This endpoint allows you to select the main address of the user.
       tags:
