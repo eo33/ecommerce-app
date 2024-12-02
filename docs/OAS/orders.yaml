@@ -98,7 +98,7 @@ paths:
           description: see message description.
   /orders/add:
     post:
-      summary: Add New Order
+      summary: Add an Order
       description: |
         This endpoint allows users to create a new order by providing the list of items they want to purchase along with the shipping address. 
         - Each item must include the product ID, quantity, and shipping type.
@@ -161,7 +161,7 @@ paths:
           description: see message description.
   /orders/change-status:
     post:
-      summary: Change Order Status
+      summary: Edit Orders
       description: |
         This endpoint allows users to update the status of one or more orders. Valid status values include:
           - `pending`: The order has not been delivered.
