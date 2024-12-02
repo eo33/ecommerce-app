@@ -19,9 +19,9 @@ components:
 paths:
   /stats/dashboard:
     get:
-      summary: Retrieve Dashboard Statistics
+      summary: Retrieve User Statistics
       description: |
-        This endpoint provides a summary of key metrics for the dashboard, including:
+        This endpoint provides a summary of key metrics for the users shown in the admin dashboard, including:
         - Total orders and their statuses (pending, delivery, and completed).
         - Total users and total products.
         Each metric includes a text label, count, and a link for further details.
