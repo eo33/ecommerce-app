@@ -1,7 +1,7 @@
 openapi: 3.0.0
 info:
-  description: This file contains the OpenAPI specifications for the Checkout APIs of **The Furniture Bros**.
-  title: The Furniture Bros Checkout OpenAPI Specifications
+  description: This file contains the OpenAPI specifications for the Address APIs of **The Furniture Bros**.
+  title: The Furniture Bros Address OpenAPI Specifications
   version: 1.0.0
 servers:
   - url: https://thefurniturebros.com
