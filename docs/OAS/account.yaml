@@ -4,9 +4,9 @@ info:
   title: The Furniture Bros Account OpenAPI Specifications
   version: 1.0.0
 servers:
-  - url: https://thefurniturebros.com
+  - url: http://thefurniturebros.com
     description: Production server
-  - url: https://localhost:5000
+  - url: http://localhost:5000
     description: Local server
 components:
   securitySchemes:

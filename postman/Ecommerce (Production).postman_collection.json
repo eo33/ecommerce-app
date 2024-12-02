@@ -1,0 +1,991 @@
+{
+	"info": {
+		"_postman_id": "e1b13d7b-2be0-4c50-9831-d1e3d49cb67d",
+		"name": "Ecommerce (Production)",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "39773026"
+	},
+	"item": [
+		{
+			"name": "Account",
+			"item": [
+				{
+					"name": "Register an Account",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"John Dane\",\r\n    \"email\":\"jon_dane@gmail.com\",\r\n    \"password\":\"123456\",\r\n    \"admin\": false\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://thefurniturebros.com/auth/register",
+							"protocol": "https",
+							"host": [
+								"thefurniturebros",
+								"com"
+							],
+							"path": [
+								"auth",
+								"register"
+							]
+						},
+						"description": "This endpoint allows you to register a user. Once registered, it will return an API key."
+					},
+					"response": []
+				},
+				{
+					"name": "Get an API key",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\":\"first_account@gmail.com\",\r\n    \"password\":\"123456\"\r\n}\r\n"
+						},
+						"url": {
+							"raw": "https://thefurniturebros.com/auth/login",
+							"protocol": "https",
+							"host": [
+								"thefurniturebros",
+								"com"
+							],
+							"path": [
+								"auth",
+								"login"
+							]
+						},
+						"description": "This endpoint allows you to login to an account and retrieve an API key."
+					},
+					"response": []
+				},
+				{
+					"name": "Validate API key",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjU1NWEwZjg5ZmVlYWM3ZGNjZDliMWRkIiwiYWRtaW4iOmZhbHNlfSwiaWF0IjoxNzMyODYzNjAwLCJleHAiOjE3MzI4OTk2MDB9.T181N1OJxwnyexjICaU8MvuI_NIzKUnYNI9pS1Sllls",
+								"type": "default"
+							}
+						],
+						"url": {
+							"raw": "https://thefurniturebros.com/auth/validate",
+							"protocol": "https",
+							"host": [
+								"thefurniturebros",
+								"com"
+							],
+							"path": [
+								"auth",
+								"validate"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Users",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "value",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjc0ODYwZGY4ZGQxZmYzZDNlYjk0NGViIiwiYWRtaW4iOnRydWV9LCJpYXQiOjE3MzI3OTY2MzksImV4cCI6MTczMjgzMjYzOX0.By67bjeFbf68jXxiXldj8FApcMxszl6VUnUnpPwM_pk",
+									"type": "string"
+								},
+								{
+									"key": "key",
+									"value": "Authorization",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjc0ODYwZGY4ZGQxZmYzZDNlYjk0NGViIiwiYWRtaW4iOnRydWV9LCJpYXQiOjE3MzI3OTY2MzksImV4cCI6MTczMjgzMjYzOX0.By67bjeFbf68jXxiXldj8FApcMxszl6VUnUnpPwM_pk",
+								"type": "default",
+								"disabled": true
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"totalUsers\": 51,\r\n    \"adminUsers\": 11,\r\n    \"regularUsers\": 40,\r\n    \"users\": [\r\n        {\r\n            \"_id\": \"6555a0f89feeac7dccd9b1dd\",\r\n            \"name\": \"first account\",\r\n            \"email\": \"first_account@gmail.com\",\r\n            \"password\": \"$2a$10$jK1bvjH7D/pdjI6mVb9uSuXMeWwcFwhlBYIh7Wqf0CLsey9I3Epx2\",\r\n            \"admin\": false,\r\n            \"__v\": 0\r\n        }\r\n    ]\r\n}"
+						},
+						"url": {
+							"raw": "https://thefurniturebros.com/users/get_all/1",
+							"protocol": "https",
+							"host": [
+								"thefurniturebros",
+								"com"
+							],
+							"path": [
+								"users",
+								"get_all",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Edit User Details",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjc0NjA1YTJhMThjMmYzOGYyMTQ4NjAxIiwiYWRtaW4iOnRydWV9LCJpYXQiOjE3MzI3OTM1MTQsImV4cCI6MTczMjgyOTUxNH0.1IAEOLaQT7Z_08iW0515nRfKRUP7WIfB0gcH80FFfjk",
+								"type": "default"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userId\": \"674605a2a18c2f38f2148601\",\r\n    \"newName\": \"Jane Doe2\",\r\n    \"newEmail\": \"jane_example@gmail.com\",\r\n    \"newAdminStatus\": \"true\"\r\n}"
+						},
+						"url": {
+							"raw": "https://thefurniturebros.com/users/edit",
+							"protocol": "https",
+							"host": [
+								"thefurniturebros",
+								"com"
+							],
+							"path": [
+								"users",
+								"edit"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Product",
+			"item": [
+				{
+					"name": "Get Product list",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://thefurniturebros.com/products",
+							"protocol": "https",
+							"host": [
+								"thefurniturebros",
+								"com"
+							],
+							"path": [
+								"products"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get a Product Image",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://thefurniturebros.com/products/{{filename}}",
+							"protocol": "https",
+							"host": [
+								"thefurniturebros",
+								"com"
+							],
+							"path": [
+								"products",
+								"{{filename}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Edit a Product",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "multipart/form-data",
+								"type": "default"
+							},
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjc0NjA1YTJhMThjMmYzOGYyMTQ4NjAxIiwiYWRtaW4iOnRydWV9LCJpYXQiOjE3MzI3OTM1MTQsImV4cCI6MTczMjgyOTUxNH0.1IAEOLaQT7Z_08iW0515nRfKRUP7WIfB0gcH80FFfjk",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "brown tablede",
+									"type": "default"
+								},
+								{
+									"key": "image",
+									"type": "file",
+									"src": "/C:/Users/asus/Downloads/furniture pics/0737704_PE741220_S3.webp"
+								},
+								{
+									"key": "price",
+									"value": "30",
+									"type": "default"
+								},
+								{
+									"key": "description",
+									"value": "this is a new desc 29 Nov 2.28pm",
+									"type": "default"
+								},
+								{
+									"key": "soldCount",
+									"value": "90",
+									"type": "default"
+								}
+							]
+						},
+						"url": {
+							"raw": "https://thefurniturebros.com/products/{{filename}}",
+							"protocol": "https",
+							"host": [
+								"thefurniturebros",
+								"com"
+							],
+							"path": [
+								"products",
+								"{{filename}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete a Product",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "default"
+							},
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjc0NjA1YTJhMThjMmYzOGYyMTQ4NjAxIiwiYWRtaW4iOnRydWV9LCJpYXQiOjE3MzI3OTM1MTQsImV4cCI6MTczMjgyOTUxNH0.1IAEOLaQT7Z_08iW0515nRfKRUP7WIfB0gcH80FFfjk",
+								"type": "default",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "https://thefurniturebros.com/products/{{filename}}",
+							"protocol": "https",
+							"host": [
+								"thefurniturebros",
+								"com"
+							],
+							"path": [
+								"products",
+								"{{filename}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Product Details",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://thefurniturebros.com/products/details/{{filename}}",
+							"protocol": "https",
+							"host": [
+								"thefurniturebros",
+								"com"
+							],
+							"path": [
+								"products",
+								"details",
+								"{{filename}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Upload a Product",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "multipart/form-data",
+								"type": "default"
+							},
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjU1NWEwZjg5ZmVlYWM3ZGNjZDliMWRkIiwiYWRtaW4iOmZhbHNlfSwiaWF0IjoxNzMyODYzNjAwLCJleHAiOjE3MzI4OTk2MDB9.T181N1OJxwnyexjICaU8MvuI_NIzKUnYNI9pS1Sllls",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "test_item6 29 nov",
+									"type": "text"
+								},
+								{
+									"key": "image",
+									"type": "file",
+									"src": "/C:/Users/asus/Downloads/furniture pics/0736929_PE740809_S3.webp"
+								},
+								{
+									"key": "price",
+									"value": "40",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "new description 29 nov 230pm",
+									"type": "text"
+								},
+								{
+									"key": "soldCount",
+									"value": "35",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "https://thefurniturebros.com/products/upload",
+							"protocol": "https",
+							"host": [
+								"thefurniturebros",
+								"com"
+							],
+							"path": [
+								"products",
+								"upload"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Cart",
+			"item": [
+				{
+					"name": "Add Items to Cart",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjU1NWEwZjg5ZmVlYWM3ZGNjZDliMWRkIiwiYWRtaW4iOmZhbHNlfSwiaWF0IjoxNzMyODczNzc1LCJleHAiOjE3MzI5MDk3NzV9.xfi5CmsgdAWh9d-l1YyPMReOUDl38AB0zYL2WcJPxlc",
+								"type": "default"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"productId\": \"655fefee60b5a0bcc0a9313c\",\r\n    \"quantity\":25\r\n}"
+						},
+						"url": {
+							"raw": "http://thefurniturebros.com/cart/add",
+							"protocol": "http",
+							"host": [
+								"thefurniturebros",
+								"com"
+							],
+							"path": [
+								"cart",
+								"add"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Cart Items",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjU1NWEwZjg5ZmVlYWM3ZGNjZDliMWRkIiwiYWRtaW4iOmZhbHNlfSwiaWF0IjoxNzMyODczNzc1LCJleHAiOjE3MzI5MDk3NzV9.xfi5CmsgdAWh9d-l1YyPMReOUDl38AB0zYL2WcJPxlc",
+								"type": "default"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "default"
+							}
+						],
+						"url": {
+							"raw": "http://thefurniturebros.com/cart/items",
+							"protocol": "http",
+							"host": [
+								"thefurniturebros",
+								"com"
+							],
+							"path": [
+								"cart",
+								"items"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Edit Cart Items",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjU1NWEwZjg5ZmVlYWM3ZGNjZDliMWRkIiwiYWRtaW4iOmZhbHNlfSwiaWF0IjoxNzMyODczNzc1LCJleHAiOjE3MzI5MDk3NzV9.xfi5CmsgdAWh9d-l1YyPMReOUDl38AB0zYL2WcJPxlc",
+								"type": "default"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"productId\": \"655fefee60b5a0bcc0a9313c\",\r\n    \"quantity\": 40\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://thefurniturebros.com/cart/edit",
+							"protocol": "http",
+							"host": [
+								"thefurniturebros",
+								"com"
+							],
+							"path": [
+								"cart",
+								"edit"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Remove Items from Cart",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjU1NWEwZjg5ZmVlYWM3ZGNjZDliMWRkIiwiYWRtaW4iOmZhbHNlfSwiaWF0IjoxNzMyODczNzc1LCJleHAiOjE3MzI5MDk3NzV9.xfi5CmsgdAWh9d-l1YyPMReOUDl38AB0zYL2WcJPxlc",
+								"type": "default"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"items\": [\"67498e75990ee7506c8ee954\"]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://thefurniturebros.com/cart/delete",
+							"protocol": "http",
+							"host": [
+								"thefurniturebros",
+								"com"
+							],
+							"path": [
+								"cart",
+								"delete"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Address",
+			"item": [
+				{
+					"name": "Get Addresses",
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "value",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjU1NWEwZjg5ZmVlYWM3ZGNjZDliMWRkIiwiYWRtaW4iOmZhbHNlfSwiaWF0IjoxNzMyOTgxMzgzLCJleHAiOjE3MzMwMTczODN9.wlGWgUsOlj5g2dzNLJH9sQk-kdVd4WCE3frQcf1Zasc",
+									"type": "string"
+								},
+								{
+									"key": "key",
+									"value": "Authorization",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://thefurniturebros.com/address/list",
+							"protocol": "http",
+							"host": [
+								"thefurniturebros",
+								"com"
+							],
+							"path": [
+								"address",
+								"list"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Google Places Key",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjU1NWEwZjg5ZmVlYWM3ZGNjZDliMWRkIiwiYWRtaW4iOmZhbHNlfSwiaWF0IjoxNzMyOTgxMzgzLCJleHAiOjE3MzMwMTczODN9.wlGWgUsOlj5g2dzNLJH9sQk-kdVd4WCE3frQcf1Zasc",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://thefurniturebros.com/address/api_key",
+							"protocol": "http",
+							"host": [
+								"thefurniturebros",
+								"com"
+							],
+							"path": [
+								"address",
+								"api_key"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add an Address",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIazI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjU1NWEwZjg5ZmVlYWM3ZGNjZDliMWRkIiwiYWRtaW4iOmZhbHNlfSwiaWF0IjoxNzMyOTgxMzgzLCJleHAiOjE3MzMwMTczODN9.wlGWgUsOlj5g2dzNLJH9sQk-kdVd4WCE3frQcf1Zasc",
+								"type": "default"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"address\":\"NEWLY ADDRESSS\"\r\n}"
+						},
+						"url": {
+							"raw": "http://thefurniturebros.com/address/add",
+							"protocol": "http",
+							"host": [
+								"thefurniturebros",
+								"com"
+							],
+							"path": [
+								"address",
+								"add"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Select Main Address",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjU1NWEwZjg5ZmVlYWM3ZGNjZDliMWRkIiwiYWRtaW4iOmZhbHNlfSwiaWF0IjoxNzMyOTgxMzgzLCJleHAiOjE3MzMwMTczODN9.wlGWgUsOlj5g2dzNLJH9sQk-kdVd4WCE3frQcf1Zasc",
+								"type": "default"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"addressId\":\"65eacf844c51b2f201d9502d\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://thefurniturebros.com/address/select",
+							"protocol": "http",
+							"host": [
+								"thefurniturebros",
+								"com"
+							],
+							"path": [
+								"address",
+								"select"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": "",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete an Address",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjU1NWEwZjg5ZmVlYWM3ZGNjZDliMWRkIiwiYWRtaW4iOmZhbHNlfSwiaWF0IjoxNzMyOTgxMzgzLCJleHAiOjE3MzMwMTczODN9.wlGWgUsOlj5g2dzNLJH9sQk-kdVd4WCE3frQcf1Zasc",
+								"type": "default"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"addressId\":\"674b3347dc3d9360b4c32da3\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://thefurniturebros.com/address/delete",
+							"protocol": "http",
+							"host": [
+								"thefurniturebros",
+								"com"
+							],
+							"path": [
+								"address",
+								"delete"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": "",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Orders",
+			"item": [
+				{
+					"name": "Get all Orders",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjcyMDUwYTI3ZGVmNGQyM2ZmY2I1MTY2IiwiYWRtaW4iOmZhbHNlfSwiaWF0IjoxNzMyOTgyNTk5LCJleHAiOjE3MzMwMTg1OTl9.dI9A_RFdAczqnFcrYKxFLoKGk-okY6XZV8i1Nl4-WQI",
+								"type": "default"
+							}
+						],
+						"url": {
+							"raw": "http://thefurniturebros.com/orders/get_all",
+							"protocol": "http",
+							"host": [
+								"thefurniturebros",
+								"com"
+							],
+							"path": [
+								"orders",
+								"get_all"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add an Order",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjcyMDUwYTI3ZGVmNGQyM2ZmY2I1MTY2IiwiYWRtaW4iOmZhbHNlfSwiaWF0IjoxNzMyOTgyNTk5LCJleHAiOjE3MzMwMTg1OTl9.dI9A_RFdAczqnFcrYKxFLoKGk-okY6XZV8i1Nl4-WQI",
+								"type": "default"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"items\": [\r\n    {\r\n      \"product\": \"655ff05e60b5a0bcc0a9314e\",\r\n      \"quantity\": 15,\r\n      \"shipping\": \"Regular\"\r\n    },\r\n    {\r\n      \"product\": \"656427ab575db1ee43d46b57\",\r\n      \"quantity\": 10,\r\n      \"shipping\": \"Regular\"\r\n    }\r\n  ],\r\n  \"address\": \"Post Office Pl, Carlton VIC 3053, Australia\"\r\n}"
+						},
+						"url": {
+							"raw": "http://thefurniturebros.com/orders/add",
+							"protocol": "http",
+							"host": [
+								"thefurniturebros",
+								"com"
+							],
+							"path": [
+								"orders",
+								"add"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Edit Orders",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjU1NWExMjI5ZmVlYWM3ZGNjZDliMWU0IiwiYWRtaW4iOnRydWV9LCJpYXQiOjE3MzI5ODY5MjAsImV4cCI6MTczMzAyMjkyMH0.7-1m_z1e-TzPWvWKLiZ6STRuw3qdkBVWB-ltjYNNgkg",
+								"type": "default"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"items\":[\r\n        {\r\n            \"orderId\":\"674b46f1dc3d9360b4c32ee2\",\r\n            \"status\":\"delivery\"\r\n        },\r\n                {\r\n            \"orderId\":\"674b46a8dc3d9360b4c32ede\",\r\n            \"status\":\"completed\"\r\n        }\r\n    ]\r\n}"
+						},
+						"url": {
+							"raw": "http://thefurniturebros.com/orders/change-status",
+							"protocol": "http",
+							"host": [
+								"thefurniturebros",
+								"com"
+							],
+							"path": [
+								"orders",
+								"change-status"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Orders",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjU1NWExMjI5ZmVlYWM3ZGNjZDliMWU0IiwiYWRtaW4iOnRydWV9LCJpYXQiOjE3MzI5ODY5MjAsImV4cCI6MTczMzAyMjkyMH0.7-1m_z1e-TzPWvWKLiZ6STRuw3qdkBVWB-ltjYNNgkg",
+								"type": "default"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"orderId\": [\r\n    \"674b46f1dc3d9360b4c32ee2\",\r\n    \"674b46a8dc3d9360b4c32ede\"\r\n  ]\r\n}"
+						},
+						"url": {
+							"raw": "https://thefurniturebros.com/orders/delete",
+							"protocol": "https",
+							"host": [
+								"thefurniturebros",
+								"com"
+							],
+							"path": [
+								"orders",
+								"delete"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Statistics",
+			"item": [
+				{
+					"name": "Get Users Stats",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjU1NWExMjI5ZmVlYWM3ZGNjZDliMWU0IiwiYWRtaW4iOnRydWV9LCJpYXQiOjE3MzI5ODY5MjAsImV4cCI6MTczMzAyMjkyMH0.7-1m_z1e-TzPWvWKLiZ6STRuw3qdkBVWB-ltjYNNgkg",
+								"type": "default"
+							}
+						],
+						"url": {
+							"raw": "http://thefurniturebros.com/stats/dashboard",
+							"protocol": "http",
+							"host": [
+								"thefurniturebros",
+								"com"
+							],
+							"path": [
+								"stats",
+								"dashboard"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Products Stats",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjU1NWExMjI5ZmVlYWM3ZGNjZDliMWU0IiwiYWRtaW4iOnRydWV9LCJpYXQiOjE3MzI5ODY5MjAsImV4cCI6MTczMzAyMjkyMH0.7-1m_z1e-TzPWvWKLiZ6STRuw3qdkBVWB-ltjYNNgkg",
+								"type": "default"
+							}
+						],
+						"url": {
+							"raw": "http://thefurniturebros.com/stats/productTable/1",
+							"protocol": "http",
+							"host": [
+								"thefurniturebros",
+								"com"
+							],
+							"path": [
+								"stats",
+								"productTable",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Order Stats",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjU1NWExMjI5ZmVlYWM3ZGNjZDliMWU0IiwiYWRtaW4iOnRydWV9LCJpYXQiOjE3MzI5ODY5MjAsImV4cCI6MTczMzAyMjkyMH0.7-1m_z1e-TzPWvWKLiZ6STRuw3qdkBVWB-ltjYNNgkg",
+								"type": "default"
+							}
+						],
+						"url": {
+							"raw": "http://thefurniturebros.com/stats/orders/all/1",
+							"protocol": "http",
+							"host": [
+								"thefurniturebros",
+								"com"
+							],
+							"path": [
+								"stats",
+								"orders",
+								"all",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

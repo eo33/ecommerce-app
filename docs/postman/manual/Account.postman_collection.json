@@ -1,0 +1,199 @@
+{
+	"info": {
+		"_postman_id": "9853a264-6b8e-4e99-895e-955517377a68",
+		"name": "Account",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "39773026"
+	},
+	"item": [
+		{
+			"name": "Register an Account",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"John Dane\",\r\n    \"email\":\"jon_dane@gmail.com\",\r\n    \"password\":\"123456\",\r\n    \"admin\": false\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://thefurniturebros.com/auth/register",
+					"protocol": "https",
+					"host": [
+						"thefurniturebros",
+						"com"
+					],
+					"path": [
+						"auth",
+						"register"
+					]
+				},
+				"description": "This endpoint allows you to register a user. Once registered, it will return an API key."
+			},
+			"response": []
+		},
+		{
+			"name": "Get an API key",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\":\"first_account@gmail.com\",\r\n    \"password\":\"123456\"\r\n}\r\n"
+				},
+				"url": {
+					"raw": "https://thefurniturebros.com/auth/login",
+					"protocol": "https",
+					"host": [
+						"thefurniturebros",
+						"com"
+					],
+					"path": [
+						"auth",
+						"login"
+					]
+				},
+				"description": "This endpoint allows you to login to an account and retrieve an API key."
+			},
+			"response": []
+		},
+		{
+			"name": "Validate API key",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjU1NWEwZjg5ZmVlYWM3ZGNjZDliMWRkIiwiYWRtaW4iOmZhbHNlfSwiaWF0IjoxNzMyODYzNjAwLCJleHAiOjE3MzI4OTk2MDB9.T181N1OJxwnyexjICaU8MvuI_NIzKUnYNI9pS1Sllls",
+						"type": "default"
+					}
+				],
+				"url": {
+					"raw": "https://thefurniturebros.com/auth/validate",
+					"protocol": "https",
+					"host": [
+						"thefurniturebros",
+						"com"
+					],
+					"path": [
+						"auth",
+						"validate"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Users",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "value",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjc0ODYwZGY4ZGQxZmYzZDNlYjk0NGViIiwiYWRtaW4iOnRydWV9LCJpYXQiOjE3MzI3OTY2MzksImV4cCI6MTczMjgzMjYzOX0.By67bjeFbf68jXxiXldj8FApcMxszl6VUnUnpPwM_pk",
+							"type": "string"
+						},
+						{
+							"key": "key",
+							"value": "Authorization",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjc0ODYwZGY4ZGQxZmYzZDNlYjk0NGViIiwiYWRtaW4iOnRydWV9LCJpYXQiOjE3MzI3OTY2MzksImV4cCI6MTczMjgzMjYzOX0.By67bjeFbf68jXxiXldj8FApcMxszl6VUnUnpPwM_pk",
+						"type": "default",
+						"disabled": true
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"totalUsers\": 51,\r\n    \"adminUsers\": 11,\r\n    \"regularUsers\": 40,\r\n    \"users\": [\r\n        {\r\n            \"_id\": \"6555a0f89feeac7dccd9b1dd\",\r\n            \"name\": \"first account\",\r\n            \"email\": \"first_account@gmail.com\",\r\n            \"password\": \"$2a$10$jK1bvjH7D/pdjI6mVb9uSuXMeWwcFwhlBYIh7Wqf0CLsey9I3Epx2\",\r\n            \"admin\": false,\r\n            \"__v\": 0\r\n        }\r\n    ]\r\n}"
+				},
+				"url": {
+					"raw": "https://thefurniturebros.com/users/get_all/1",
+					"protocol": "https",
+					"host": [
+						"thefurniturebros",
+						"com"
+					],
+					"path": [
+						"users",
+						"get_all",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Edit User Details",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjc0NjA1YTJhMThjMmYzOGYyMTQ4NjAxIiwiYWRtaW4iOnRydWV9LCJpYXQiOjE3MzI3OTM1MTQsImV4cCI6MTczMjgyOTUxNH0.1IAEOLaQT7Z_08iW0515nRfKRUP7WIfB0gcH80FFfjk",
+						"type": "default"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"userId\": \"674605a2a18c2f38f2148601\",\r\n    \"newName\": \"Jane Doe2\",\r\n    \"newEmail\": \"jane_example@gmail.com\",\r\n    \"newAdminStatus\": \"true\"\r\n}"
+				},
+				"url": {
+					"raw": "https://thefurniturebros.com/users/edit",
+					"protocol": "https",
+					"host": [
+						"thefurniturebros",
+						"com"
+					],
+					"path": [
+						"users",
+						"edit"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

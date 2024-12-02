@@ -1,0 +1,984 @@
+{
+    "item": [
+        {
+            "name": "auth",
+            "description": "",
+            "item": [
+                {
+                    "name": "register",
+                    "description": "",
+                    "item": [
+                        {
+                            "id": "6f9f1cbd-0fd2-4ae3-8d7e-d7cdf70e55ad",
+                            "name": "Register an Account",
+                            "request": {
+                                "name": "Register an Account",
+                                "description": {
+                                    "content": "This endpoint allows you to register a user. Once registered, it will return an API key.",
+                                    "type": "text/plain"
+                                },
+                                "url": {
+                                    "path": [
+                                        "auth",
+                                        "register"
+                                    ],
+                                    "host": [
+                                        "{{baseUrl}}"
+                                    ],
+                                    "query": [],
+                                    "variable": []
+                                },
+                                "header": [
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                    },
+                                    {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                    }
+                                ],
+                                "method": "POST",
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n  \"name\": \"<string>\",\n  \"email\": \"<email>\",\n  \"password\": \"<string>\",\n  \"admin\": false\n}",
+                                    "options": {
+                                        "raw": {
+                                            "headerFamily": "json",
+                                            "language": "json"
+                                        }
+                                    }
+                                },
+                                "auth": null
+                            },
+                            "response": [
+                                {
+                                    "id": "4e631f9d-2226-4f09-bf5f-0c11ec654dd4",
+                                    "name": "Successful response. Returns an object containing the API key.",
+                                    "originalRequest": {
+                                        "url": {
+                                            "path": [
+                                                "auth",
+                                                "register"
+                                            ],
+                                            "host": [
+                                                "{{baseUrl}}"
+                                            ],
+                                            "query": [],
+                                            "variable": []
+                                        },
+                                        "header": [
+                                            {
+                                                "key": "Content-Type",
+                                                "value": "application/json"
+                                            },
+                                            {
+                                                "key": "Accept",
+                                                "value": "application/json"
+                                            }
+                                        ],
+                                        "method": "POST",
+                                        "body": {
+                                            "mode": "raw",
+                                            "raw": "{\n  \"name\": \"<string>\",\n  \"email\": \"<email>\",\n  \"password\": \"<string>\",\n  \"admin\": false\n}",
+                                            "options": {
+                                                "raw": {
+                                                    "headerFamily": "json",
+                                                    "language": "json"
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "status": "OK",
+                                    "code": 200,
+                                    "header": [
+                                        {
+                                            "key": "Content-Type",
+                                            "value": "application/json"
+                                        }
+                                    ],
+                                    "body": "{\n  \"token\": \"<string>\"\n}",
+                                    "cookie": [],
+                                    "_postman_previewlanguage": "json"
+                                },
+                                {
+                                    "id": "452b428e-82f5-4830-b392-b43b0dda4319",
+                                    "name": "See message description.",
+                                    "originalRequest": {
+                                        "url": {
+                                            "path": [
+                                                "auth",
+                                                "register"
+                                            ],
+                                            "host": [
+                                                "{{baseUrl}}"
+                                            ],
+                                            "query": [],
+                                            "variable": []
+                                        },
+                                        "header": [
+                                            {
+                                                "key": "Content-Type",
+                                                "value": "application/json"
+                                            }
+                                        ],
+                                        "method": "POST",
+                                        "body": {
+                                            "mode": "raw",
+                                            "raw": "{\n  \"name\": \"<string>\",\n  \"email\": \"<email>\",\n  \"password\": \"<string>\",\n  \"admin\": false\n}",
+                                            "options": {
+                                                "raw": {
+                                                    "headerFamily": "json",
+                                                    "language": "json"
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "status": "Bad Request",
+                                    "code": 400,
+                                    "header": [],
+                                    "cookie": [],
+                                    "_postman_previewlanguage": "text"
+                                },
+                                {
+                                    "id": "bc64ba1e-8f4d-4815-889a-ae75f35e548c",
+                                    "name": "see message description.",
+                                    "originalRequest": {
+                                        "url": {
+                                            "path": [
+                                                "auth",
+                                                "register"
+                                            ],
+                                            "host": [
+                                                "{{baseUrl}}"
+                                            ],
+                                            "query": [],
+                                            "variable": []
+                                        },
+                                        "header": [
+                                            {
+                                                "key": "Content-Type",
+                                                "value": "application/json"
+                                            }
+                                        ],
+                                        "method": "POST",
+                                        "body": {
+                                            "mode": "raw",
+                                            "raw": "{\n  \"name\": \"<string>\",\n  \"email\": \"<email>\",\n  \"password\": \"<string>\",\n  \"admin\": false\n}",
+                                            "options": {
+                                                "raw": {
+                                                    "headerFamily": "json",
+                                                    "language": "json"
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "status": "Internal Server Error",
+                                    "code": 500,
+                                    "header": [],
+                                    "cookie": [],
+                                    "_postman_previewlanguage": "text"
+                                }
+                            ],
+                            "event": [],
+                            "protocolProfileBehavior": {
+                                "disableBodyPruning": true
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "login",
+                    "description": "",
+                    "item": [
+                        {
+                            "id": "fe9a9c40-c0e8-425d-b5aa-8fb09a6ed6d4",
+                            "name": "Get an API key",
+                            "request": {
+                                "name": "Get an API key",
+                                "description": {
+                                    "content": "This endpoint allows you to login to an account and retrieve an API key.",
+                                    "type": "text/plain"
+                                },
+                                "url": {
+                                    "path": [
+                                        "auth",
+                                        "login"
+                                    ],
+                                    "host": [
+                                        "{{baseUrl}}"
+                                    ],
+                                    "query": [],
+                                    "variable": []
+                                },
+                                "header": [
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                    },
+                                    {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                    }
+                                ],
+                                "method": "POST",
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n  \"email\": \"<email>\",\n  \"password\": \"<string>\"\n}",
+                                    "options": {
+                                        "raw": {
+                                            "headerFamily": "json",
+                                            "language": "json"
+                                        }
+                                    }
+                                },
+                                "auth": null
+                            },
+                            "response": [
+                                {
+                                    "id": "eecb1f42-94d8-4d6d-83bd-2039a57d3021",
+                                    "name": "Successful response. Returns an object containing the API key and the information about the user.",
+                                    "originalRequest": {
+                                        "url": {
+                                            "path": [
+                                                "auth",
+                                                "login"
+                                            ],
+                                            "host": [
+                                                "{{baseUrl}}"
+                                            ],
+                                            "query": [],
+                                            "variable": []
+                                        },
+                                        "header": [
+                                            {
+                                                "key": "Content-Type",
+                                                "value": "application/json"
+                                            },
+                                            {
+                                                "key": "Accept",
+                                                "value": "application/json"
+                                            }
+                                        ],
+                                        "method": "POST",
+                                        "body": {
+                                            "mode": "raw",
+                                            "raw": "{\n  \"email\": \"<email>\",\n  \"password\": \"<string>\"\n}",
+                                            "options": {
+                                                "raw": {
+                                                    "headerFamily": "json",
+                                                    "language": "json"
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "status": "OK",
+                                    "code": 200,
+                                    "header": [
+                                        {
+                                            "key": "Content-Type",
+                                            "value": "application/json"
+                                        }
+                                    ],
+                                    "body": "{\n  \"token\": \"<string>\",\n  \"user\": {\n    \"_id\": \"<string>\",\n    \"name\": \"<string>\",\n    \"email\": \"<email>\",\n    \"password\": \"<string>\",\n    \"admin\": \"<boolean>\",\n    \"__v\": \"<integer>\"\n  }\n}",
+                                    "cookie": [],
+                                    "_postman_previewlanguage": "json"
+                                },
+                                {
+                                    "id": "9bc63ef7-cc8a-491c-b6a0-e8b2b62bd9db",
+                                    "name": "See message description.",
+                                    "originalRequest": {
+                                        "url": {
+                                            "path": [
+                                                "auth",
+                                                "login"
+                                            ],
+                                            "host": [
+                                                "{{baseUrl}}"
+                                            ],
+                                            "query": [],
+                                            "variable": []
+                                        },
+                                        "header": [
+                                            {
+                                                "key": "Content-Type",
+                                                "value": "application/json"
+                                            }
+                                        ],
+                                        "method": "POST",
+                                        "body": {
+                                            "mode": "raw",
+                                            "raw": "{\n  \"email\": \"<email>\",\n  \"password\": \"<string>\"\n}",
+                                            "options": {
+                                                "raw": {
+                                                    "headerFamily": "json",
+                                                    "language": "json"
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "status": "Bad Request",
+                                    "code": 400,
+                                    "header": [],
+                                    "cookie": [],
+                                    "_postman_previewlanguage": "text"
+                                },
+                                {
+                                    "id": "0da6f07b-c39c-4dd0-9aa6-310917078688",
+                                    "name": "see message description.",
+                                    "originalRequest": {
+                                        "url": {
+                                            "path": [
+                                                "auth",
+                                                "login"
+                                            ],
+                                            "host": [
+                                                "{{baseUrl}}"
+                                            ],
+                                            "query": [],
+                                            "variable": []
+                                        },
+                                        "header": [
+                                            {
+                                                "key": "Content-Type",
+                                                "value": "application/json"
+                                            }
+                                        ],
+                                        "method": "POST",
+                                        "body": {
+                                            "mode": "raw",
+                                            "raw": "{\n  \"email\": \"<email>\",\n  \"password\": \"<string>\"\n}",
+                                            "options": {
+                                                "raw": {
+                                                    "headerFamily": "json",
+                                                    "language": "json"
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "status": "Internal Server Error",
+                                    "code": 500,
+                                    "header": [],
+                                    "cookie": [],
+                                    "_postman_previewlanguage": "text"
+                                }
+                            ],
+                            "event": [],
+                            "protocolProfileBehavior": {
+                                "disableBodyPruning": true
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "validate",
+                    "description": "",
+                    "item": [
+                        {
+                            "id": "275663c2-382b-490f-a73a-057b88d41f1f",
+                            "name": "Validate API key",
+                            "request": {
+                                "name": "Validate API key",
+                                "description": {
+                                    "content": "This endpoint allows you to validate your API key.",
+                                    "type": "text/plain"
+                                },
+                                "url": {
+                                    "path": [
+                                        "auth",
+                                        "validate"
+                                    ],
+                                    "host": [
+                                        "{{baseUrl}}"
+                                    ],
+                                    "query": [],
+                                    "variable": []
+                                },
+                                "header": [
+                                    {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                    }
+                                ],
+                                "method": "GET",
+                                "body": {},
+                                "auth": {
+                                    "type": "apikey",
+                                    "apikey": [
+                                        {
+                                            "key": "key",
+                                            "value": "Authorization"
+                                        },
+                                        {
+                                            "key": "value",
+                                            "value": "{{apiKey}}"
+                                        },
+                                        {
+                                            "key": "in",
+                                            "value": "header"
+                                        }
+                                    ]
+                                }
+                            },
+                            "response": [
+                                {
+                                    "id": "6c6b2a2a-0361-48d5-8c75-2c06f9e4734b",
+                                    "name": "Successful response. Returns an object containing information related to the user's access privilege.",
+                                    "originalRequest": {
+                                        "url": {
+                                            "path": [
+                                                "auth",
+                                                "validate"
+                                            ],
+                                            "host": [
+                                                "{{baseUrl}}"
+                                            ],
+                                            "query": [],
+                                            "variable": []
+                                        },
+                                        "header": [
+                                            {
+                                                "key": "Accept",
+                                                "value": "application/json"
+                                            },
+                                            {
+                                                "description": {
+                                                    "content": "Added as a part of security scheme: apikey",
+                                                    "type": "text/plain"
+                                                },
+                                                "key": "Authorization",
+                                                "value": "<API Key>"
+                                            }
+                                        ],
+                                        "method": "GET",
+                                        "body": {}
+                                    },
+                                    "status": "OK",
+                                    "code": 200,
+                                    "header": [
+                                        {
+                                            "key": "Content-Type",
+                                            "value": "application/json"
+                                        }
+                                    ],
+                                    "body": "{\n  \"authenticate\": \"<boolean>\",\n  \"admin\": \"<boolean>\"\n}",
+                                    "cookie": [],
+                                    "_postman_previewlanguage": "json"
+                                },
+                                {
+                                    "id": "2e97f715-47ca-4c25-9bcb-9eaeb5a331b7",
+                                    "name": "See message description.",
+                                    "originalRequest": {
+                                        "url": {
+                                            "path": [
+                                                "auth",
+                                                "validate"
+                                            ],
+                                            "host": [
+                                                "{{baseUrl}}"
+                                            ],
+                                            "query": [],
+                                            "variable": []
+                                        },
+                                        "header": [
+                                            {
+                                                "description": {
+                                                    "content": "Added as a part of security scheme: apikey",
+                                                    "type": "text/plain"
+                                                },
+                                                "key": "Authorization",
+                                                "value": "<API Key>"
+                                            }
+                                        ],
+                                        "method": "GET",
+                                        "body": {}
+                                    },
+                                    "status": "Bad Request",
+                                    "code": 400,
+                                    "header": [],
+                                    "cookie": [],
+                                    "_postman_previewlanguage": "text"
+                                },
+                                {
+                                    "id": "00aa1c2e-7b00-4de2-945f-7a480ff59ee4",
+                                    "name": "see message description.",
+                                    "originalRequest": {
+                                        "url": {
+                                            "path": [
+                                                "auth",
+                                                "validate"
+                                            ],
+                                            "host": [
+                                                "{{baseUrl}}"
+                                            ],
+                                            "query": [],
+                                            "variable": []
+                                        },
+                                        "header": [
+                                            {
+                                                "description": {
+                                                    "content": "Added as a part of security scheme: apikey",
+                                                    "type": "text/plain"
+                                                },
+                                                "key": "Authorization",
+                                                "value": "<API Key>"
+                                            }
+                                        ],
+                                        "method": "GET",
+                                        "body": {}
+                                    },
+                                    "status": "Internal Server Error",
+                                    "code": 500,
+                                    "header": [],
+                                    "cookie": [],
+                                    "_postman_previewlanguage": "text"
+                                }
+                            ],
+                            "event": [],
+                            "protocolProfileBehavior": {
+                                "disableBodyPruning": true
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "users",
+            "description": "",
+            "item": [
+                {
+                    "name": "get_all",
+                    "description": "",
+                    "item": [
+                        {
+                            "name": "{page}",
+                            "description": "",
+                            "item": [
+                                {
+                                    "id": "26a51684-1f94-4f79-90fd-232a5bd5a441",
+                                    "name": "Get Users",
+                                    "request": {
+                                        "name": "Get Users",
+                                        "description": {
+                                            "content": "This endpoint allows you to get the info about the users in the application.",
+                                            "type": "text/plain"
+                                        },
+                                        "url": {
+                                            "path": [
+                                                "users",
+                                                "get_all",
+                                                ":page"
+                                            ],
+                                            "host": [
+                                                "{{baseUrl}}"
+                                            ],
+                                            "query": [],
+                                            "variable": [
+                                                {
+                                                    "type": "any",
+                                                    "value": "<integer>",
+                                                    "key": "page",
+                                                    "disabled": false,
+                                                    "description": {
+                                                        "content": "(Required) The page number to retrieve (1-based index). Each page returns 20 users.",
+                                                        "type": "text/plain"
+                                                    }
+                                                }
+                                            ]
+                                        },
+                                        "header": [
+                                            {
+                                                "key": "Accept",
+                                                "value": "application/json"
+                                            }
+                                        ],
+                                        "method": "GET",
+                                        "body": {},
+                                        "auth": {
+                                            "type": "apikey",
+                                            "apikey": [
+                                                {
+                                                    "key": "key",
+                                                    "value": "Authorization"
+                                                },
+                                                {
+                                                    "key": "value",
+                                                    "value": "{{apiKey}}"
+                                                },
+                                                {
+                                                    "key": "in",
+                                                    "value": "header"
+                                                }
+                                            ]
+                                        }
+                                    },
+                                    "response": [
+                                        {
+                                            "id": "67cc08ce-3a29-4e95-8b47-a04780d89e14",
+                                            "name": "Successful response. Returns an object with users statistics in the application.",
+                                            "originalRequest": {
+                                                "url": {
+                                                    "path": [
+                                                        "users",
+                                                        "get_all",
+                                                        ":page"
+                                                    ],
+                                                    "host": [
+                                                        "{{baseUrl}}"
+                                                    ],
+                                                    "query": [],
+                                                    "variable": []
+                                                },
+                                                "header": [
+                                                    {
+                                                        "key": "Accept",
+                                                        "value": "application/json"
+                                                    },
+                                                    {
+                                                        "description": {
+                                                            "content": "Added as a part of security scheme: apikey",
+                                                            "type": "text/plain"
+                                                        },
+                                                        "key": "Authorization",
+                                                        "value": "<API Key>"
+                                                    }
+                                                ],
+                                                "method": "GET",
+                                                "body": {}
+                                            },
+                                            "status": "OK",
+                                            "code": 200,
+                                            "header": [
+                                                {
+                                                    "key": "Content-Type",
+                                                    "value": "application/json"
+                                                }
+                                            ],
+                                            "body": "{\n  \"totalUsers\": \"<integer>\",\n  \"adminUsers\": \"<integer>\",\n  \"regularUsers\": \"<integer>\",\n  \"users\": [\n    {\n      \"_id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"email\": \"<email>\",\n      \"password\": \"<string>\",\n      \"admin\": \"<boolean>\",\n      \"__v\": \"<integer>\"\n    },\n    {\n      \"_id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"email\": \"<email>\",\n      \"password\": \"<string>\",\n      \"admin\": \"<boolean>\",\n      \"__v\": \"<integer>\"\n    }\n  ]\n}",
+                                            "cookie": [],
+                                            "_postman_previewlanguage": "json"
+                                        },
+                                        {
+                                            "id": "e37bd64f-7f45-456b-ad8b-c8906c7cc0e0",
+                                            "name": "See message description.",
+                                            "originalRequest": {
+                                                "url": {
+                                                    "path": [
+                                                        "users",
+                                                        "get_all",
+                                                        ":page"
+                                                    ],
+                                                    "host": [
+                                                        "{{baseUrl}}"
+                                                    ],
+                                                    "query": [],
+                                                    "variable": []
+                                                },
+                                                "header": [
+                                                    {
+                                                        "description": {
+                                                            "content": "Added as a part of security scheme: apikey",
+                                                            "type": "text/plain"
+                                                        },
+                                                        "key": "Authorization",
+                                                        "value": "<API Key>"
+                                                    }
+                                                ],
+                                                "method": "GET",
+                                                "body": {}
+                                            },
+                                            "status": "Bad Request",
+                                            "code": 400,
+                                            "header": [],
+                                            "cookie": [],
+                                            "_postman_previewlanguage": "text"
+                                        },
+                                        {
+                                            "id": "a5a131c7-e6aa-4764-ae69-eb7c1593c46a",
+                                            "name": "see message description.",
+                                            "originalRequest": {
+                                                "url": {
+                                                    "path": [
+                                                        "users",
+                                                        "get_all",
+                                                        ":page"
+                                                    ],
+                                                    "host": [
+                                                        "{{baseUrl}}"
+                                                    ],
+                                                    "query": [],
+                                                    "variable": []
+                                                },
+                                                "header": [
+                                                    {
+                                                        "description": {
+                                                            "content": "Added as a part of security scheme: apikey",
+                                                            "type": "text/plain"
+                                                        },
+                                                        "key": "Authorization",
+                                                        "value": "<API Key>"
+                                                    }
+                                                ],
+                                                "method": "GET",
+                                                "body": {}
+                                            },
+                                            "status": "Internal Server Error",
+                                            "code": 500,
+                                            "header": [],
+                                            "cookie": [],
+                                            "_postman_previewlanguage": "text"
+                                        }
+                                    ],
+                                    "event": [],
+                                    "protocolProfileBehavior": {
+                                        "disableBodyPruning": true
+                                    }
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "name": "edit",
+                    "description": "",
+                    "item": [
+                        {
+                            "id": "891119b0-0c79-4c37-8f00-a9324068f87e",
+                            "name": "Edit User Details",
+                            "request": {
+                                "name": "Edit User Details",
+                                "description": {
+                                    "content": "This endpoint allows you to edit a user's details. This requires admin privileges.",
+                                    "type": "text/plain"
+                                },
+                                "url": {
+                                    "path": [
+                                        "users",
+                                        "edit"
+                                    ],
+                                    "host": [
+                                        "{{baseUrl}}"
+                                    ],
+                                    "query": [],
+                                    "variable": []
+                                },
+                                "header": [
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                    },
+                                    {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                    }
+                                ],
+                                "method": "POST",
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n  \"userId\": \"<string>\",\n  \"newName\": \"<string>\",\n  \"newEmail\": \"<email>\",\n  \"newAdminStatus\": \"<boolean>\"\n}",
+                                    "options": {
+                                        "raw": {
+                                            "headerFamily": "json",
+                                            "language": "json"
+                                        }
+                                    }
+                                },
+                                "auth": {
+                                    "type": "apikey",
+                                    "apikey": [
+                                        {
+                                            "key": "key",
+                                            "value": "Authorization"
+                                        },
+                                        {
+                                            "key": "value",
+                                            "value": "{{apiKey}}"
+                                        },
+                                        {
+                                            "key": "in",
+                                            "value": "header"
+                                        }
+                                    ]
+                                }
+                            },
+                            "response": [
+                                {
+                                    "id": "3dadb97a-7d22-4b23-aa0d-dcedcc731628",
+                                    "name": "Successful response. Returns an object containing user information.",
+                                    "originalRequest": {
+                                        "url": {
+                                            "path": [
+                                                "users",
+                                                "edit"
+                                            ],
+                                            "host": [
+                                                "{{baseUrl}}"
+                                            ],
+                                            "query": [],
+                                            "variable": []
+                                        },
+                                        "header": [
+                                            {
+                                                "key": "Content-Type",
+                                                "value": "application/json"
+                                            },
+                                            {
+                                                "key": "Accept",
+                                                "value": "application/json"
+                                            },
+                                            {
+                                                "description": {
+                                                    "content": "Added as a part of security scheme: apikey",
+                                                    "type": "text/plain"
+                                                },
+                                                "key": "Authorization",
+                                                "value": "<API Key>"
+                                            }
+                                        ],
+                                        "method": "POST",
+                                        "body": {
+                                            "mode": "raw",
+                                            "raw": "{\n  \"userId\": \"<string>\",\n  \"newName\": \"<string>\",\n  \"newEmail\": \"<email>\",\n  \"newAdminStatus\": \"<boolean>\"\n}",
+                                            "options": {
+                                                "raw": {
+                                                    "headerFamily": "json",
+                                                    "language": "json"
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "status": "OK",
+                                    "code": 200,
+                                    "header": [
+                                        {
+                                            "key": "Content-Type",
+                                            "value": "application/json"
+                                        }
+                                    ],
+                                    "body": "{\n  \"user\": {\n    \"_id\": \"<string>\",\n    \"name\": \"<string>\",\n    \"email\": \"<email>\",\n    \"password\": \"<string>\",\n    \"admin\": \"<boolean>\",\n    \"__v\": \"<integer>\"\n  }\n}",
+                                    "cookie": [],
+                                    "_postman_previewlanguage": "json"
+                                },
+                                {
+                                    "id": "a8d500c8-cc4e-4287-b8aa-461259e87403",
+                                    "name": "See message description.",
+                                    "originalRequest": {
+                                        "url": {
+                                            "path": [
+                                                "users",
+                                                "edit"
+                                            ],
+                                            "host": [
+                                                "{{baseUrl}}"
+                                            ],
+                                            "query": [],
+                                            "variable": []
+                                        },
+                                        "header": [
+                                            {
+                                                "key": "Content-Type",
+                                                "value": "application/json"
+                                            },
+                                            {
+                                                "description": {
+                                                    "content": "Added as a part of security scheme: apikey",
+                                                    "type": "text/plain"
+                                                },
+                                                "key": "Authorization",
+                                                "value": "<API Key>"
+                                            }
+                                        ],
+                                        "method": "POST",
+                                        "body": {
+                                            "mode": "raw",
+                                            "raw": "{\n  \"userId\": \"<string>\",\n  \"newName\": \"<string>\",\n  \"newEmail\": \"<email>\",\n  \"newAdminStatus\": \"<boolean>\"\n}",
+                                            "options": {
+                                                "raw": {
+                                                    "headerFamily": "json",
+                                                    "language": "json"
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "status": "Bad Request",
+                                    "code": 400,
+                                    "header": [],
+                                    "cookie": [],
+                                    "_postman_previewlanguage": "text"
+                                },
+                                {
+                                    "id": "bca64c3f-0776-4629-acf3-ed001bfc5489",
+                                    "name": "see message description.",
+                                    "originalRequest": {
+                                        "url": {
+                                            "path": [
+                                                "users",
+                                                "edit"
+                                            ],
+                                            "host": [
+                                                "{{baseUrl}}"
+                                            ],
+                                            "query": [],
+                                            "variable": []
+                                        },
+                                        "header": [
+                                            {
+                                                "key": "Content-Type",
+                                                "value": "application/json"
+                                            },
+                                            {
+                                                "description": {
+                                                    "content": "Added as a part of security scheme: apikey",
+                                                    "type": "text/plain"
+                                                },
+                                                "key": "Authorization",
+                                                "value": "<API Key>"
+                                            }
+                                        ],
+                                        "method": "POST",
+                                        "body": {
+                                            "mode": "raw",
+                                            "raw": "{\n  \"userId\": \"<string>\",\n  \"newName\": \"<string>\",\n  \"newEmail\": \"<email>\",\n  \"newAdminStatus\": \"<boolean>\"\n}",
+                                            "options": {
+                                                "raw": {
+                                                    "headerFamily": "json",
+                                                    "language": "json"
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "status": "Internal Server Error",
+                                    "code": 500,
+                                    "header": [],
+                                    "cookie": [],
+                                    "_postman_previewlanguage": "text"
+                                }
+                            ],
+                            "event": [],
+                            "protocolProfileBehavior": {
+                                "disableBodyPruning": true
+                            }
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "event": [],
+    "variable": [
+        {
+            "key": "baseUrl",
+            "value": "https://thefurniturebros.com"
+        }
+    ],
+    "info": {
+        "_postman_id": "a2e12050-3a5b-4d9b-9d6a-3023223ddc6c",
+        "name": "The Furniture Bros Account OpenAPI Specifications",
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+        "description": {
+            "content": "This file contains the OpenAPI specifications for the Acocunt APIs of **The Furniture Bros**.",
+            "type": "text/plain"
+        }
+    }
+}
