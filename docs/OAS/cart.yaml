@@ -51,7 +51,7 @@ paths:
                   description: |
                     The quantity of items to add.
               example:
-                productId: "6555a2269feeac7dccd9b1f2"
+                productId: "6555a1f49feeac7dccd9b1ee"
                 quantity: 20
       responses:
         "200":
@@ -266,8 +266,9 @@ paths:
                   description: List of product IDs to remove from the cart.
                   items:
                     type: string
-                  example:
-                    - "67498e75990ee7506c8ee954"
+              example:
+                items:
+                  - "67498e75990ee7506c8ee954"
       responses:
         "200":
           description: Successful response. Returns the updated cart after deletion.
