@@ -375,6 +375,9 @@ _Note 3: Feature, user stories and tasks are partially generated with the help o
 - 29 Nov 2024 - Worked on the docs for "products" category. Also added helpful desc to the "200" response section of the endpoints.
 - 30 Nov 2024 - Completed the docs for the "products" and "checkout" category.
 - 1 Dec 2024 - Completed the docs for "orders" and "stats" category.
+- 2 Dec 2024 - Tested the OAS docs in GitBook (powered by Scalar). There was an error in the `multipart/form-data`, but it's a Scalar issue. Modified some of the OAS docs as well to improve clarity.
+- 3 Dec 2024 - Started working on the secondary content, including Postman collection and the _Start here_ pages. Modified Postman collection and removed security tokens so that it can be run publicly.
+- 4 Dec 2024 - Continue working on the secondary content. Worked on the Introduction, Get started, authentication.
 
 ## Reference
 
