@@ -378,6 +378,7 @@ _Note 3: Feature, user stories and tasks are partially generated with the help o
 - 2 Dec 2024 - Tested the OAS docs in GitBook (powered by Scalar). There was an error in the `multipart/form-data`, but it's a Scalar issue. Modified some of the OAS docs as well to improve clarity.
 - 3 Dec 2024 - Started working on the secondary content, including Postman collection and the _Start here_ pages. Modified Postman collection and removed security tokens so that it can be run publicly.
 - 4 Dec 2024 - Continue working on the secondary content. Worked on the Introduction, Get started, authentication.
+- 5 Dec 2024 - Continue working on the secondary content. Worked on making a request, examples, functionalities, glossary.
 
 ## Reference
 
