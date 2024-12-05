@@ -75,7 +75,16 @@ function Navbar({ isAdmin }) {
             </li>
             <li class="nav-item">
               <Link class="nav-link" to="/api-docs/#" target="_blank">
-                Docs
+                SwaggerUI docs
+              </Link>
+            </li>
+            <li class="nav-item">
+              <Link
+                class="nav-link"
+                to="https://docs.thefurniturebros.com/"
+                target="_blank"
+              >
+                GitBook docs
               </Link>
             </li>
             <li class="nav-item">

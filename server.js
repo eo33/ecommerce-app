@@ -50,7 +50,7 @@ const swaggerOptions = {
       title: "API docs",
       version: "1.0.0",
       description:
-        "This is the documentation for the Furniture Bro's API. It follows the OpenAPI 3.0 specification.",
+        "This is the documentation for the Furniture Bro's API. It follows the OpenAPI 3.0 specification. The docs were written alongisde the code, rendered using JSDoc, and published with SwaggerUI in ExpressJS. ",
     },
     tags: [
       {
