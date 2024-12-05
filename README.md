@@ -360,12 +360,16 @@ _Note 3: Feature, user stories and tasks are partially generated with the help o
 2. As a developer, I want to view and modify the OAS 3.0 file
 3. As a user, I want to be able to download the Postman collection.
 4. As a user, I want to make sure that the code snippets in the docs are working.
+5. As a user, I want to know about REST API and how to make my first request.
+6. As a developer, I want to test out the API endpoints easily.
+7. As a developer, I want to know the latest updates to the API.
 
 #### Tasks
 
 1. Setup a Gitbook instance and configure it to host the documentation
 2. Create and configure a repository for storing the OAS file, ensuring proper version control and access management.
 3. Upload and embed the Postman collection into GitBook, providing clear instructions for users on how to use the collection to test API endpoints.
+4. Create the secondary content to support the Open API docs, inclduing the info about REST API and release notes.
 
 #### Work progress
 
@@ -378,7 +382,7 @@ _Note 3: Feature, user stories and tasks are partially generated with the help o
 - 2 Dec 2024 - Tested the OAS docs in GitBook (powered by Scalar). There was an error in the `multipart/form-data`, but it's a Scalar issue. Modified some of the OAS docs as well to improve clarity.
 - 3 Dec 2024 - Started working on the secondary content, including Postman collection and the _Start here_ pages. Modified Postman collection and removed security tokens so that it can be run publicly.
 - 4 Dec 2024 - Continue working on the secondary content. Worked on the Introduction, Get started, authentication.
-- 5 Dec 2024 - Continue working on the secondary content. Worked on making a request, examples, functionalities, glossary.
+- 5 Dec 2024 - Continue working on the secondary content. Worked on making a request, examples, functionalities, release notes and glossary.
 
 ## Reference
 
