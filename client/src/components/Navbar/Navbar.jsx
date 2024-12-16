@@ -88,7 +88,7 @@ function Navbar({ isAdmin }) {
                 </Dropdown.Toggle>
 
                 <Dropdown.Menu aria-labelledby="navbarDropdownMenuLink">
-                  <Dropdown.Item href="/api_docs" target="_blank">
+                  <Dropdown.Item href="/api-docs" target="_blank">
                     SwaggerUI
                   </Dropdown.Item>
                   <Dropdown.Item
