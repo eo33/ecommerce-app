@@ -1,4 +1,5 @@
 import "bootstrap/dist/css/bootstrap.css";
+import Dropdown from "react-bootstrap/Dropdown";
 import "./Navbar.css";
 import { useState, useContext } from "react";
 import { LoginContext } from "../Context/LoginContext";
@@ -73,20 +74,63 @@ function Navbar({ isAdmin }) {
                 </Link>
               )}
             </li>
-            <li class="nav-item">
-              <Link class="nav-link" to="/api-docs/#" target="_blank">
-                SwaggerUI docs
-              </Link>
+
+            {/**Drop down for docs */}
+            <li className="nav-item">
+              <Dropdown>
+                <Dropdown.Toggle
+                  className="nav-link dropdown-toggle"
+                  id="navbarDropdownMenuLink"
+                  aria-haspopup="true"
+                  variant="outline-none"
+                >
+                  Docs
+                </Dropdown.Toggle>
+
+                <Dropdown.Menu aria-labelledby="navbarDropdownMenuLink">
+                  <Dropdown.Item href="/api_docs" target="_blank">
+                    SwaggerUI
+                  </Dropdown.Item>
+                  <Dropdown.Item
+                    href="https://docs.thefurniturebros.com/"
+                    target="_blank"
+                  >
+                    GitBook
+                  </Dropdown.Item>
+                  <Dropdown.Item
+                    href="https://docs2.thefurniturebros.com/"
+                    target="_blank"
+                  >
+                    MKDocs
+                  </Dropdown.Item>
+                  <Dropdown.Item
+                    href="https://docs3.thefurniturebros.com/"
+                    target="_blank"
+                  >
+                    ReadMe
+                  </Dropdown.Item>
+                  <Dropdown.Item
+                    href="https://docs4.thefurniturebros.com/"
+                    target="_blank"
+                  >
+                    Docusaurus (AI)
+                  </Dropdown.Item>
+                  <Dropdown.Item
+                    href="https://docs5.thefurniturebros.com/"
+                    target="_blank"
+                  >
+                    Redocly
+                  </Dropdown.Item>
+                  <Dropdown.Item
+                    href="https://eo33.stoplight.io/docs/api"
+                    target="_blank"
+                  >
+                    StopLight
+                  </Dropdown.Item>
+                </Dropdown.Menu>
+              </Dropdown>
             </li>
-            <li class="nav-item">
-              <Link
-                class="nav-link"
-                to="https://docs.thefurniturebros.com/"
-                target="_blank"
-              >
-                GitBook docs
-              </Link>
-            </li>
+
             <li class="nav-item">
               {authenticated ? (
                 <button
