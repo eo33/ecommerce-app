@@ -10,14 +10,14 @@ const Users = require("../model/user");
  * @swagger
  * /users/edit:
  *   post:
- *     summary: Edit user's details by ID.
- *     description: Edit the user's details, such as _name_, _email_, and _admin status_. Values can be specified in the request body. Requires administrator's token. You can get admin's token by logging in to `john_doe@gmail.com` with the password of `123456`
+ *     summary: Edit User Details
+ *     description: This endpoint allows you to edit a user's details. This requires admin privileges.
  *     tags:
  *       - Auth
  *     security:
  *       - APIKey: []
  *     requestBody:
- *       description: JSON containing the _userId_, _newName_, _newEmail_, and _newAdminStatus_ to update the current value of the fields. Some field(s) are required. See schema for more details.
+ *       description: A JSON object containing the user's ID, new name, new email, and new admin status. The user ID is required, while the others are optional. If no new values are provided, the existing values will remain unchanged.
  *       required: true
  *       content:
  *         application/json:
@@ -26,16 +26,16 @@ const Users = require("../model/user");
  *             properties:
  *               userId:
  *                 type: string
- *                 description: The user's ID can be obtained from the `/auth/login` endpoint (required).
+ *                 description: The user ID of the account to modify. You can get the list of user ID by using the POST /users/get_all/{page} endpoint.
  *               newName:
  *                 type: string
- *                 description: The new name to replace the current name. If none provided, the existing name will remain (optional).
+ *                 description: The new name for the user. If none provided, the existing name will remain (optional).
  *               newEmail:
  *                 type: string
- *                 description: The new email to replace the current email. If none provided, the existing email will remain (optional).
+ *                 description: The new email for the user. If none provided, the existing email will remain (optional).
  *               newAdminStatus:
  *                 type: boolean
- *                 description: The new status to replace the current admin status. If none provided, the existing status will remain (optional).
+ *                 description: The new admin status for the user.(optional). If true, the user will have admin privileges; if false, the user will be a regular user. If none provided, the existing admin status will remain unchanged.
  *     responses:
  *       200:
  *         description: Successful response
@@ -66,8 +66,8 @@ module.exports = router;
  * @swagger
  * /users/get_all/{page}:
  *   get:
- *     summary: Get all user's details, limit by page.
- *     description: Get the user's details, such as _id_, _name_, _email_,_password_ and _admin status_. Also return the total number of _totalUsers_, _adminUsers_, and _regularUsers_. Each page will show 20 users. Requires administrator's privilege.
+ *     summary: Get Users
+ *     description: This endpoint allows you to get the info about the users in the application. It returns the total number of users, the number of admin users, the number of regular users, and a list of users on the specified page. By default, each page contains 20 users, .
  *     tags:
  *       - Auth
  *     security:

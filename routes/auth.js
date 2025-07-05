@@ -18,12 +18,12 @@ const findUser = require("../middleware/findUser");
  * @swagger
  * /auth/register:
  *   post:
- *     summary: Register user and get it's token
- *     description: Register a user with the _name_, _email_, _password_, and _admin status_. This end point will return the authentication token (JWT) link to this account.
+ *     summary: Register an Account.
+ *     description: This endpoint allows you to register a user. Once registered, it will return an API key.
  *     tags:
  *       - Auth
  *     requestBody:
- *       description: JSON containing the _name_, _email_, _password_, and _admin status_ to create a new user. See description for more details.
+ *       description: A JSON object containing the user's name, email, password, and admin status. All fields are required.
  *       required: true
  *       content:
  *         application/json:
@@ -33,23 +33,25 @@ const findUser = require("../middleware/findUser");
  *               name:
  *                 type: string
  *                 example: john doe
+ *                 description: The name of the user. 
+ *                 required: true
  *               email:
  *                 type: string
  *                 example: john_doe12@gmail.com
+ *                 description: The email of the user. It must be a valid email.  
  *               password:
  *                 type: string
  *                 example: 123456
+ *                 description: The password of the user. It must be at least 6 characters long.
  *               admin:
  *                 type: boolean
  *                 example: false
+ *                 description: The admin status of the user. If true, the user will have admin privileges.
  *     responses:
  *       200:
  *         description: Successful response
  *       400:
  *         description: See message decription
- *     externalDocs:
- *       description: Learn more about JSON Web Token (JWT).
- *       url: https://auth0.com/docs/secure/tokens/json-web-tokens
  */
 
 router.post(
@@ -117,12 +119,12 @@ router.post(
  * @swagger
  * /auth/login:
  *   post:
- *     summary: Login to an existing acocunt and get it's token.
- *     description: Login to an account using the _email_ and _password_. It will also return the user's details.
+ *     summary: Get an API key
+ *     description: This endpoint allows you to login to an account and retrieve an API key.
  *     tags:
  *       - Auth
  *     requestBody:
- *       description: JSON containing _email_ and _password_ to login to an account. All fields are required.
+ *       description: A JSON object containing the user's email and password. Both fields are required.
  *       required: true
  *       content:
  *         application/json:
@@ -151,9 +153,6 @@ router.post(
  *         description: Successful response
  *       400:
  *         description: See message decription
- *     externalDocs:
- *       description: Learn more about JSON Web Token (JWT).
- *       url: https://auth0.com/docs/secure/tokens/json-web-tokens
  */
 
 router.post(

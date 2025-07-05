@@ -56,31 +56,31 @@ const swaggerOptions = {
       {
         name: "Auth",
         description:
-          "APIs related to authentication. Includes end points in `/auth` and `/users`",
+          "The account endpoints allow you to register an account, get an API key, validate your key, get users' details, and edit a user's details. ",
       },
       {
         name: "Products",
         description:
-          "APIs related to products. Includes end points in `/products`",
+          "The product endpoints allow you to get the list of products available and the details. You can also get the picture of the product. If your account has administrative rights, you can modify and delete a product.",
       },
       {
         name: "Cart",
-        description: "APIs related to products. Includes end points in `/cart`",
+        description: "The cart endpoints allow you to add items in your cart, and look at what you currently have in there. You can also modify the number of items and remove items in the cart.",
       },
       {
-        name: "Checkout",
+        name: "Address",
         description:
-          "APIs related to products. Includes end points in `/address`",
+          "The address endpoints allow you to add, modify, select and delete an address. You can view the list of addresses that you have. ",
       },
       {
         name: "Orders",
         description:
-          "APIs related to products. Includes end points in `/orders`",
+          "The orders endpoints allow you to view your current orders. You can also add, modify and delete your orders with these endpoints.",
       },
       {
         name: "Stats",
         description:
-          "APIs related to products. Includes end points in `/stats`",
+          "The statistics endpoints allow you to get the statistics of the users, products and orders. These metrics give you insights to the number of users, the most ordered items, and the status of the different orders. `",
       },
     ],
     components: {

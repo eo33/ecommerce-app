@@ -16,8 +16,11 @@ const Orders = require("../model/orders");
  * @swagger
  * /orders/get_all:
  *   get:
- *     summary: Get the orders of the user.
- *     description: Get all of the orders made by the logged in user. This includes _pending_, _delivery_, and _completed_ orders.
+ *     summary: Get all Orders
+ *     description: |
+ *       This endpoint allows you to get all the orders of the user.
+ *       Order can either be: pending, completed, or delivery. 
+ *       To change the status of an order, use the POST Edit Orders endpoint. Requires administrator's privilege.
  *     tags:
  *       - Orders
  *     security:
@@ -75,14 +78,14 @@ router.get("/get_all", authToken, async (req, res) => {
  * @swagger
  * /orders/add:
  *   post:
- *     summary: Add an order
- *     description: Add an order made by the logged in user.
+ *     summary: Add an Order
+ *     description: This endpoint allows users to create a new order by providing the list of items they want to purchase along with the shipping address.
  *     tags:
  *       - Orders
  *     security:
  *       - APIKey: []
  *     requestBody:
- *       description: JSON containing the _items_ to add to the order. Each item contains the _productId_ and the _quantity_ to add. See schema for more details.
+ *       description: A JSON object containing the _items_ to add to the order. Each item contains the _productId_ and the _quantity_ to add. See schema for more details. 
  *       required: true
  *       content:
  *         application/json:
@@ -134,18 +137,21 @@ router.post("/add", authToken, async (req, res) => {
 // @route   POST orders/change-status
 // @desc    Change the order(s) status. This includes all the items in the order.
 // @acess   private
+
 /**
  * @swagger
  * /orders/change-status:
  *   post:
- *     summary: Change the order(s) status.
- *     description: Change the order(s) status of the logged in user.
+ *     summary: Edit Orders
+ *     description: | 
+ *       This endpoint allows users to update the status of one or more orders. 
+ *       Valid status values include: pending, completed, and delivery. 
  *     tags:
  *       - Orders
  *     security:
  *       - APIKey: []
  *     requestBody:
- *       description: JSON containing the _items_ to add to the order. Each item contains the _orderId_ and the _status_. See schema for more details.
+ *       description: A JSON object containing the _items_ to add to the order. Each item contains the _orderId_ and the _status_. See schema for more details.
  *       required: true
  *       content:
  *         application/json:
@@ -214,7 +220,7 @@ router.post("/change-status", authTokenAdmin, async (req, res) => {
  *     security:
  *       - APIKey: []
  *     requestBody:
- *       description: JSON containing the _orderId_ to delete. The _orderId_ is an array containing the order(s), made by users, to delete.
+ *       description: A JSON object containing the _orderId_ to delete. The _orderId_ is an array containing the order(s), made by users, to delete.
  *       required: true
  *       content:
  *         application/json:

@@ -16,8 +16,8 @@ const Cart = require("../model/cart");
  * @swagger
  * /cart/items:
  *   get:
- *     summary: Get cart items.
- *     description: Get the cart items of the logged in user.
+ *     summary: Get Cart Items.
+ *     description: This endpoint allows you add items to your cart.
  *     tags:
  *       - Cart
  *     security:
@@ -43,21 +43,21 @@ router.get("/items", authToken, async (req, res) => {
 });
 
 // @route   POST cart/add
-// @desc    Add item to cart
+// @desc    Add Items to cart
 // @acess   private
 /**
  * @swagger
  * /cart/add:
  *   post:
- *     summary: Add an item type to cart.
- *     description: Add an item type to the cart of the logged in user. The item and it's quantity are specified in the request body.
+ *     summary: Add Items to Cart.
+ *     description: This endpoint allows you add items to your cart.
  *     tags:
  *       - Cart
  *     security:
  *       - APIKey: []
  *     requestBody:
  *       description:
- *         JSON containing the _productId_ and the _quantity_ of the item to add. All fields are required. See schema for more details.
+ *         A JSON object containing the _productId_ and the _quantity_ of the item to add. All fields are required. See schema for more details.
  *       required: true
  *       content:
  *         application/json:
@@ -122,15 +122,15 @@ router.post("/add", authToken, async (req, res) => {
  * @swagger
  * /cart/edit:
  *   put:
- *     summary: Edit the quantity of an item.
- *     description: Edit the quantity of an item inside the cart of the logged in user. The item and it's quantity are specified in the request body.
+ *     summary: Edit Cart Items.
+ *     description: This endpoint allows you to update the quantity of a product in the cart.
  *     tags:
  *       - Cart
  *     security:
  *       - APIKey: []
  *     requestBody:
  *       description:
- *         JSON containing the _productId_ and the _quantity_ of the item to edit. All fields are required. See schema for more details.
+ *         A JSON object containing the _productId_ and the _quantity_ of the item to edit. All fields are required. See schema for more details.
  *       required: true
  *       content:
  *         application/json:
@@ -185,15 +185,15 @@ router.put("/edit", authToken, async (req, res) => {
  * @swagger
  * /cart/delete:
  *   delete:
- *     summary: Delete item(s) inside the cart.
- *     description: Delete the item(s) inside the cart of the logged in user. The item(s) are specified in the request body.
+ *     summary: Remove Items from Cart.
+ *     description: This endpoint allows you to delete specified items from the user's cart.
  *     tags:
  *       - Cart
  *     security:
  *       - APIKey: []
  *     requestBody:
  *       description:
- *         JSON containing the _items_, which contains an array of the item(s) ID inside the cart to delete.
+ *         A JSON object containing the _items_, which contains an array of the item(s) ID inside the cart to delete.
  *       required: true
  *       content:
  *         application/json:

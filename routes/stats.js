@@ -16,8 +16,8 @@ const Products = require("../model/products");
  * @swagger
  * /stats/dashboard:
  *   get:
- *     summary: Get the orders, users and products statistics.
- *     description: Get the statistics to be displayed on the administrator's dashboard. Requires administrator's privilege.
+ *     summary: Get User Stats
+ *     description: This endpoint provides a summary of key metrics for the users shown in the admin dashboard.
  *     tags:
  *       - Stats
  *     security:
@@ -82,8 +82,11 @@ router.get("/dashboard", authTokenAdmin, async (req, res) => {
  * @swagger
  * /stats/productTable/{page}:
  *   get:
- *     summary: Get the product information by page number
- *     description: Get the product information to be displayed on the product table section of the administrator's page. The product is paginated. Each page will dispaly 7 products. Requires administrator's privilege.
+ *     summary: Get Prodcut Stats
+ *     description: | 
+ *        This endpoint retrieves product statistics for the specified page, including:
+ *        - Total products sold (soldCount).
+ *        - Breakdown of product orders by status (pending, delivery, completed) with counts and total quantities.
  *     tags:
  *       - Stats
  *     security:
@@ -191,8 +194,8 @@ router.get("/productTable/:page", authTokenAdmin, async (req, res) => {
  * @swagger
  * /stats/orders/{status}/{page}:
  *   get:
- *     summary: Get the product information by page number
- *     description: Get the product information to be displayed on the product table section of the administrator's page. The product is paginated. Each page will dispaly 7 products. Requires administrator's privilege.
+ *     summary: Get Order Stats
+ *     description: This endpoint retrieves order statistics for the specified page.
  *     tags:
  *       - Stats
  *     security:

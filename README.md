@@ -1,3 +1,34 @@
+<!--<div>marker</div>-->
+<br><br>
+<div align="center">
+   <a href="https://www.thefurniturebros.com/"><img src="./client/public/assets/logo.jpeg" /></a><br>
+</div>
+
+<p align="center">An eCommerce web application made using the MERN stack</p>
+
+<p align="center">
+    <a href="https://www.thefurniturebros.com/"><b>Website</b></a> •
+    <a href="https://docs.thefurniturebros.com/"><b>Documentation</b></a>
+</p>
+<p align="center">
+  <a href="https://github.com/eo33/ecommerce-app/actions">
+    <img src="https://img.shields.io/github/actions/workflow/status/eo33/ecommerce-app/ci.yml?branch=main&style=flat-square" alt="CI Status" />
+  </a>
+  <a href="https://github.com/eo33/ecommerce-app/blob/main/LICENSE">
+    <img src="https://img.shields.io/github/license/eo33/ecommerce-app?style=flat-square" alt="License" />
+  </a>
+  <a href="https://github.com/eo33/ecommerce-app/commits/main">
+    <img src="https://img.shields.io/github/last-commit/eo33/ecommerce-app?style=flat-square" alt="Last Commit" />
+  </a>
+  <a href="https://github.com/eo33/ecommerce-app/issues">
+    <img src="https://img.shields.io/github/issues/eo33/ecommerce-app?style=flat-square" alt="Issues" />
+  </a>
+  <a href="https://github.com/eo33/ecommerce-app">
+    <img src="https://img.shields.io/github/repo-size/eo33/ecommerce-app?style=flat-square" alt="Repo Size" />
+  </a>
+</p>
+
+
 # Ecommerce app
 
 I'm building an Ecommerce app using Mongo, Express, React and Node (MERN) stack.
@@ -5,6 +36,24 @@ I'm building an Ecommerce app using Mongo, Express, React and Node (MERN) stack.
 1. There are 8 features that are going to be implemented.
 1. Check out the deployed app [here](https://desolate-reef-25578-0bcc1c956f71.herokuapp.com/)!
 1. Watch a video explanation of the web app [here](https://www.loom.com/share/9e074a6cea434832a18eb4518fa9def6?sid=4e9e9e9d-53c4-4da3-85be-8c4a738c9741).
+
+## Run this repository locally
+
+To run this repository locally, run the following commands:
+1. Install the backend dependencies using:
+```
+npm install
+```
+2. Install the frontend dependencies using:
+```
+cd client
+npm install
+cd ..
+```
+2. Run the local application using:
+```
+npm run dev
+```
 
 ## Account credential demo
 
@@ -49,9 +98,9 @@ The ecommerce project is planned to be completed within 8 weeks (1 week break), 
 |  7  |              Admin Panel              |     |     |     |     |     |     |     |     | •   | •   |     |
 |  8  |    Landing page, Deployment, Docs     |     |     |     |     |     |     |     |     |     |     | •   |
 
-_Note 1: Week 35 (W35) starts from 28 Aug 2023_
-_Note 2: Added 2 weeks (W48 & W49) because some features took additional time to complete_
-_Note 3: Feature, user stories and tasks are partially generated with the help of ChatGPT._
+- _Note 1: Week 35 (W35) starts from 28 Aug 2023_
+- _Note 2: Added 2 weeks (W48 & W49) because some features took additional time to complete_
+- _Note 3: Feature, user stories and tasks are partially generated with the help of ChatGPT._
 
 ### Packages used for backend (Express):
 

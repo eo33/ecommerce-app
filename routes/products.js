@@ -65,8 +65,8 @@ const checkFile = async (err, req, res, next) => {
  * @swagger
  * /products:
  *   get:
- *     summary: Get the list of available products and it's details.
- *     description: Get the _id_, _name_, _image_, _price_, _description_, and _soldCount_ of all of the products.
+ *     summary: Get Product list
+ *     description: This endpoint allows you get the list of available products. It shows all available product.
  *     tags:
  *       - Products
  *     responses:
@@ -90,8 +90,8 @@ router.get("/", async (req, res) => {
  * @swagger
  * /products/upload:
  *   post:
- *     summary: Upload a product as an admin.
- *     description: Upload a product, including its _name_, _image_, _price_, _description_, and _soldCount_.
+ *     summary: Upload a Product 
+ *     description: This endpoint allows you to upload a product.
  *     tags:
  *       - Products
  *     security:
@@ -169,8 +169,8 @@ router.post(
  * @swagger
  * /products/{filename}:
  *   get:
- *     summary: Get the image of the product.
- *     description: Get the image of the specified product in the parameter.
+ *     summary: Get a Product Image
+ *     description: This endpoint allows you get the image of the product. The image is in the .webp format.
  *     tags:
  *       - Products
  *     parameters:
@@ -205,8 +205,8 @@ router.get("/:filename", async (req, res) => {
  * @swagger
  * /products/{filename}:
  *   put:
- *     summary: Update a product image and it's details.
- *     description: Edit a product's details, such as the _name_, _image_, _price_, _description_, and _soldCount_. Product is specified in the filename parameter.
+ *     summary: Edit a Product
+ *     description: This endpoint allows you to edit a product.
  *     tags:
  *       - Products
  *     security:
@@ -305,8 +305,8 @@ router.put(
  * @swagger
  * /products/{filename}:
  *   delete:
- *     summary: Delete the product
- *     description: Delete the product by its filename. Requires administrator's privilege.
+ *     summary: Delete a Product
+ *     description: This endpoint allows you get delete a product.
  *     tags:
  *       - Products
  *     security:
@@ -354,8 +354,8 @@ router.delete("/:image", authTokenAdmin, async (req, res) => {
  * @swagger
  * /products/details/{filename}:
  *   get:
- *     summary: Get the details of a product.
- *     description: Get the details of a product from the filename.
+ *     summary: Get Product Details
+ *     description: This endpoint allows you get the details of a product.
  *     tags:
  *       - Products
  *     parameters:
